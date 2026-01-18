@@ -12,7 +12,7 @@ Since we only have one device available, most of the time we were working on que
 
 ### Solution
 
-Since we used Text Based method (Notepad) to import the slide data into ProPresenter, it will increase our productivity to simulate the text results beforehand.
+Since we used Text Based method (Notepad) in our workflow to import the slide data into ProPresenter, it will increase our productivity to simulate the text results beforehand.
 
 Therefore this ProPresenter Sim offer that Simulation within a web app.
 
