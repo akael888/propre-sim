@@ -1,4 +1,4 @@
-import DisplayPanel from "../display-panel";
+import DisplayPanel from "../display/display-panel";
 
 interface DisplayAreaSectionProps {
   textData: string;
@@ -9,7 +9,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
 }) => {
   return (
     <>
-      <div className="w-full h-full">
+      <div className="border-1 w-full max-h-screen bg-gray-500 justify-center  flex overflow-y-auto">
         <DisplayPanel textData={textData} />
       </div>
     </>
