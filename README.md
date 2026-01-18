@@ -4,11 +4,11 @@ Link : [propre-sim.vercel.app](https://propre-sim.vercel.app)
 
 ## Background..
 
-ProPresenter is the main tool used by my team to perform a Multimedia Church Service. However, we only have a single device installed with ProPresenter.
+ProPresenter is the main tool used by my team to perform our Multimedia Church Service. However, we only have a single device installed with ProPresenter.
 
 ### Problem
 
-Since we only have one device available, most of the time we were working on queue based approach. This slows down the process, since we have to wait for the first person in the queue to finished their presentation.
+Since we only have one device available, most of the time we were working on queue based approach. This slows down the process, since we couldn't execute our individual tasks in pararel
 
 ### Solution
 
