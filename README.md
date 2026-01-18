@@ -8,7 +8,7 @@ ProPresenter is the main tool used by my team to perform our Multimedia Church S
 
 ### Problem
 
-Since we only have one device available, most of the time we're unable to execute our task in pararel.
+Since we only have one device available, we're unable to execute our task in pararel.
 
 ### Solution
 
