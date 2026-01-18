@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 
 interface DisplayPanelProps {
   textData: string;
+  textSize: number;
 }
 
-const DisplayPanel: React.FC<DisplayPanelProps> = ({ textData }) => {
+const DisplayPanel: React.FC<DisplayPanelProps> = ({ textData, textSize }) => {
   const [slideObject, setSlideObject] = useState(parseTextDataToObjects(""));
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({ textData }) => {
             slideNum={slideData.id}
             slideMaxNum={slideMaxNum}
             slideContent={slideData.content}
+            textSize={textSize}
           />
         ))}
       </div>
