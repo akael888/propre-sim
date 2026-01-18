@@ -24,7 +24,7 @@ export default function Editor() {
 
   return (
     <>
-      <div className="min-w-screen min-h-screen bg-foreground grid grid-cols-2 gap-2 text-background">
+      <div className="min-w-screen min-h-screen md:grid-rows-none md:max-h-full max-h-screen bg-foreground grid md:grid-cols-2 gap-2 text-background grid-rows-2">
         <TextAreaSection textData={textAreaData} handleTextDataChanges={handleTextAreaDataChanges} />
         <DisplayAreaSection textData={textAreaData} />
       </div>
