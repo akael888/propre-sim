@@ -8,13 +8,13 @@ ProPresenter is the main tool used by my team to perform our Multimedia Church S
 
 ### Problem
 
-Since we only have one device available, most of the time we were working on queue based approach. This slows down the process, since we couldn't execute our individual tasks in pararel
+Since we only have one device available, most of the time we're unable to execute our task in pararel.
 
 ### Solution
 
-Since we used Text Based method (Notepad) in our workflow to import the slide data into ProPresenter, it will increase our productivity to simulate the text results beforehand.
+Since we used Text Based method (Notepad) within our workflow to import the text data into ProPresenter, it will increase our productivity to simulate the text results beforehand.
 
-Therefore this ProPresenter Sim offer that Simulation within a web app.
+Therefore this ProPresenter Sim will offer that Simulation on a web app accessible anytime and anywhere, enabling all team member to foresee the ProPresenter Slide Results
 
 ## Features
 
