@@ -16,6 +16,13 @@ Since we used Text Based method (Notepad) to import the slide data into ProPrese
 
 Therefore this ProPresenter Sim offer that Simulation within a web app.
 
+## Features
+
+- Simulate ProPresenter Display from a text editor
+- (Planned) Auth and Account (Register and Login) Feature
+- (Planned) Parsing text using ProPresenter formatting for specific ProPre Settings
+- To Be Added..
+
 ## Tech Stack
 
 - Next JS
@@ -25,11 +32,3 @@ Therefore this ProPresenter Sim offer that Simulation within a web app.
 
 - Tailwindcss
 - To Be Added..
-
-## Features
-
-- Simulate ProPresenter Display from a text editor
-- (Planned) Auth and Account (Register and Login) Feature
-- (Planned) Parsing text using ProPresenter formatting for specific ProPre Settings
-- To Be Added..
-
