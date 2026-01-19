@@ -20,7 +20,7 @@ const Slide: React.FC<SlideProps> = ({
         style={{ containerType: "inline-size" }}
       >
         <pre
-          className={`text-wrap`}
+          className={`border-1`}
           style={{
             fontSize: `${textAttribute.textSize}cqw`,
             textAlign: textAttribute.textAlign,
