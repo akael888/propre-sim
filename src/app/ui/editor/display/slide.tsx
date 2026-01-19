@@ -12,16 +12,17 @@ const Slide: React.FC<SlideProps> = ({
   slideContent,
   textAttribute,
 }) => {
-
-
   // convertTextAlignEnumToCSS(textAttribute.textAlign);
   return (
     <>
-      <div className="aspect-video border-1 bg-pink-200 flex justify-center items-center relative">
+      <div
+        className="aspect-video border-1 bg-pink-200 flex justify-center items-center relative"
+        style={{ containerType: "inline-size" }}
+      >
         <pre
           className={`absolute`}
           style={{
-            fontSize: `${textAttribute.textSize}px`,
+            fontSize: `${textAttribute.textSize}cqw`,
             textAlign: textAttribute.textAlign,
           }}
         >
