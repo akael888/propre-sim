@@ -16,11 +16,11 @@ const Slide: React.FC<SlideProps> = ({
   return (
     <>
       <div
-        className="aspect-video border-1 bg-pink-200 flex justify-center items-center relative"
+        className="aspect-video border-1 bg-pink-200 flex justify-center items-center relative overflow-hidden"
         style={{ containerType: "inline-size" }}
       >
         <pre
-          className={`absolute`}
+          className={`text-wrap`}
           style={{
             fontSize: `${textAttribute.textSize}cqw`,
             textAlign: textAttribute.textAlign,
