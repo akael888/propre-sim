@@ -13,9 +13,9 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
 }) => {
   const [displayedTextAttribute, setDisplayedTextAttribute] =
     useState<TextAttribute>({
-      textSize: 16,
+      textSize: 6,
       textFont: "string",
-      textAlign: "left",
+      textAlign: "center",
     });
 
   // const handleTextSizeChanges = (textSizeNumvber: number) => {
