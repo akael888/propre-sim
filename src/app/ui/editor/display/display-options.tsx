@@ -1,19 +1,30 @@
+import { TextAttribute } from "@/app/lib/type";
 import { useState } from "react";
+import { textAlignTypes } from "../../../lib/data";
 
 interface DisplayOptionsProp {
-  textSize: number;
-  handleTextSizeChanges: (textSizeNumvber: number) => void;
+  textAttribute: TextAttribute;
+  handleTextAttributeChanges: <K extends keyof TextAttribute>(
+    attribute: K,
+    attributeValue: TextAttribute[K],
+  ) => void;
 }
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
-  textSize,
-  handleTextSizeChanges,
+  textAttribute,
+  handleTextAttributeChanges,
 }) => {
-  const [textSizeOpt, setTextSizeOpt] = useState(textSize);
+  const [textSizeOpt, setTextSizeOpt] = useState(textAttribute.textSize);
+  const [textAlignOpt, setAlignOpt] = useState(textAttribute.textAlign);
 
-  const handleTextSizeOptChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextSizeOpt(Number(e.target.value));
-    handleTextSizeChanges(Number(e.target.value));
+  const handleTextSizeOptChanges = (textSizeData: number) => {
+    setTextSizeOpt(textSizeData);
+    handleTextAttributeChanges("textSize", textSizeData);
+  };
+
+  const handleTextAlignOptChanges = (textAlignData: textAlignTypes) => {
+    setAlignOpt(textAlignData);
+    handleTextAttributeChanges("textAlign", textAlignData);
   };
 
   return (
@@ -22,15 +33,44 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
         <div className="grid grid-cols-2 grid-rows-2 h-full w-full">
           <div className="flex justify-center w-full h-full">
             <p>Text Size:</p>
+            <button
+              className="w-full"
+              onClick={() => handleTextSizeOptChanges(textSizeOpt - 1)}
+            >
+              -
+            </button>
             <input
               value={textSizeOpt}
-              onInput={handleTextSizeOptChanges}
+              onInput={(e) =>
+                handleTextSizeOptChanges(Number(e.currentTarget.value))
+              }
               type="number"
               className="border-1 p-1"
               placeholder="Text Size.."
             />
+            <button
+              className="w-full"
+              onClick={() => handleTextSizeOptChanges(textSizeOpt + 1)}
+            >
+              +
+            </button>
           </div>
-          <div className="">1</div>
+          <div className="">
+            <div>
+              <select
+                value={textAlignOpt}
+                onChange={(e) => {
+                  const value = e.target.value as textAlignTypes;
+                  handleTextAlignOptChanges(value);
+                }}
+              >
+                <option value={"left"}>left</option>
+                <option value={"center"}>center</option>
+                <option value={"right"}>right</option>
+                <option value={"justify"}>justify</option>
+              </select>
+            </div>
+          </div>
           <div className="">1</div>
           <div className="">1</div>
         </div>

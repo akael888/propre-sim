@@ -1,22 +1,29 @@
+import { TextAttribute } from "@/app/lib/type";
 interface SlideProps {
   slideNum: number;
   slideMaxNum: number;
   slideContent: string;
-  textSize: number;
+  textAttribute: TextAttribute;
 }
 
 const Slide: React.FC<SlideProps> = ({
   slideNum,
   slideMaxNum,
   slideContent,
-  textSize,
+  textAttribute,
 }) => {
+
+
+  // convertTextAlignEnumToCSS(textAttribute.textAlign);
   return (
     <>
       <div className="aspect-video border-1 bg-pink-200 flex justify-center items-center relative">
         <pre
-          className={`absolute text-center`}
-          style={{ fontSize: `${textSize}px` }}
+          className={`absolute`}
+          style={{
+            fontSize: `${textAttribute.textSize}px`,
+            textAlign: textAttribute.textAlign,
+          }}
         >
           {slideContent}
         </pre>
