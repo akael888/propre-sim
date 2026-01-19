@@ -1,19 +1,22 @@
 import { parseTextDataToObjects } from "@/app/lib/utils";
 import Slide from "./slide";
 import { useEffect, useState } from "react";
-import { TextAttribute } from "@/app/lib/type";
+import { TextAttribute, TextObject } from "@/app/lib/type";
 
 interface DisplayPanelProps {
-  textData: string;
+  slideObject: TextObject[];
+  // handleTextObjectDataChanges: (text: string) => void;
   textAttribute: TextAttribute;
 }
 
-const DisplayPanel: React.FC<DisplayPanelProps> = ({ textData, textAttribute }) => {
-  const [slideObject, setSlideObject] = useState(parseTextDataToObjects(""));
-
-  useEffect(() => {
-    setSlideObject(parseTextDataToObjects(textData));
-  }, [textData]);
+const DisplayPanel: React.FC<DisplayPanelProps> = ({
+  slideObject,
+  // handleTextObjectDataChanges,
+  textAttribute,
+}) => {
+  // useEffect(() => {
+  //   handleTextObjectDataChanges(slideObject);
+  // }, [slideObject]);
 
   const slideMaxNum = slideObject.length;
 

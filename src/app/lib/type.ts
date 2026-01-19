@@ -5,3 +5,8 @@ export interface TextAttribute {
   textFont: string;
   textAlign: textAlignTypes;
 }
+
+export interface TextObject {
+  id: number;
+  content: string;
+}
