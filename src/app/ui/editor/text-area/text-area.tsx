@@ -27,16 +27,23 @@ const TextArea: React.FC<TextAreaProps> = ({
 
     const indexClicked = refClicked.selectionStart;
 
-    const indexIdToScroll = slidePositionList.findIndex((pos) => indexClicked < pos);
+    const indexIdToScroll = slidePositionList.findIndex(
+      (pos) => indexClicked < pos,
+    );
 
     let idToScroll = null;
-    if (indexIdToScroll) {
-      idToScroll = slidePositionList[indexIdToScroll-1];
+    if (indexIdToScroll != -1) {
+      idToScroll = slidePositionList[indexIdToScroll - 1];
+    } else {
+      idToScroll = slidePositionList[slidePositionList.length-1];
     }
+    console.log("indexClicked");
     console.log(indexClicked);
     console.log(slidePositionList);
 
+    console.log("indexIdToScroll");
     console.log(indexIdToScroll);
+    console.log("idToScroll");
     console.log(idToScroll);
 
     document.getElementById(`${idToScroll}`)?.scrollIntoView({
