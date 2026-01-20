@@ -7,12 +7,18 @@ interface DisplayPanelProps {
   slideObject: TextObject[];
   // handleTextObjectDataChanges: (text: string) => void;
   textAttribute: TextAttribute;
+  handleSlideObjectChanges: <K extends keyof TextObject>(
+    index: number,
+    objectKey: K,
+    objectValue: TextObject[K],
+  ) => void;
 }
 
 const DisplayPanel: React.FC<DisplayPanelProps> = ({
   slideObject,
   // handleTextObjectDataChanges,
   textAttribute,
+  handleSlideObjectChanges,
 }) => {
   // useEffect(() => {
   //   handleTextObjectDataChanges(slideObject);
@@ -30,6 +36,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
             slideMaxNum={slideMaxNum}
             slideContent={slideData.content}
             textAttribute={textAttribute}
+            handleSlideObjectChanges={handleSlideObjectChanges}
           />
         ))}
       </div>

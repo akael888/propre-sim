@@ -6,11 +6,17 @@ import { textAlignTypes } from "@/app/lib/data";
 
 interface DisplayAreaSectionProps {
   slideObject: TextObject[];
+  handleSlideObjectChanges: <K extends keyof TextObject>(
+    index: number,
+    objectKey: K,
+    objectValue: TextObject[K],
+  ) => void;
   // handleTextObjectDataChanges: (text: string) => void;
 }
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   slideObject,
+  handleSlideObjectChanges,
   // handleTextObjectDataChanges,
 }) => {
   const [displayedTextAttribute, setDisplayedTextAttribute] =
@@ -46,6 +52,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
             slideObject={slideObject}
             // handleTextObjectDataChanges={handleTextObjectDataChanges}
             textAttribute={displayedTextAttribute}
+            handleSlideObjectChanges={handleSlideObjectChanges}
           />
         </div>
         <DisplayOptions

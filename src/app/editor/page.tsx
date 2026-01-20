@@ -10,10 +10,29 @@ export default function Editor() {
   const [textAreaData, setTextAreaData] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const slideObject = parseTextDataToObjects(textAreaData);
+  const [slideObject, setSlideObject] = useState([
+    { id: 0, content: "", clicked: false },
+  ]);
+
+  const handleSlideObjectChanges = <K extends keyof TextObject>(
+    index: number,
+    objectKey: K,
+    objectValue: TextObject[K],
+  ) => {
+    setSlideObject((prev) =>
+      prev.map((object, i) =>
+        i === index ? { ...object, [objectKey]: objectValue } : object,
+      ),
+    );
+    alert(objectKey);
+    alert(objectValue);
+    console.log("HandleSlide");
+    console.log(slideObject);
+  };
 
   const handleTextAreaDataChanges = (textAreaData: string) => {
     setTextAreaData(textAreaData);
+    setSlideObject(parseTextDataToObjects(textAreaData));
     localStorage.setItem("TEXT_AREA_DATA", textAreaData);
   };
 
@@ -21,12 +40,17 @@ export default function Editor() {
     const stored = localStorage.getItem("TEXT_AREA_DATA");
     if (stored) {
       handleTextAreaDataChanges(stored);
+      setSlideObject(parseTextDataToObjects(stored));
     }
     setIsLoaded(true);
-  }, []); 
+  }, []);
 
   if (!isLoaded) {
-    return <div className="flex flex-row justify-center items-center">Loading...</div>;
+    return (
+      <div className="flex flex-row justify-center items-center">
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -35,8 +59,12 @@ export default function Editor() {
         <TextAreaSection
           textData={textAreaData}
           handleTextDataChanges={handleTextAreaDataChanges}
+          handleSlideObjectChanges={handleSlideObjectChanges}
         />
-        <DisplayAreaSection slideObject={slideObject} />
+        <DisplayAreaSection
+          slideObject={slideObject}
+          handleSlideObjectChanges={handleSlideObjectChanges}
+        />
       </div>
     </>
   );

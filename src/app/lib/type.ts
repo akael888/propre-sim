@@ -9,4 +9,5 @@ export interface TextAttribute {
 export interface TextObject {
   id: number;
   content: string;
+  clicked: boolean;
 }

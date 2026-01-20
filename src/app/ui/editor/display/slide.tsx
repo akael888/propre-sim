@@ -1,9 +1,14 @@
-import { TextAttribute } from "@/app/lib/type";
+import { TextAttribute, TextObject } from "@/app/lib/type";
 interface SlideProps {
   slideNum: number;
   slideMaxNum: number;
   slideContent: string;
   textAttribute: TextAttribute;
+  handleSlideObjectChanges: <K extends keyof TextObject>(
+    index: number,
+    objectKey: K,
+    objectValue: TextObject[K],
+  ) => void;
 }
 
 const Slide: React.FC<SlideProps> = ({
@@ -11,13 +16,16 @@ const Slide: React.FC<SlideProps> = ({
   slideMaxNum,
   slideContent,
   textAttribute,
+  handleSlideObjectChanges,
 }) => {
   // convertTextAlignEnumToCSS(textAttribute.textAlign);
   return (
     <>
       <div
-        className="aspect-video border-1 bg-pink-200 flex justify-center items-center relative overflow-hidden"
+        className="aspect-video border-1 bg-pink-200 flex justify-center items-center relative overflow-hidden hover:bg-pink-100"
         style={{ containerType: "inline-size" }}
+        onClick={() => handleSlideObjectChanges(slideNum, "clicked", true)}
+        onKeyUp={() => handleSlideObjectChanges(slideNum, "clicked", false)}
       >
         <pre
           className={`border-1`}
