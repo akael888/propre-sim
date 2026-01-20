@@ -1,14 +1,6 @@
-import { TextAttribute } from "@/app/lib/type";
+import { DisplayOptionsProp, TextAttribute } from "@/app/lib/type";
 import { useState } from "react";
 import { textAlignTypes } from "../../../lib/data";
-
-interface DisplayOptionsProp {
-  textAttribute: TextAttribute;
-  handleTextAttributeChanges: <K extends keyof TextAttribute>(
-    attribute: K,
-    attributeValue: TextAttribute[K],
-  ) => void;
-}
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   textAttribute,
@@ -71,7 +63,11 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
               </select>
             </div>
           </div>
-          <div className="">1</div>
+          <div className="">
+            <a href="#DOA SYUKUR">
+              <button type="button">scroll</button>
+            </a>
+          </div>
           <div className="">1</div>
         </div>
       </div>

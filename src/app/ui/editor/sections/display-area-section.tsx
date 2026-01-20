@@ -1,23 +1,16 @@
 import { useState } from "react";
 import DisplayPanel from "../display/display-panel";
 import DisplayOptions from "../display/display-options";
-import { TextAttribute, TextObject } from "../../../lib/type";
+import {
+  DisplayAreaSectionProps,
+  TextAttribute,
+  TextObject,
+} from "../../../lib/type";
 import { textAlignTypes } from "@/app/lib/data";
-
-interface DisplayAreaSectionProps {
-  slideObject: TextObject[];
-  handleSlideObjectChanges: <K extends keyof TextObject>(
-    index: number,
-    objectKey: K,
-    objectValue: TextObject[K],
-  ) => void;
-  // handleTextObjectDataChanges: (text: string) => void;
-}
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   slideObject,
-  handleSlideObjectChanges,
-  // handleTextObjectDataChanges,
+  textAreaRef,
 }) => {
   const [displayedTextAttribute, setDisplayedTextAttribute] =
     useState<TextAttribute>({
@@ -25,14 +18,6 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
       textFont: "string",
       textAlign: "center",
     });
-
-  // const handleTextSizeChanges = (textSizeNumvber: number) => {
-  //   setDisplayedTextAttribute({
-  //     ...displayedTextAttribute,
-  //     textSize: textSizeNumvber,
-  //   });
-  //   // setTextSize(textSizeNumvber);
-  // };
 
   const handleTextAttributeChanges = <K extends keyof TextAttribute>(
     attribute: K,
@@ -50,9 +35,8 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
         <div className="flex-1 overflow-y-auto flex h-full justify-center">
           <DisplayPanel
             slideObject={slideObject}
-            // handleTextObjectDataChanges={handleTextObjectDataChanges}
             textAttribute={displayedTextAttribute}
-            handleSlideObjectChanges={handleSlideObjectChanges}
+            textAreaRef={textAreaRef}
           />
         </div>
         <DisplayOptions

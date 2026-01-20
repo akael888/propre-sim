@@ -1,20 +1,11 @@
-import { TextObject } from "@/app/lib/type";
+import { TextAreaSectionProps, TextObject } from "@/app/lib/type";
 import TextArea from "../text-area/text-area";
-
-interface TextAreaSectionProps {
-  textData: string;
-  handleTextDataChanges: (textData: string) => void;
-  handleSlideObjectChanges: <K extends keyof TextObject>(
-    index: number,
-    objectKey: K,
-    objectValue: TextObject[K],
-  ) => void;
-}
+import { RefObject } from "react";
 
 const TextAreaSection: React.FC<TextAreaSectionProps> = ({
   textData,
   handleTextDataChanges,
-  handleSlideObjectChanges,
+  textAreaRef,
 }) => {
   return (
     <>
@@ -22,7 +13,7 @@ const TextAreaSection: React.FC<TextAreaSectionProps> = ({
         <TextArea
           textData={textData}
           handleTextDataChanges={handleTextDataChanges}
-          handleSlideObjectChanges={handleSlideObjectChanges}
+          textAreaRef={textAreaRef}
         />
       </div>
     </>

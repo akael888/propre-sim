@@ -1,24 +1,14 @@
 "use client";
 
 // import { convertInnerHTMLToText, insertDataBlock } from "@/app/lib/utils";
-import { useState } from "react";
+import { useState, RefObject } from "react";
 import TextBlock from "./text-block";
-import { TextObject } from "@/app/lib/type";
-
-interface TextAreaProps {
-  textData: string;
-  handleTextDataChanges: (textData: string) => void;
-  handleSlideObjectChanges: <K extends keyof TextObject>(
-    index: number,
-    objectKey: K,
-    objectValue: TextObject[K],
-  ) => void;
-}
+import { TextAreaProps, TextAreaSectionProps, TextObject } from "@/app/lib/type";
 
 const TextArea: React.FC<TextAreaProps> = ({
   textData,
   handleTextDataChanges,
-  handleSlideObjectChanges,
+  textAreaRef,
 }) => {
   const [textValue, setTextValue] = useState(textData);
 
@@ -42,10 +32,11 @@ const TextArea: React.FC<TextAreaProps> = ({
           }}
         ></div> */}
         <textarea
-          className="p-2 w-full h-[50%] border-1 bg-gray-400"
+          className="p-2 w-full h-full border-1 bg-gray-400"
           value={textValue}
-          onInput={handleTextValueChanges}
+          onChange={handleTextValueChanges}
           placeholder="Type here.."
+          ref={textAreaRef}
         />
       </div>
     </>
