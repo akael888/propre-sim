@@ -43,7 +43,7 @@ const Slide: React.FC<SlideProps> = ({
   return (
     <>
       <div
-        id={slideContent}
+        id={slideTextCharIndex.toString()}
         className="aspect-video border-1 bg-pink-200 flex justify-center items-center relative overflow-hidden hover:bg-pink-100"
         style={{ containerType: "inline-size" }}
         onClick={() => FocusOnTextArea(slideContent)}
