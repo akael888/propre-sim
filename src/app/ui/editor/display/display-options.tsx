@@ -22,9 +22,11 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
   return (
     <>
-      <div className=" w-full bottom-0 md:h-fit h-[50%] absolute flex flex-col justify-end items-start">
+      <div
+        className={`w-full bottom-0 md:h-fit h-${isOpen ? "20%" : "0"} absolute flex flex-col justify-end items-start`}
+      >
         <button
-          className="bg-black w-fit border-1 text-white p-1"
+          className="bg-black w-fit border-1 text-white p-1 "
           onClick={() => setIsOpen(!isOpen)}
         >
           Options
