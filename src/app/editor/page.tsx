@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DisplayAreaSection from "../ui/editor/sections/display-area-section";
 import TextAreaSection from "../ui/editor/sections/text-area-section";
 import { TextObject } from "../lib/type";
@@ -9,30 +9,12 @@ import { parseTextDataToObjects } from "../lib/utils";
 export default function Editor() {
   const [textAreaData, setTextAreaData] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  const [slideObject, setSlideObject] = useState([
-    { id: 0, content: "", clicked: false },
-  ]);
-
-  const handleSlideObjectChanges = <K extends keyof TextObject>(
-    index: number,
-    objectKey: K,
-    objectValue: TextObject[K],
-  ) => {
-    setSlideObject((prev) =>
-      prev.map((object, i) =>
-        i === index ? { ...object, [objectKey]: objectValue } : object,
-      ),
-    );
-    alert(objectKey);
-    alert(objectValue);
-    console.log("HandleSlide");
-    console.log(slideObject);
-  };
+  const slideObject = parseTextDataToObjects(textAreaData);
 
   const handleTextAreaDataChanges = (textAreaData: string) => {
     setTextAreaData(textAreaData);
-    setSlideObject(parseTextDataToObjects(textAreaData));
     localStorage.setItem("TEXT_AREA_DATA", textAreaData);
   };
 
@@ -40,7 +22,6 @@ export default function Editor() {
     const stored = localStorage.getItem("TEXT_AREA_DATA");
     if (stored) {
       handleTextAreaDataChanges(stored);
-      setSlideObject(parseTextDataToObjects(stored));
     }
     setIsLoaded(true);
   }, []);
@@ -59,11 +40,11 @@ export default function Editor() {
         <TextAreaSection
           textData={textAreaData}
           handleTextDataChanges={handleTextAreaDataChanges}
-          handleSlideObjectChanges={handleSlideObjectChanges}
+          textAreaRef={textAreaRef}
         />
         <DisplayAreaSection
           slideObject={slideObject}
-          handleSlideObjectChanges={handleSlideObjectChanges}
+          textAreaRef={textAreaRef}
         />
       </div>
     </>
