@@ -1,17 +1,15 @@
 "use client";
-
-import { useState } from "react";
-
-interface TextAreaProps {
-  textData: string;
-  handleTextDataChanges: (textData: string) => void;
-}
+import { useState, RefObject } from "react";
+import { TextAreaProps } from "@/app/lib/type";
 
 const TextArea: React.FC<TextAreaProps> = ({
   textData,
+  textObject,
   handleTextDataChanges,
+  textAreaRef,
 }) => {
   const [textValue, setTextValue] = useState(textData);
+  const slidePositionList = textObject?.map((object) => object.charIndex);
 
   const handleTextValueChanges = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -21,14 +19,51 @@ const TextArea: React.FC<TextAreaProps> = ({
     localStorage.setItem("TEXT_AREA_DATA", e.target.value);
   };
 
+  const clickToScrollSlides = () => {
+    const refClicked = textAreaRef.current;
+    if (!refClicked) {
+      return;
+    }
+
+    const indexClicked = refClicked.selectionStart;
+
+    const indexIdToScroll = slidePositionList.findIndex((pos) => indexClicked < pos);
+
+    let idToScroll = null;
+    if (indexIdToScroll) {
+      idToScroll = slidePositionList[indexIdToScroll-1];
+    }
+    console.log(indexClicked);
+    console.log(slidePositionList);
+
+    console.log(indexIdToScroll);
+    console.log(idToScroll);
+
+    document.getElementById(`${idToScroll}`)?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
-      <textarea
-        className="p-2 w-full h-full border-1 bg-gray-400"
-        value={textValue}
-        onInput={handleTextValueChanges}
-        placeholder="Type here.."
-      />
+      <div className="w-full h-full overflow-hidden">
+        {/* <div
+          className=" w-full h-[50%] bg-black top-100 text-white [&>div]:bg-pink-300 overflow-y-hidden"
+          contentEditable
+          onInput={(e) => convertInnerHTMLToText(e.currentTarget.innerHTML)}
+          onBeforeInput={(e) => {
+            insertDataBlock(e);
+          }}
+        ></div> */}
+        <textarea
+          className="p-2 w-full h-full border-1 bg-gray-400"
+          value={textValue}
+          onChange={handleTextValueChanges}
+          placeholder="Type here.."
+          onClick={clickToScrollSlides}
+          ref={textAreaRef}
+        />
+      </div>
     </>
   );
 };
