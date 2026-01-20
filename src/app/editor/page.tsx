@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import DisplayAreaSection from "../ui/editor/sections/display-area-section";
 import TextAreaSection from "../ui/editor/sections/text-area-section";
-import { TextObject } from "../lib/type";
 import { parseTextDataToObjects } from "../lib/utils";
 
 export default function Editor() {
@@ -11,7 +10,7 @@ export default function Editor() {
   const [isLoaded, setIsLoaded] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  const slideObject = parseTextDataToObjects(textAreaData);
+  const textObject = parseTextDataToObjects(textAreaData);
 
   const handleTextAreaDataChanges = (textAreaData: string) => {
     setTextAreaData(textAreaData);
@@ -34,16 +33,19 @@ export default function Editor() {
     );
   }
 
+
+
   return (
     <>
       <div className="min-w-screen min-h-screen md:grid-rows-none md:max-h-full max-h-screen bg-foreground grid md:grid-cols-2 gap-2 text-background grid-rows-2">
         <TextAreaSection
           textData={textAreaData}
+          textObject={textObject}
           handleTextDataChanges={handleTextAreaDataChanges}
           textAreaRef={textAreaRef}
         />
         <DisplayAreaSection
-          slideObject={slideObject}
+          slideObject={textObject}
           textAreaRef={textAreaRef}
         />
       </div>
