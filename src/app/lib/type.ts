@@ -16,12 +16,14 @@ export interface TextObject {
 // Text Area -----------------------------
 export interface TextAreaSectionProps {
   textData: string;
+  textObject: TextObject[];
   handleTextDataChanges: (textData: string) => void;
   textAreaRef: RefObject<HTMLTextAreaElement | null>;
 }
 
 export interface TextAreaProps {
   textData: string;
+  textObject: TextObject[];
   handleTextDataChanges: (textData: string) => void;
   textAreaRef: RefObject<HTMLTextAreaElement | null>;
 }
