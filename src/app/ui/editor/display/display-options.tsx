@@ -1,6 +1,8 @@
 import { DisplayOptionsProp, TextAttribute } from "@/app/lib/type";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { textAlignTypes } from "../../../lib/data";
+import TextFontsSelection from "./text-fonts-selection";
+import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   textAttribute,
@@ -8,6 +10,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 }) => {
   const [textSizeOpt, setTextSizeOpt] = useState(textAttribute.textSize);
   const [textAlignOpt, setAlignOpt] = useState(textAttribute.textAlign);
+  const [textFontOpt, setTextFontOpt] = useState(textAttribute.textFont);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleTextSizeOptChanges = (textSizeData: number) => {
@@ -18,6 +21,14 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   const handleTextAlignOptChanges = (textAlignData: textAlignTypes) => {
     setAlignOpt(textAlignData);
     handleTextAttributeChanges("textAlign", textAlignData);
+  };
+
+  const handleTextFontOptChanges = (textFontData: NextFontWithVariable) => {
+    // alert(textFontData.className);
+    setTextFontOpt(textFontData);
+    // alert(textFontOpt.className);
+    handleTextAttributeChanges("textFont", textFontData);
+    // alert(textAttribute.textFont.className);
   };
 
   return (
@@ -80,6 +91,10 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     <option value={"justify"}>justify</option>
                   </select>
                 </div>
+                <TextFontsSelection
+                  textFontOpt={textFontOpt}
+                  handleTextFontOptChanges={handleTextFontOptChanges}
+                />
               </div>
               <div className="">
                 {/* <a href="#DOA SYUKUR">
