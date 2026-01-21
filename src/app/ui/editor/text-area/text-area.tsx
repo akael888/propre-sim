@@ -37,14 +37,14 @@ const TextArea: React.FC<TextAreaProps> = ({
     } else {
       idToScroll = slidePositionList[slidePositionList.length-1];
     }
-    console.log("indexClicked");
-    console.log(indexClicked);
-    console.log(slidePositionList);
+    // console.log("indexClicked");
+    // console.log(indexClicked);
+    // console.log(slidePositionList);
 
-    console.log("indexIdToScroll");
-    console.log(indexIdToScroll);
-    console.log("idToScroll");
-    console.log(idToScroll);
+    // console.log("indexIdToScroll");
+    // console.log(indexIdToScroll);
+    // console.log("idToScroll");
+    // console.log(idToScroll);
 
     document.getElementById(`${idToScroll}`)?.scrollIntoView({
       behavior: "smooth",
