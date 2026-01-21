@@ -1,23 +1,26 @@
-export function parseTextDataToObjects(textData: string) {
-  console.log(textData);
+"use server";
 
-  const splittedData = textData.split("\n\n");
+import { readFile } from "fs/promises";
+import path from "path";
 
-  console.log(splittedData);
+// console.log(splittedObject);
+// console.log("test");
 
-  let charIndexInText = 0;
-
-  const splittedObject = splittedData.map((data, index) => {
-    const object = { id: index, content: data, charIndex: charIndexInText };
-    charIndexInText = charIndexInText + data.length + 2; // Keep track of the latest index of the splitted text
-    return object;
-  });
-
-  console.log(splittedObject);
-  console.log("test");
-
-  return splittedObject;
-}
+// export async function parseFontFilestoFontObjects() {
+//   console.log("Parsing Font Files to Font Objects");
+//   try {
+//     const filePath = path.join(process.cwd(), "src", "app", "fonts");
+//     const fileData = readFile(filePath, "utf-8");
+//     console.log("filePath");
+//     console.log(filePath);
+//     console.log("fileData");
+//     console.log(fileData);
+//     return [{ fontData: 1 }, { fontData: 2 }];
+//   } catch (error) {
+//     console.log(error);
+//     return [];
+//   }
+// }
 
 // function scrollToSentence(searchText: string) {
 //   const textarea = document.getElementById("myTextarea");
