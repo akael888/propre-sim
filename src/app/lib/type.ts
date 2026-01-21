@@ -1,9 +1,10 @@
 import { RefObject } from "react";
 import { textAlignTypes } from "./data";
+import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 
 export interface TextAttribute {
   textSize: number;
-  textFont: string;
+  textFont: NextFontWithVariable;
   textAlign: textAlignTypes;
 }
 
@@ -55,4 +56,9 @@ export interface DisplayOptionsProp {
     attribute: K,
     attributeValue: TextAttribute[K],
   ) => void;
+}
+
+export interface TextFontsSelectionProp {
+  textFontOpt: NextFontWithVariable;
+  handleTextFontOptChanges: (textFontName: NextFontWithVariable) => void;
 }
