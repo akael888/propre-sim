@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import DisplayAreaSection from "../ui/editor/sections/display-area-section";
 import TextAreaSection from "../ui/editor/sections/text-area-section";
-import { parseTextDataToObjects } from "../lib/utils";
+import { parseTextDataToObjects } from "../lib/client-utils";
+
 
 export default function Editor() {
   const [textAreaData, setTextAreaData] = useState("");
@@ -32,8 +33,6 @@ export default function Editor() {
       </div>
     );
   }
-
-
 
   return (
     <>
