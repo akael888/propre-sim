@@ -4,9 +4,8 @@ import DisplayOptions from "../display/display-options";
 import {
   DisplayAreaSectionProps,
   TextAttribute,
-  TextObject,
 } from "../../../lib/type";
-import { textAlignTypes } from "@/app/lib/data";
+import { defaultFontCollection } from "@/app/lib/data";
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   slideObject,
@@ -15,7 +14,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   const [displayedTextAttribute, setDisplayedTextAttribute] =
     useState<TextAttribute>({
       textSize: 6,
-      textFont: "string",
+      textFont: defaultFontCollection[0].fontData,
       textAlign: "center",
     });
 
@@ -29,6 +28,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
     }));
   };
 
+  
   return (
     <>
       <div className="border-1 w-full md:max-h-screen bg-gray-500 justify-center flex  md:order-none order-1 max-h-full relative">
