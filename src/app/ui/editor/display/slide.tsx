@@ -34,7 +34,7 @@ const Slide: React.FC<SlideProps> = ({
 
       const lines = text.substring(0, targetIndex).split("\n").length; //Calculcate how many enter/lines in the text
       const lineHeight = 24; //approx each line height
-      const scrollPosition = (lines) * lineHeight; //-3 to give more context above
+      const scrollPosition = lines * lineHeight; //-3 to give more context above
 
       textarea.scrollTop = Math.max(0, scrollPosition);
     }
@@ -50,7 +50,7 @@ const Slide: React.FC<SlideProps> = ({
       >
         <div className="border-1 overflow-hidden w-[70%] h-[60%]">
           <pre
-            className={`text-wrap w-full h-full flex items-center justify-center`}
+            className={`text-wrap w-full h-full flex items-center justify-center ${textAttribute.textFont.className}`}
             style={{
               fontSize: `${textAttribute.textSize}cqw`,
               textAlign: textAttribute.textAlign,
