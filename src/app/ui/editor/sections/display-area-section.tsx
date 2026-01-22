@@ -10,10 +10,16 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
 }) => {
   const [displayedTextAttribute, setDisplayedTextAttribute] =
     useState<TextAttribute>({
-      textSize: 6,
+      textSize: 5,
       textFont: defaultFontCollection[0].fontData,
       textAlign: "center",
-      textStroke: { strokeSize: -1, strokeColor: "" },
+      textStroke: { strokeSize: 0.1, strokeColor: "" },
+      textStyle: {
+        bold: true,
+        italic: false,
+        underlined: false,
+        strikethrough: false,
+      },
     });
 
   const handleTextAttributeChanges = <K extends keyof TextAttribute>(
