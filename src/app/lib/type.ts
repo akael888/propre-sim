@@ -7,9 +7,17 @@ export interface TextAttribute {
   textFont: NextFontWithVariable;
   textAlign: textAlignTypes;
   textStroke: TextStroke;
+  textStyle: TextStyle;
 }
 
 export type TextStroke = { strokeSize: number; strokeColor: string };
+
+export type TextStyle = {
+  bold: boolean;
+  italic: boolean;
+  underlined: boolean;
+  strikethrough: boolean;
+};
 export interface TextObject {
   id: number;
   content: string;
