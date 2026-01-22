@@ -11,6 +11,10 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   const [textSizeOpt, setTextSizeOpt] = useState(textAttribute.textSize);
   const [textAlignOpt, setAlignOpt] = useState(textAttribute.textAlign);
   const [textFontOpt, setTextFontOpt] = useState(textAttribute.textFont);
+  const [textStrokeObject, setTextStrokeObject] = useState(
+    textAttribute.textStroke,
+  );
+  const [isUsingStroke, setIsUsingStroke] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleTextSizeOptChanges = (textSizeData: number) => {
@@ -29,6 +33,32 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
     // alert(textFontOpt.className);
     handleTextAttributeChanges("textFont", textFontData);
     // alert(textAttribute.textFont.className);
+  };
+
+  const handleTextStrokeOptChanges = (
+    textStrokeSize?: number,
+    textStrokeColor?: string,
+  ) => {
+    if (textStrokeSize) {
+      setTextStrokeObject({
+        strokeSize: textStrokeSize,
+        strokeColor: textAttribute.textStroke.strokeColor,
+      });
+      handleTextAttributeChanges("textStroke", {
+        strokeSize: textStrokeSize,
+        strokeColor: textAttribute.textStroke.strokeColor,
+      });
+    }
+    if (textStrokeColor) {
+      setTextStrokeObject({
+        strokeSize: textAttribute.textStroke.strokeSize,
+        strokeColor: textStrokeColor,
+      });
+      handleTextAttributeChanges("textStroke", {
+        strokeSize: textAttribute.textStroke.strokeSize,
+        strokeColor: textStrokeColor,
+      });
+    }
   };
 
   return (
@@ -96,10 +126,46 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   handleTextFontOptChanges={handleTextFontOptChanges}
                 />
               </div>
-              <div className="">
-                {/* <a href="#DOA SYUKUR">
-                  <button type="button">scroll</button>
-                </a> */}
+              <div className="p-1">
+                <div>
+                  <div>Stroke</div>
+                  <input
+                    type="checkbox"
+                    checked={isUsingStroke} // use checked, not value
+                    onChange={(e) => setIsUsingStroke(e.target.checked)}
+                  />
+                </div>
+                {isUsingStroke ? (
+                  <div>
+                    <button
+                      className="w-[20%] bg-red-400"
+                      onClick={() =>
+                        handleTextStrokeOptChanges(textStrokeObject.strokeSize - 0.1)
+                      }
+                    >
+                      -
+                    </button>
+                    <input
+                      value={textStrokeObject.strokeSize}
+                      onInput={(e) =>
+                        handleTextStrokeOptChanges(
+                          Number(e.currentTarget.value),
+                        )
+                      }
+                      type="number"
+                      className="border-1 p-1 max-w-[20%] text-center bg-white"
+                      placeholder="Text Size"
+                    />
+                    <button
+                      className="w-[20%] bg-green-400"
+                      onClick={() =>
+                        handleTextStrokeOptChanges(textStrokeObject.strokeSize + 0.1)
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+                ) : null}
               </div>
               <div className="">1</div>
             </div>
