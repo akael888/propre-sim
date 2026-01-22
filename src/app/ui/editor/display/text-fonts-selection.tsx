@@ -13,15 +13,21 @@ export default function TextFontsSelection({
       <select
         value={textFontOpt.className}
         onChange={(e) => {
-          const value = Number(e.target.value);
-        //   alert(textFontOpt.variable);
-          handleTextFontOptChanges(fontObjects[value].fontData);
+          const selectedClass = e.target.value;
+          const selectedFontObject = fontObjects.find(
+            (obj) => obj.fontData.className === selectedClass,
+          );
+          //   alert(textFontOpt.variable);
+          if (selectedFontObject) {
+            handleTextFontOptChanges(selectedFontObject.fontData);
+          }
         }}
+        className={`${textFontOpt.className}`}
       >
-        {fontObjects?.map((object, index) => (
+        {fontObjects?.map((object) => (
           <option
-            key={index}
-            value={index}
+            key={object.fontData.className}
+            value={object.fontData.className}
             className={object.fontData.className}
           >
             {object.fontName}
