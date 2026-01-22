@@ -53,6 +53,7 @@ const Slide: React.FC<SlideProps> = ({
             className={`text-wrap w-full h-full flex items-center justify-center ${textAttribute.textFont.className}`}
             style={{
               fontSize: `${textAttribute.textSize}cqw`,
+              fontWeight: `${textAttribute.textStyle.bold ? "bold" : "normal"}`,
               textAlign: textAttribute.textAlign,
               WebkitTextStroke: `${textAttribute.textStroke.strokeSize > 0 ? textAttribute.textStroke.strokeSize : "0"}cqw black`,
               color: "white",
