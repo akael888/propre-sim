@@ -1,4 +1,4 @@
-import { DisplayOptionsProp, TextAttribute } from "@/app/lib/type";
+import { DisplayOptionsProp, TextAttribute, TextStyle } from "@/app/lib/type";
 import { useState, useEffect } from "react";
 import { textAlignTypes } from "../../../lib/data";
 import TextFontsSelection from "./text-fonts-selection";
@@ -14,7 +14,12 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   const [textStrokeObject, setTextStrokeObject] = useState(
     textAttribute.textStroke,
   );
-  const [isUsingStroke, setIsUsingStroke] = useState(false);
+  const [textStyleObject, setTextStyleObject] = useState(
+    textAttribute.textStyle,
+  );
+  const [isUsingStroke, setIsUsingStroke] = useState(
+    textAttribute.textStroke.strokeSize > 0,
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   const handleTextSizeOptChanges = (textSizeData: number) => {
@@ -39,27 +44,29 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
     textStrokeSize?: number,
     textStrokeColor?: string,
   ) => {
-    if (textStrokeSize) {
-      setTextStrokeObject({
-        strokeSize: textStrokeSize,
-        strokeColor: textAttribute.textStroke.strokeColor,
-      });
-      handleTextAttributeChanges("textStroke", {
-        strokeSize: textStrokeSize,
-        strokeColor: textAttribute.textStroke.strokeColor,
-      });
-    }
-    if (textStrokeColor) {
-      setTextStrokeObject({
-        strokeSize: textAttribute.textStroke.strokeSize,
-        strokeColor: textStrokeColor,
-      });
-      handleTextAttributeChanges("textStroke", {
-        strokeSize: textAttribute.textStroke.strokeSize,
-        strokeColor: textStrokeColor,
-      });
-    }
+    if (textStrokeSize === undefined && textStrokeColor === undefined) return;
+
+    const newStroke = {
+      strokeSize: textStrokeSize ?? textAttribute.textStroke.strokeSize,
+      strokeColor: textStrokeColor ?? textAttribute.textStroke.strokeColor,
+    };
+
+    setTextStrokeObject(newStroke);
+    handleTextAttributeChanges("textStroke", newStroke);
   };
+
+  // const handleTextStyleOptChanges = <K extends keyof TextStyle>(
+  //   style: K,
+  //   value: boolean,
+  // ) => {
+  //   if (style) {
+  //     setTextStyleObject((prev) => {
+  //       const next = { ...prev, [style]: value };
+  //       handleTextAttributeChanges("textStyle", next);
+  //       return next;
+  //     });
+  //   }
+  // };
 
   return (
     <>
@@ -128,46 +135,110 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
               </div>
               <div className="p-1">
                 <div>
-                  <div>Stroke</div>
-                  <input
-                    type="checkbox"
-                    checked={isUsingStroke} // use checked, not value
-                    onChange={(e) => setIsUsingStroke(e.target.checked)}
-                  />
-                </div>
-                {isUsingStroke ? (
                   <div>
-                    <button
-                      className="w-[20%] bg-red-400"
-                      onClick={() =>
-                        handleTextStrokeOptChanges(textStrokeObject.strokeSize - 0.1)
-                      }
-                    >
-                      -
-                    </button>
+                    <div>Stroke</div>
                     <input
-                      value={textStrokeObject.strokeSize}
-                      onInput={(e) =>
-                        handleTextStrokeOptChanges(
-                          Number(e.currentTarget.value),
-                        )
-                      }
-                      type="number"
-                      className="border-1 p-1 max-w-[20%] text-center bg-white"
-                      placeholder="Text Size"
+                      type="checkbox"
+                      checked={isUsingStroke}
+                      onChange={(e) => setIsUsingStroke(e.target.checked)}
                     />
-                    <button
-                      className="w-[20%] bg-green-400"
-                      onClick={() =>
-                        handleTextStrokeOptChanges(textStrokeObject.strokeSize + 0.1)
-                      }
-                    >
-                      +
-                    </button>
                   </div>
-                ) : null}
+                  {isUsingStroke ? (
+                    <div>
+                      <button
+                        className="w-[20%] bg-red-400"
+                        onClick={() =>
+                          handleTextStrokeOptChanges(
+                            textStrokeObject.strokeSize - 0.1,
+                          )
+                        }
+                      >
+                        -
+                      </button>
+                      <input
+                        value={textStrokeObject.strokeSize}
+                        onInput={(e) =>
+                          handleTextStrokeOptChanges(
+                            Number(e.currentTarget.value),
+                          )
+                        }
+                        type="number"
+                        className="border-1 p-1 max-w-[20%] text-center bg-white"
+                        placeholder="Text Size"
+                      />
+                      <button
+                        className="w-[20%] bg-green-400"
+                        onClick={() =>
+                          handleTextStrokeOptChanges(
+                            textStrokeObject.strokeSize + 0.1,
+                          )
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
               </div>
-              <div className="">1</div>
+              <div className="">
+                <div className="flex flex-row gap-3 p-1">
+                  <div>
+                    Text Style: {textAttribute.textFont.style.fontWeight}
+                  </div>
+                  <div>
+                    Bold
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textStyle.bold}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStyle", {
+                          ...textAttribute.textStyle,
+                          bold: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    Italic
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textStyle.italic}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStyle", {
+                          ...textAttribute.textStyle,
+                          italic: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    Underlined
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textStyle.underlined}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStyle", {
+                          ...textAttribute.textStyle,
+                          underlined: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    Strikethrough
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textStyle.strikethrough}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStyle", {
+                          ...textAttribute.textStyle,
+                          strikethrough: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ) : null}
