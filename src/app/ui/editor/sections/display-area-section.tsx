@@ -1,10 +1,7 @@
 import { useState } from "react";
 import DisplayPanel from "../display/display-panel";
 import DisplayOptions from "../display/display-options";
-import {
-  DisplayAreaSectionProps,
-  TextAttribute,
-} from "../../../lib/type";
+import { DisplayAreaSectionProps, TextAttribute } from "../../../lib/type";
 import { defaultFontCollection } from "@/app/lib/data";
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
@@ -16,6 +13,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
       textSize: 6,
       textFont: defaultFontCollection[0].fontData,
       textAlign: "center",
+      textStroke: { strokeSize: -1, strokeColor: "" },
     });
 
   const handleTextAttributeChanges = <K extends keyof TextAttribute>(
@@ -28,7 +26,6 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
     }));
   };
 
-  
   return (
     <>
       <div className="border-1 w-full md:max-h-screen bg-gray-500 justify-center flex  md:order-none order-1 max-h-full relative">
