@@ -34,7 +34,7 @@ const Slide: React.FC<SlideProps> = ({
 
       const lines = text.substring(0, targetIndex).split("\n").length; //Calculcate how many enter/lines in the text
       const lineHeight = 24; //approx each line height
-      const scrollPosition = lines * lineHeight; //-3 to give more context above
+      const scrollPosition = (lines - 2) * lineHeight; //-3 to give more context above
 
       textarea.scrollTop = Math.max(0, scrollPosition);
     }
@@ -54,6 +54,8 @@ const Slide: React.FC<SlideProps> = ({
             style={{
               fontSize: `${textAttribute.textSize}cqw`,
               textAlign: textAttribute.textAlign,
+              WebkitTextStroke: `${textAttribute.textStroke.strokeSize > 0 ? textAttribute.textStroke.strokeSize : "0"}cqw black`,
+              color: "white",
             }}
           >
             {slideContent}
