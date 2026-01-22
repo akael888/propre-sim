@@ -6,8 +6,10 @@ export interface TextAttribute {
   textSize: number;
   textFont: NextFontWithVariable;
   textAlign: textAlignTypes;
+  textStroke: TextStroke;
 }
 
+export type TextStroke = { strokeSize: number; strokeColor: string };
 export interface TextObject {
   id: number;
   content: string;
