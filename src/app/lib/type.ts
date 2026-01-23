@@ -1,12 +1,36 @@
 import { RefObject } from "react";
 import { textAlignTypes } from "./data";
+import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 
 export interface TextAttribute {
   textSize: number;
-  textFont: string;
+  textFont: NextFontWithVariable;
   textAlign: textAlignTypes;
+  textStroke: TextStroke;
+  textStyle: TextStyle;
+  textShadow: TextShadow;
 }
 
+export type TextShadow = {
+  isOn: boolean;
+  x: number;
+  y: number;
+  shadowBlur: number;
+  shadowColor: string;
+};
+
+export type TextStroke = {
+  isOn: boolean;
+  strokeSize: number;
+  strokeColor: string;
+};
+
+export type TextStyle = {
+  bold: boolean;
+  italic: boolean;
+  underlined: boolean;
+  strikethrough: boolean;
+};
 export interface TextObject {
   id: number;
   content: string;
@@ -55,4 +79,23 @@ export interface DisplayOptionsProp {
     attribute: K,
     attributeValue: TextAttribute[K],
   ) => void;
+}
+
+export interface TextFontsSelectionProp {
+  textAttribute: TextAttribute;
+  handleTextAttributeChanges: <K extends keyof TextAttribute>(
+    attribute: K,
+    attributeValue: TextAttribute[K],
+  ) => void;
+}
+
+export interface OptionInputStepperProp {
+  textAttribute: TextAttribute;
+  handleTextAttributeChanges: <K extends keyof TextAttribute>(
+    attribute: K,
+    attributeValue: TextAttribute[K],
+  ) => void;
+  attributeKey: keyof TextAttribute;
+  keyValue?: string;
+  intervalPerStep: number;
 }

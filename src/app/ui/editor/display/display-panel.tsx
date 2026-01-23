@@ -1,7 +1,5 @@
-import { parseTextDataToObjects } from "@/app/lib/utils";
 import Slide from "./slide";
-import { useEffect, useState } from "react";
-import { DisplayPanelProps, TextAttribute, TextObject } from "@/app/lib/type";
+import { DisplayPanelProps } from "@/app/lib/type";
 
 const DisplayPanel: React.FC<DisplayPanelProps> = ({
   slideObject,

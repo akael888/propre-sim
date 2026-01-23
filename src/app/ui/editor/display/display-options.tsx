@@ -1,64 +1,109 @@
-import { DisplayOptionsProp, TextAttribute } from "@/app/lib/type";
-import { useState } from "react";
+import { DisplayOptionsProp, TextAttribute, TextStyle } from "@/app/lib/type";
+import { useState, useEffect } from "react";
 import { textAlignTypes } from "../../../lib/data";
+import TextFontsSelection from "./text-fonts-selection";
+import { NextFontWithVariable } from "next/dist/compiled/@next/font";
+import OptionInputStepper from "./option/option-input-stepper";
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   textAttribute,
   handleTextAttributeChanges,
 }) => {
-  const [textSizeOpt, setTextSizeOpt] = useState(textAttribute.textSize);
-  const [textAlignOpt, setAlignOpt] = useState(textAttribute.textAlign);
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleTextSizeOptChanges = (textSizeData: number) => {
-    setTextSizeOpt(textSizeData);
-    handleTextAttributeChanges("textSize", textSizeData);
-  };
-
-  const handleTextAlignOptChanges = (textAlignData: textAlignTypes) => {
-    setAlignOpt(textAlignData);
-    handleTextAttributeChanges("textAlign", textAlignData);
-  };
 
   return (
     <>
-      <div className=" w-full bottom-0 md:h-[20%] h-[50%] absolute flex flex-col justify-end items-end">
+      <div
+        className={`w-full bottom-0 md:h-fit h-${isOpen ? "20%" : "0"} absolute flex flex-col justify-end items-start`}
+      >
         <button
-          className="bg-black w-fit border-1 text-white p-1"
+          className="bg-black w-fit border-1 text-white p-1 "
           onClick={() => setIsOpen(!isOpen)}
         >
           Options
         </button>
         {isOpen ? (
           <div className=" w-full border-1 bottom-0 h-full  bg-gray-300">
-            <div className="grid grid-cols-2 grid-rows-2 h-full w-full">
-              <div className="flex justify-center w-fit h-full">
-                <div className="flex md:flex-row flex-col p-3 w-fit">
-                  <div className="w-fit p-2 h-full flex items-center text-center">
-                    Text Size:
-                  </div>
-                  <div className="flex flex-row w-full">
-                    <button
-                      className="w-[20%] bg-red-400"
-                      onClick={() => handleTextSizeOptChanges(textSizeOpt - 1)}
-                    >
-                      -
-                    </button>
+            <div className="grid grid-cols-2 grid-rows-1 h-full w-full">
+              <div className="flex flex-col justify-center w-fit">
+                <OptionInputStepper
+                  textAttribute={textAttribute}
+                  handleTextAttributeChanges={handleTextAttributeChanges}
+                  attributeKey="textSize"
+                  intervalPerStep={1}
+                />
+                <div>
+                  <div>
+                    <div>Stroke</div>
                     <input
-                      value={textSizeOpt}
-                      onInput={(e) =>
-                        handleTextSizeOptChanges(Number(e.currentTarget.value))
+                      type="checkbox"
+                      checked={textAttribute.textStroke.isOn}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStroke", {
+                          ...textAttribute.textStroke,
+                          isOn: e.target.checked,
+                        })
                       }
-                      type="number"
-                      className="border-1 p-1 max-w-[20%] text-center bg-white"
-                      placeholder="Text Size"
                     />
-                    <button
-                      className="w-[20%] bg-green-400"
-                      onClick={() => handleTextSizeOptChanges(textSizeOpt + 1)}
-                    >
-                      +
-                    </button>
+                  </div>
+                  {textAttribute.textStroke.isOn ? (
+                    <>
+                      <OptionInputStepper
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        attributeKey="textStroke"
+                        keyValue="strokeSize"
+                        intervalPerStep={0.1}
+                      />
+                    </>
+                  ) : null}
+                </div>
+                <div>
+                  <div>
+                    <div>Shadow</div>
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textShadow.isOn}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textShadow", {
+                          ...textAttribute.textShadow,
+                          isOn: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 p-2">
+                    {textAttribute.textShadow.isOn ? (
+                      <>
+                        <OptionInputStepper
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textShadow"
+                          keyValue="x"
+                          intervalPerStep={0.01}
+                        />
+                        <OptionInputStepper
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textShadow"
+                          keyValue="y"
+                          intervalPerStep={0.01}
+                        />
+                        <OptionInputStepper
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textShadow"
+                          keyValue="shadowBlur"
+                          intervalPerStep={1}
+                        />
+                      </>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -66,10 +111,10 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                 <div>
                   <div>Text Alignment:</div>
                   <select
-                    value={textAlignOpt}
+                    value={textAttribute.textAlign}
                     onChange={(e) => {
                       const value = e.target.value as textAlignTypes;
-                      handleTextAlignOptChanges(value);
+                      handleTextAttributeChanges("textAlign", value);
                     }}
                   >
                     <option value={"left"}>left</option>
@@ -78,13 +123,68 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     <option value={"justify"}>justify</option>
                   </select>
                 </div>
+                <TextFontsSelection
+                  textAttribute={textAttribute}
+                  handleTextAttributeChanges={handleTextAttributeChanges}
+                />
+                <div className="flex flex-row gap-3 p-1">
+                  <div>
+                    Text Style: {textAttribute.textFont.style.fontWeight}
+                  </div>
+                  <div>
+                    Bold
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textStyle.bold}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStyle", {
+                          ...textAttribute.textStyle,
+                          bold: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    Italic
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textStyle.italic}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStyle", {
+                          ...textAttribute.textStyle,
+                          italic: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    Underlined
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textStyle.underlined}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStyle", {
+                          ...textAttribute.textStyle,
+                          underlined: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    Strikethrough
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textStyle.strikethrough}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStyle", {
+                          ...textAttribute.textStyle,
+                          strikethrough: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="">
-                {/* <a href="#DOA SYUKUR">
-                  <button type="button">scroll</button>
-                </a> */}
-              </div>
-              <div className="">1</div>
             </div>
           </div>
         ) : null}
