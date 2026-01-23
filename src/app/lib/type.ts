@@ -82,6 +82,9 @@ export interface DisplayOptionsProp {
 }
 
 export interface TextFontsSelectionProp {
-  textFontOpt: NextFontWithVariable;
-  handleTextFontOptChanges: (textFontName: NextFontWithVariable) => void;
+  textAttribute: TextAttribute;
+  handleTextAttributeChanges: <K extends keyof TextAttribute>(
+    attribute: K,
+    attributeValue: TextAttribute[K],
+  ) => void;
 }
