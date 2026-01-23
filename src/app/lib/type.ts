@@ -8,9 +8,22 @@ export interface TextAttribute {
   textAlign: textAlignTypes;
   textStroke: TextStroke;
   textStyle: TextStyle;
+  textShadow: TextShadow;
 }
 
-export type TextStroke = { strokeSize: number; strokeColor: string };
+export type TextShadow = {
+  isOn: boolean;
+  x: number;
+  y: number;
+  shadowBlur: number;
+  shadowColor: string;
+};
+
+export type TextStroke = {
+  isOn: boolean;
+  strokeSize: number;
+  strokeColor: string;
+};
 
 export type TextStyle = {
   bold: boolean;
