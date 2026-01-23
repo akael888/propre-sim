@@ -8,58 +8,48 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   textAttribute,
   handleTextAttributeChanges,
 }) => {
-  const [textSizeOpt, setTextSizeOpt] = useState(textAttribute.textSize);
-  const [textAlignOpt, setAlignOpt] = useState(textAttribute.textAlign);
-  const [textFontOpt, setTextFontOpt] = useState(textAttribute.textFont);
-  const [textStrokeObject, setTextStrokeObject] = useState(
-    textAttribute.textStroke,
-  );
-  const [textStyleObject, setTextStyleObject] = useState(
-    textAttribute.textStyle,
-  );
-  const [isUsingStroke, setIsUsingStroke] = useState(
-    textAttribute.textStroke.strokeSize > 0,
-  );
-
-  const [isUsingShadow, setIsUsingShadow] = useState(
-    textAttribute.textShadow != null,
-  );
+  // const [textSizeOpt, setTextSizeOpt] = useState(textAttribute.textSize);
+  // const [textAlignOpt, setAlignOpt] = useState(textAttribute.textAlign);
+  // const [textFontOpt, setTextFontOpt] = useState(textAttribute.textFont);
+  // const [textStrokeObject, setTextStrokeObject] = useState(
+  //   textAttribute.textStroke,
+  // );
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleTextSizeOptChanges = (textSizeData: number) => {
-    setTextSizeOpt(textSizeData);
-    handleTextAttributeChanges("textSize", textSizeData);
-  };
+  // const handleTextSizeOptChanges = (textSizeData: number) => {
+  //   setTextSizeOpt(textSizeData);
+  //   handleTextAttributeChanges("textSize", textSizeData);
+  // };
 
-  const handleTextAlignOptChanges = (textAlignData: textAlignTypes) => {
-    setAlignOpt(textAlignData);
-    handleTextAttributeChanges("textAlign", textAlignData);
-  };
+  // const handleTextAlignOptChanges = (textAlignData: textAlignTypes) => {
+  //   setAlignOpt(textAlignData);
+  //   handleTextAttributeChanges("textAlign", textAlignData);
+  // };
 
-  const handleTextFontOptChanges = (textFontData: NextFontWithVariable) => {
-    // alert(textFontData.className);
-    setTextFontOpt(textFontData);
-    // alert(textFontOpt.className);
-    handleTextAttributeChanges("textFont", textFontData);
-    // alert(textAttribute.textFont.className);
-  };
+  // const handleTextFontOptChanges = (textFontData: NextFontWithVariable) => {
+  //   // alert(textFontData.className);
+  //   setTextFontOpt(textFontData);
+  //   // alert(textFontOpt.className);
+  //   handleTextAttributeChanges("textFont", textFontData);
+  //   // alert(textAttribute.textFont.className);
+  // };
 
-  const handleTextStrokeOptChanges = (
-    textStrokeSize?: number,
-    textStrokeColor?: string,
-  ) => {
-    if (textStrokeSize === undefined && textStrokeColor === undefined) return;
+  // const handleTextStrokeOptChanges = (
+  //   textStrokeSize?: number,
+  //   textStrokeColor?: string,
+  // ) => {
+  //   if (textStrokeSize === undefined && textStrokeColor === undefined) return;
 
-    const newStroke = {
-      isOn: textAttribute.textStroke.isOn,
-      strokeSize: textStrokeSize ?? textAttribute.textStroke.strokeSize,
-      strokeColor: textStrokeColor ?? textAttribute.textStroke.strokeColor,
-    };
+  //   const newStroke = {
+  //     isOn: textAttribute.textStroke.isOn,
+  //     strokeSize: textStrokeSize ?? textAttribute.textStroke.strokeSize,
+  //     strokeColor: textStrokeColor ?? textAttribute.textStroke.strokeColor,
+  //   };
 
-    setTextStrokeObject(newStroke);
-    handleTextAttributeChanges("textStroke", newStroke);
-  };
+  //   setTextStrokeObject(newStroke);
+  //   handleTextAttributeChanges("textStroke", newStroke);
+  // };
 
   // const handleTextStyleOptChanges = <K extends keyof TextStyle>(
   //   style: K,
@@ -96,14 +86,22 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   <div className="flex flex-row w-full">
                     <button
                       className="w-[20%] bg-red-400"
-                      onClick={() => handleTextSizeOptChanges(textSizeOpt - 1)}
+                      onClick={() =>
+                        handleTextAttributeChanges(
+                          "textSize",
+                          textAttribute.textSize - 1,
+                        )
+                      }
                     >
                       -
                     </button>
                     <input
-                      value={textSizeOpt}
+                      value={textAttribute.textSize}
                       onInput={(e) =>
-                        handleTextSizeOptChanges(Number(e.currentTarget.value))
+                        handleTextAttributeChanges(
+                          "textSize",
+                          Number(e.currentTarget.value),
+                        )
                       }
                       type="number"
                       className="border-1 p-1 max-w-[20%] text-center bg-white"
@@ -111,7 +109,12 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     />
                     <button
                       className="w-[20%] bg-green-400"
-                      onClick={() => handleTextSizeOptChanges(textSizeOpt + 1)}
+                      onClick={() =>
+                        handleTextAttributeChanges(
+                          "textSize",
+                          textAttribute.textSize + 1,
+                        )
+                      }
                     >
                       +
                     </button>
@@ -122,10 +125,10 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                 <div>
                   <div>Text Alignment:</div>
                   <select
-                    value={textAlignOpt}
+                    value={textAttribute.textAlign}
                     onChange={(e) => {
                       const value = e.target.value as textAlignTypes;
-                      handleTextAlignOptChanges(value);
+                      handleTextAttributeChanges("textAlign", value);
                     }}
                   >
                     <option value={"left"}>left</option>
@@ -135,8 +138,8 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   </select>
                 </div>
                 <TextFontsSelection
-                  textFontOpt={textFontOpt}
-                  handleTextFontOptChanges={handleTextFontOptChanges}
+                  textAttribute={textAttribute}
+                  handleTextAttributeChanges={handleTextAttributeChanges}
                 />
               </div>
               <div className="p-1">
@@ -159,19 +162,22 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       <button
                         className="w-[20%] bg-red-400"
                         onClick={() =>
-                          handleTextStrokeOptChanges(
-                            textStrokeObject.strokeSize - 0.1,
-                          )
+                          handleTextAttributeChanges("textStroke", {
+                            ...textAttribute.textStroke,
+                            strokeSize:
+                              textAttribute.textStroke.strokeSize - 0.1,
+                          })
                         }
                       >
                         -
                       </button>
                       <input
-                        value={textStrokeObject.strokeSize}
+                        value={textAttribute.textStroke.strokeSize}
                         onInput={(e) =>
-                          handleTextStrokeOptChanges(
-                            Number(e.currentTarget.value),
-                          )
+                          handleTextAttributeChanges("textStroke", {
+                            ...textAttribute.textStroke,
+                            strokeSize: Number(e.currentTarget.value),
+                          })
                         }
                         type="number"
                         className="border-1 p-1 max-w-[20%] text-center bg-white"
@@ -180,9 +186,11 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       <button
                         className="w-[20%] bg-green-400"
                         onClick={() =>
-                          handleTextStrokeOptChanges(
-                            textStrokeObject.strokeSize + 0.1,
-                          )
+                          handleTextAttributeChanges("textStroke", {
+                            ...textAttribute.textStroke,
+                            strokeSize:
+                              textAttribute.textStroke.strokeSize + 0.1,
+                          })
                         }
                       >
                         +

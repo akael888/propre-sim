@@ -2,8 +2,8 @@ import { defaultFontCollection, textAlignTypes } from "@/app/lib/data";
 import { TextFontsSelectionProp } from "@/app/lib/type";
 
 export default function TextFontsSelection({
-  textFontOpt,
-  handleTextFontOptChanges,
+  textAttribute,
+  handleTextAttributeChanges,
 }: TextFontsSelectionProp) {
   const fontObjects = defaultFontCollection;
 
@@ -11,7 +11,7 @@ export default function TextFontsSelection({
     <div>
       <div>Text Font:</div>
       <select
-        value={textFontOpt.className}
+        value={textAttribute.textFont.className}
         onChange={(e) => {
           const selectedClass = e.target.value;
           const selectedFontObject = fontObjects.find(
@@ -19,10 +19,10 @@ export default function TextFontsSelection({
           );
           //   alert(textFontOpt.variable);
           if (selectedFontObject) {
-            handleTextFontOptChanges(selectedFontObject.fontData);
+            handleTextAttributeChanges('textFont',selectedFontObject.fontData);
           }
         }}
-        className={`${textFontOpt.className}`}
+        className={`${textAttribute.textFont.className}`}
       >
         {fontObjects?.map((object) => (
           <option
