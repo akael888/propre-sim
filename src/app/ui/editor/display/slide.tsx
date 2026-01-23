@@ -54,7 +54,9 @@ const Slide: React.FC<SlideProps> = ({
             style={{
               fontSize: `${textAttribute.textSize}cqw`,
               fontWeight: `${textAttribute.textStyle.bold ? "bolder" : "normal"}`,
-              textShadow: `${textAttribute.textShadow.x}em ${textAttribute.textShadow.y}em rgba(0,0,0,1)`, //0.2 -0.02
+              textShadow: textAttribute.textShadow.isOn
+                ? `${textAttribute.textShadow.x}em ${textAttribute.textShadow.y}em rgba(0,0,0,1)`
+                : "", //0.2 -0.02
               textAlign: textAttribute.textAlign,
               paintOrder: textAttribute.textStroke.isOn ? "stroke fill" : "",
               WebkitTextStroke: textAttribute.textStroke.isOn
