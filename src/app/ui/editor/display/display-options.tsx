@@ -24,37 +24,14 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
         </button>
         {isOpen ? (
           <div className=" w-full border-1 bottom-0 h-full  bg-gray-300">
-            <div className="grid grid-cols-2 grid-rows-2 h-full w-full">
-              <div className="flex justify-center w-fit h-full">
+            <div className="grid grid-cols-2 grid-rows-1 h-full w-full">
+              <div className="flex flex-col justify-center w-fit">
                 <OptionInputStepper
                   textAttribute={textAttribute}
                   handleTextAttributeChanges={handleTextAttributeChanges}
                   attributeKey="textSize"
                   intervalPerStep={1}
                 />
-              </div>
-              <div className="">
-                <div>
-                  <div>Text Alignment:</div>
-                  <select
-                    value={textAttribute.textAlign}
-                    onChange={(e) => {
-                      const value = e.target.value as textAlignTypes;
-                      handleTextAttributeChanges("textAlign", value);
-                    }}
-                  >
-                    <option value={"left"}>left</option>
-                    <option value={"center"}>center</option>
-                    <option value={"right"}>right</option>
-                    <option value={"justify"}>justify</option>
-                  </select>
-                </div>
-                <TextFontsSelection
-                  textAttribute={textAttribute}
-                  handleTextAttributeChanges={handleTextAttributeChanges}
-                />
-              </div>
-              <div className="p-1">
                 <div>
                   <div>
                     <div>Stroke</div>
@@ -131,6 +108,25 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                 </div>
               </div>
               <div className="">
+                <div>
+                  <div>Text Alignment:</div>
+                  <select
+                    value={textAttribute.textAlign}
+                    onChange={(e) => {
+                      const value = e.target.value as textAlignTypes;
+                      handleTextAttributeChanges("textAlign", value);
+                    }}
+                  >
+                    <option value={"left"}>left</option>
+                    <option value={"center"}>center</option>
+                    <option value={"right"}>right</option>
+                    <option value={"justify"}>justify</option>
+                  </select>
+                </div>
+                <TextFontsSelection
+                  textAttribute={textAttribute}
+                  handleTextAttributeChanges={handleTextAttributeChanges}
+                />
                 <div className="flex flex-row gap-3 p-1">
                   <div>
                     Text Style: {textAttribute.textFont.style.fontWeight}
