@@ -2,25 +2,14 @@ import { useState } from "react";
 import DisplayPanel from "../display/display-panel";
 import DisplayOptions from "../display/display-options";
 import { DisplayAreaSectionProps, TextAttribute } from "../../../lib/type";
-import { defaultFontCollection } from "@/app/lib/data";
+import { defaultTextAttributeData } from '../../../lib/data';
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   slideObject,
   textAreaRef,
 }) => {
   const [displayedTextAttribute, setDisplayedTextAttribute] =
-    useState<TextAttribute>({
-      textSize: 5,
-      textFont: defaultFontCollection[0].fontData,
-      textAlign: "center",
-      textStroke: { strokeSize: 0.1, strokeColor: "" },
-      textStyle: {
-        bold: true,
-        italic: false,
-        underlined: false,
-        strikethrough: false,
-      },
-    });
+    useState<TextAttribute>(defaultTextAttributeData);
 
   const handleTextAttributeChanges = <K extends keyof TextAttribute>(
     attribute: K,
