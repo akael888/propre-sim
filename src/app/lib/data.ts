@@ -53,7 +53,7 @@ export const defaultFontCollection = [
 ];
 
 export const defaultTextAttributeData = <TextAttribute>{
-  textSize: 5,
+  textSize: 6,
   textFont: defaultFontCollection[0].fontData,
   textAlign: "center",
   textStroke: { isOn: true, strokeSize: 0.89, strokeColor: "" },
@@ -64,4 +64,5 @@ export const defaultTextAttributeData = <TextAttribute>{
     strikethrough: false,
   },
   textShadow: { isOn: true, x: 0.2, y: -0.02, shadowBlur: 0, shadowColor: "" },
+  textContainer: { width: 85, height: 85 },
 };

@@ -48,7 +48,13 @@ const Slide: React.FC<SlideProps> = ({
         style={{ containerType: "inline-size" }}
         onClick={() => FocusOnTextArea(slideContent)}
       >
-        <div className="border-1 overflow-hidden w-[70%] h-[60%]">
+        <div
+          className="border-1 overflow-hidden"
+          style={{
+            width: `${textAttribute.textContainer.width}%`,
+            height: `${textAttribute.textContainer.height}%`,
+          }}
+        >
           <pre
             className={`text-wrap w-full h-full flex items-center justify-center ${textAttribute.textFont.className}`}
             style={{

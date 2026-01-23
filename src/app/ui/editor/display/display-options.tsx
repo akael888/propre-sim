@@ -1,8 +1,7 @@
-import { DisplayOptionsProp, TextAttribute, TextStyle } from "@/app/lib/type";
-import { useState, useEffect } from "react";
+import { DisplayOptionsProp } from "@/app/lib/type";
+import { useState } from "react";
 import { textAlignTypes } from "../../../lib/data";
 import TextFontsSelection from "./text-fonts-selection";
-import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 import OptionInputStepper from "./option/option-input-stepper";
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
@@ -30,10 +29,24 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   textAttribute={textAttribute}
                   handleTextAttributeChanges={handleTextAttributeChanges}
                   attributeKey="textSize"
+                  intervalPerStep={0.1}
+                />
+                <OptionInputStepper
+                  textAttribute={textAttribute}
+                  handleTextAttributeChanges={handleTextAttributeChanges}
+                  attributeKey="textContainer"
+                  keyValue="width"
+                  intervalPerStep={1}
+                />{" "}
+                <OptionInputStepper
+                  textAttribute={textAttribute}
+                  handleTextAttributeChanges={handleTextAttributeChanges}
+                  attributeKey="textContainer"
+                  keyValue="height"
                   intervalPerStep={1}
                 />
-                <div>
-                  <div>
+                <div className="p-1">
+                  <div className="flex gap-2 p-2">
                     <div>Stroke</div>
                     <input
                       type="checkbox"
@@ -46,20 +59,25 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       }
                     />
                   </div>
+
                   {textAttribute.textStroke.isOn ? (
                     <>
-                      <OptionInputStepper
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        attributeKey="textStroke"
-                        keyValue="strokeSize"
-                        intervalPerStep={0.1}
-                      />
+                      <div className="border-1">
+                        <OptionInputStepper
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textStroke"
+                          keyValue="strokeSize"
+                          intervalPerStep={0.1}
+                        />{" "}
+                      </div>
                     </>
                   ) : null}
                 </div>
-                <div>
-                  <div>
+                <div className="p-1">
+                  <div className="flex gap-2 p-2">
                     <div>Shadow</div>
                     <input
                       type="checkbox"
@@ -72,9 +90,10 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       }
                     />
                   </div>
-                  <div className="grid grid-cols-3 p-2">
-                    {textAttribute.textShadow.isOn ? (
-                      <>
+
+                  {textAttribute.textShadow.isOn ? (
+                    <>
+                      <div className="grid grid-cols-3 p-2 border-1">
                         <OptionInputStepper
                           textAttribute={textAttribute}
                           handleTextAttributeChanges={
@@ -102,9 +121,9 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                           keyValue="shadowBlur"
                           intervalPerStep={1}
                         />
-                      </>
-                    ) : null}
-                  </div>
+                      </div>
+                    </>
+                  ) : null}
                 </div>
               </div>
               <div className="">
