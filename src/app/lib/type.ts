@@ -9,6 +9,7 @@ export interface TextAttribute {
   textStroke: TextStroke;
   textStyle: TextStyle;
   textShadow: TextShadow;
+  textContainer: TextContainer;
 }
 
 export type TextShadow = {
@@ -36,6 +37,11 @@ export interface TextObject {
   content: string;
   charIndex: number;
 }
+
+export type TextContainer = {
+  width: number;
+  height: number;
+};
 
 // Text Area -----------------------------
 export interface TextAreaSectionProps {
