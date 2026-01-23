@@ -20,6 +20,11 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   const [isUsingStroke, setIsUsingStroke] = useState(
     textAttribute.textStroke.strokeSize > 0,
   );
+
+  const [isUsingShadow, setIsUsingShadow] = useState(
+    textAttribute.textShadow != null,
+  );
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleTextSizeOptChanges = (textSizeData: number) => {
@@ -47,6 +52,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
     if (textStrokeSize === undefined && textStrokeColor === undefined) return;
 
     const newStroke = {
+      isOn: textAttribute.textStroke.isOn,
       strokeSize: textStrokeSize ?? textAttribute.textStroke.strokeSize,
       strokeColor: textStrokeColor ?? textAttribute.textStroke.strokeColor,
     };
@@ -139,11 +145,16 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     <div>Stroke</div>
                     <input
                       type="checkbox"
-                      checked={isUsingStroke}
-                      onChange={(e) => setIsUsingStroke(e.target.checked)}
+                      checked={textAttribute.textStroke.isOn}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textStroke", {
+                          ...textAttribute.textStroke,
+                          isOn: e.target.checked,
+                        })
+                      }
                     />
                   </div>
-                  {isUsingStroke ? (
+                  {textAttribute.textStroke.isOn ? (
                     <div>
                       <button
                         className="w-[20%] bg-red-400"
@@ -237,6 +248,107 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       }
                     />
                   </div>
+                </div>
+                <div>
+                  <div>
+                    <div>Shadow</div>
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textShadow.isOn}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textShadow", {
+                          ...textAttribute.textShadow,
+                          isOn: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  {textAttribute.textShadow.isOn ? (
+                    <>
+                      <div className="flex md:flex-row flex-col p-3 w-fit">
+                        <div className="w-fit p-2 h-full flex items-center text-center">
+                          Text Shadow (X):
+                        </div>
+                        <div className="flex flex-row w-full">
+                          <button
+                            className="w-[20%] bg-red-400"
+                            onClick={() =>
+                              handleTextAttributeChanges("textShadow", {
+                                ...textAttribute.textShadow,
+                                x: textAttribute.textShadow.x - 0.01,
+                              })
+                            }
+                          >
+                            -
+                          </button>
+                          <input
+                            value={textAttribute.textShadow.x}
+                            onInput={(e) =>
+                              handleTextAttributeChanges("textShadow", {
+                                ...textAttribute.textShadow,
+                                x: Number(e.currentTarget.value),
+                              })
+                            }
+                            type="number"
+                            className="border-1 p-1 max-w-[20%] text-center bg-white"
+                            placeholder="Text Size"
+                          />
+                          <button
+                            className="w-[20%] bg-green-400"
+                            onClick={() =>
+                              handleTextAttributeChanges("textShadow", {
+                                ...textAttribute.textShadow,
+                                x: textAttribute.textShadow.x + 0.01,
+                              })
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex md:flex-row flex-col p-3 w-fit">
+                        <div className="w-fit p-2 h-full flex items-center text-center">
+                          Text Shadow (Y):
+                        </div>
+                        <div className="flex flex-row w-full">
+                          <button
+                            className="w-[20%] bg-red-400"
+                            onClick={() =>
+                              handleTextAttributeChanges("textShadow", {
+                                ...textAttribute.textShadow,
+                                y: textAttribute.textShadow.y - 0.01,
+                              })
+                            }
+                          >
+                            -
+                          </button>
+                          <input
+                            value={textAttribute.textShadow.y}
+                            onInput={(e) =>
+                              handleTextAttributeChanges("textShadow", {
+                                ...textAttribute.textShadow,
+                                y: Number(e.currentTarget.value),
+                              })
+                            }
+                            type="number"
+                            className="border-1 p-1 max-w-[20%] text-center bg-white"
+                            placeholder="Text Size"
+                          />
+                          <button
+                            className="w-[20%] bg-green-400"
+                            onClick={() =>
+                              handleTextAttributeChanges("textShadow", {
+                                ...textAttribute.textShadow,
+                                y: textAttribute.textShadow.y + 0.01,
+                              })
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  ) : null}
                 </div>
               </div>
             </div>
