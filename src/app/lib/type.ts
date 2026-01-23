@@ -88,3 +88,14 @@ export interface TextFontsSelectionProp {
     attributeValue: TextAttribute[K],
   ) => void;
 }
+
+export interface OptionInputStepperProp {
+  textAttribute: TextAttribute;
+  handleTextAttributeChanges: <K extends keyof TextAttribute>(
+    attribute: K,
+    attributeValue: TextAttribute[K],
+  ) => void;
+  attributeKey: keyof TextAttribute;
+  keyValue?: string;
+  intervalPerStep: number;
+}
