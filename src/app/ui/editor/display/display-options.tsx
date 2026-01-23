@@ -81,6 +81,54 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     </>
                   ) : null}
                 </div>
+                <div>
+                  <div>
+                    <div>Shadow</div>
+                    <input
+                      type="checkbox"
+                      checked={textAttribute.textShadow.isOn}
+                      onChange={(e) =>
+                        handleTextAttributeChanges("textShadow", {
+                          ...textAttribute.textShadow,
+                          isOn: e.target.checked,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 p-2">
+                    {textAttribute.textShadow.isOn ? (
+                      <>
+                        <OptionInputStepper
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textShadow"
+                          keyValue="x"
+                          intervalPerStep={0.01}
+                        />
+                        <OptionInputStepper
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textShadow"
+                          keyValue="y"
+                          intervalPerStep={0.01}
+                        />
+                        <OptionInputStepper
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textShadow"
+                          keyValue="shadowBlur"
+                          intervalPerStep={1}
+                        />
+                      </>
+                    ) : null}
+                  </div>
+                </div>
               </div>
               <div className="">
                 <div className="flex flex-row gap-3 p-1">
@@ -139,150 +187,6 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       }
                     />
                   </div>
-                </div>
-                <div>
-                  <div>
-                    <div>Shadow</div>
-                    <input
-                      type="checkbox"
-                      checked={textAttribute.textShadow.isOn}
-                      onChange={(e) =>
-                        handleTextAttributeChanges("textShadow", {
-                          ...textAttribute.textShadow,
-                          isOn: e.target.checked,
-                        })
-                      }
-                    />
-                  </div>
-                  {textAttribute.textShadow.isOn ? (
-                    <>
-                      <div className="flex md:flex-row flex-col p-3 w-fit">
-                        <div className="w-fit p-2 h-full flex items-center text-center">
-                          Text Shadow (X):
-                        </div>
-                        <div className="flex flex-row w-full">
-                          <button
-                            className="w-[20%] bg-red-400"
-                            onClick={() =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                x: textAttribute.textShadow.x - 0.01,
-                              })
-                            }
-                          >
-                            -
-                          </button>
-                          <input
-                            value={textAttribute.textShadow.x}
-                            onInput={(e) =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                x: Number(e.currentTarget.value),
-                              })
-                            }
-                            type="number"
-                            className="border-1 p-1 max-w-[20%] text-center bg-white"
-                            placeholder="Text Size"
-                          />
-                          <button
-                            className="w-[20%] bg-green-400"
-                            onClick={() =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                x: textAttribute.textShadow.x + 0.01,
-                              })
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                      <div className="flex md:flex-row flex-col p-3 w-fit">
-                        <div className="w-fit p-2 h-full flex items-center text-center">
-                          Text Shadow (Y):
-                        </div>
-                        <div className="flex flex-row w-full">
-                          <button
-                            className="w-[20%] bg-red-400"
-                            onClick={() =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                y: textAttribute.textShadow.y - 0.01,
-                              })
-                            }
-                          >
-                            -
-                          </button>
-                          <input
-                            value={textAttribute.textShadow.y}
-                            onInput={(e) =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                y: Number(e.currentTarget.value),
-                              })
-                            }
-                            type="number"
-                            className="border-1 p-1 max-w-[20%] text-center bg-white"
-                            placeholder="Text Size"
-                          />
-                          <button
-                            className="w-[20%] bg-green-400"
-                            onClick={() =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                y: textAttribute.textShadow.y + 0.01,
-                              })
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                      <div className="flex md:flex-row flex-col p-3 w-fit">
-                        <div className="w-fit p-2 h-full flex items-center text-center">
-                          Shadow Blur:
-                        </div>
-                        <div className="flex flex-row w-full">
-                          <button
-                            className="w-[20%] bg-red-400"
-                            onClick={() =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                shadowBlur:
-                                  textAttribute.textShadow.shadowBlur - 1,
-                              })
-                            }
-                          >
-                            -
-                          </button>
-                          <input
-                            value={textAttribute.textShadow.shadowBlur}
-                            onInput={(e) =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                shadowBlur: Number(e.currentTarget.value),
-                              })
-                            }
-                            type="number"
-                            className="border-1 p-1 max-w-[20%] text-center bg-white"
-                            placeholder="Text Size"
-                          />
-                          <button
-                            className="w-[20%] bg-green-400"
-                            onClick={() =>
-                              handleTextAttributeChanges("textShadow", {
-                                ...textAttribute.textShadow,
-                                shadowBlur:
-                                  textAttribute.textShadow.shadowBlur + 1,
-                              })
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </>
-                  ) : null}
                 </div>
               </div>
             </div>

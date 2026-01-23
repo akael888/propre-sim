@@ -37,7 +37,7 @@ export default function OptionInputStepper({
   return (
     <div className="flex flex-col p-3 w-fit">
       <div className="w-full p-2 h-fit flex items-center text-center">
-        {attributeKey}:
+        {attributeKey} {keyValue ? `(${keyValue})` : ""} :
       </div>
       <div className="flex flex-row">
         <button
