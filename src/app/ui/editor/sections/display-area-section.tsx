@@ -14,7 +14,6 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
         const stored = localStorage.getItem("TEXT_ATTRIBUTE_DATA");
         if (stored) {
           const parsed = JSON.parse(stored);
-          console.log("testF");
           return parsed;
         }
       } catch (err) {
