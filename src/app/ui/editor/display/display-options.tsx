@@ -94,7 +94,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                   {textAttribute.textShadow.isOn ? (
                     <>
-                      <div className="md:grid md:grid-cols-3 flex flex-row w-screen p-2 border-1">
+                      <div className="md:grid md:grid-cols-3 flex flex-row md:w-full w-screen p-2 border-1">
                         <OptionInputStepper
                           textAttribute={textAttribute}
                           handleTextAttributeChanges={
