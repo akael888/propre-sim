@@ -13,7 +13,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   return (
     <>
       <div
-        className={`w-full bottom-0 md:h-fit h-${isOpen ? "20%" : "0"} absolute flex flex-col justify-end items-start`}
+        className={`w-full bottom-0 md:h-fit h-${isOpen ? "10%" : "0"} absolute flex flex-col justify-end items-start`}
       >
         <button
           className="bg-black w-fit border-1 text-white p-1 "
@@ -22,9 +22,10 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
           Options
         </button>
         {isOpen ? (
-          <div className=" w-full border-1 bottom-0 h-full  bg-gray-300">
-            <div className="grid grid-cols-2 grid-rows-1 h-full w-full">
-              <div className="flex flex-col justify-center w-fit">
+          <div className=" w-full border-1 bottom-0 max-h-[10%] overflow-y-hidden bg-gray-300">
+            <div className="md:grid md:grid-cols-2 md:grid-rows-1 flex flex-col md:h-full h-fit w-full
+             overflow-x-auto">
+              <div className="flex md:flex-col flex-row justify-center w-fit h-full">
                 <OptionInputStepper
                   textAttribute={textAttribute}
                   handleTextAttributeChanges={handleTextAttributeChanges}
@@ -93,7 +94,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                   {textAttribute.textShadow.isOn ? (
                     <>
-                      <div className="grid grid-cols-3 p-2 border-1">
+                      <div className="md:grid md:grid-cols-3 flex flex-row w-screen p-2 border-1">
                         <OptionInputStepper
                           textAttribute={textAttribute}
                           handleTextAttributeChanges={
@@ -126,7 +127,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   ) : null}
                 </div>
               </div>
-              <div className="">
+              <div className="flex flex-col h-full">
                 <div>
                   <div>Text Alignment:</div>
                   <select
