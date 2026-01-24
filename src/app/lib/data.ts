@@ -64,5 +64,5 @@ export const defaultTextAttributeData = <TextAttribute>{
     strikethrough: false,
   },
   textShadow: { isOn: true, x: 0.2, y: -0.02, shadowBlur: 0, shadowColor: "" },
-  textContainer: { width: 85, height: 85 },
+  textContainer: { width: 100, height: 100 },
 };
