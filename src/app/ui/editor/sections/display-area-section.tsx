@@ -2,14 +2,26 @@ import { useState } from "react";
 import DisplayPanel from "../display/display-panel";
 import DisplayOptions from "../display/display-options";
 import { DisplayAreaSectionProps, TextAttribute } from "../../../lib/type";
-import { defaultTextAttributeData } from '../../../lib/data';
+import { defaultTextAttributeData } from "../../../lib/data";
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   slideObject,
   textAreaRef,
 }) => {
   const [displayedTextAttribute, setDisplayedTextAttribute] =
-    useState<TextAttribute>(defaultTextAttributeData);
+    useState<TextAttribute>(() => {
+      try {
+        const stored = localStorage.getItem("TEXT_ATTRIBUTE_DATA");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          return parsed;
+        }
+      } catch (err) {
+        console.log(err);
+        return defaultTextAttributeData;
+      }
+      return 0;
+    });
 
   const handleTextAttributeChanges = <K extends keyof TextAttribute>(
     attribute: K,
@@ -19,6 +31,10 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
       ...prev,
       [attribute]: attributeValue,
     }));
+    localStorage.setItem(
+      "TEXT_ATTRIBUTE_DATA",
+      JSON.stringify(displayedTextAttribute),
+    );
   };
 
   return (

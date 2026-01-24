@@ -49,14 +49,14 @@ const Slide: React.FC<SlideProps> = ({
         onClick={() => FocusOnTextArea(slideContent)}
       >
         <div
-          className="border-1 overflow-hidden"
+          className="border-1 border-dashed overflow-hidden"
           style={{
             width: `${textAttribute.textContainer.width}%`,
             height: `${textAttribute.textContainer.height}%`,
           }}
         >
           <pre
-            className={`text-wrap w-full h-full flex items-center justify-center ${textAttribute.textFont.className}`}
+            className={`text-wrap w-full h-full flex items-center justify-center border-black ${textAttribute.textFont.className}`}
             style={{
               fontSize: `${textAttribute.textSize}cqw`,
               fontWeight: `${textAttribute.textStyle.bold ? "bolder" : "normal"}`,
@@ -74,7 +74,7 @@ const Slide: React.FC<SlideProps> = ({
             {slideContent}
           </pre>
         </div>
-        <div className="absolute bottom-10 left-10 bg-gray-200 p-1">
+        <div className="absolute bottom-1 left-1 bg-gray-200/80 p-1 font-bold">
           Slide : {slideNum + 1} / {slideMaxNum}
         </div>
       </div>

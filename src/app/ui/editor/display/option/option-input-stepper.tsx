@@ -50,7 +50,6 @@ export default function OptionInputStepper({
           value={getCurrentValue()}
           onInput={(e) => {
             if (typeof currentObject === "object" && currentObject !== null) {
-              alert(currentObject);
               if (keyValue) {
                 handleTextAttributeChanges(attributeKey, {
                   ...currentObject,
