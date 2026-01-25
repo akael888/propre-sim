@@ -4,6 +4,7 @@ import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 
 export interface TextAttribute {
   textSize: number;
+  textColor: string;
   textFont: NextFontWithVariable;
   textAlign: textAlignTypes;
   textStroke: TextStroke;
@@ -85,6 +86,7 @@ export interface DisplayOptionsProp {
     attribute: K,
     attributeValue: TextAttribute[K],
   ) => void;
+  handleTextAttributeObjectChanges: (newObject: TextAttribute) => void;
 }
 
 export interface TextFontsSelectionProp {
@@ -104,4 +106,13 @@ export interface OptionInputStepperProp {
   attributeKey: keyof TextAttribute;
   keyValue?: string;
   intervalPerStep: number;
+}
+export interface OptionColorPickerProp {
+  textAttribute: TextAttribute;
+  handleTextAttributeChanges: <K extends keyof TextAttribute>(
+    attribute: K,
+    attributeValue: TextAttribute[K],
+  ) => void;
+  attributeKey: keyof TextAttribute;
+  keyValue?: string;
 }

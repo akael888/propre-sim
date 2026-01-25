@@ -1,14 +1,22 @@
 import { DisplayOptionsProp } from "@/app/lib/type";
 import { useState } from "react";
-import { textAlignTypes } from "../../../lib/data";
+import { defaultTextAttributeData, textAlignTypes } from "../../../lib/data";
 import TextFontsSelection from "./text-fonts-selection";
 import OptionInputStepper from "./option/option-input-stepper";
+import OptionColorPicker from "./option/option-color-picker";
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   textAttribute,
   handleTextAttributeChanges,
+  handleTextAttributeObjectChanges,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const resetDisplayOption = () => {
+    handleTextAttributeObjectChanges(defaultTextAttributeData);
+    localStorage.removeItem("TEXT_ATTRIBUTE_DATA");
+    alert("Options Successfully Reset");
+  };
 
   return (
     <>
@@ -23,30 +31,43 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
         </button>
         {isOpen ? (
           <div className=" w-full border-1 bottom-0 max-h-[10%] overflow-y-hidden bg-gray-300">
-            <div className="md:grid md:grid-cols-2 md:grid-rows-1 flex flex-col md:h-full h-fit w-full
-             overflow-x-auto">
-              <div className="flex md:flex-col flex-row justify-center w-fit h-full">
-                <OptionInputStepper
-                  textAttribute={textAttribute}
-                  handleTextAttributeChanges={handleTextAttributeChanges}
-                  attributeKey="textSize"
-                  intervalPerStep={0.1}
-                />
-                <OptionInputStepper
-                  textAttribute={textAttribute}
-                  handleTextAttributeChanges={handleTextAttributeChanges}
-                  attributeKey="textContainer"
-                  keyValue="width"
-                  intervalPerStep={1}
-                />{" "}
-                <OptionInputStepper
-                  textAttribute={textAttribute}
-                  handleTextAttributeChanges={handleTextAttributeChanges}
-                  attributeKey="textContainer"
-                  keyValue="height"
-                  intervalPerStep={1}
-                />
-                <div className="p-1">
+            <div
+              className="md:grid md:grid-cols-2 md:grid-rows-1 flex flex-col md:h-full md:max-h-full max-h-[200px] w-[100%]
+             overflow-y-auto"
+            >
+              <div className="flex md:flex-col flex-col justify-center w-fit h-full p-1 gap-2">
+                <div className=" flex md:flex-row flex-col w-full justify-center items-center border-1">
+                  <OptionInputStepper
+                    textAttribute={textAttribute}
+                    handleTextAttributeChanges={handleTextAttributeChanges}
+                    attributeKey="textSize"
+                    intervalPerStep={0.1}
+                  />
+                  <OptionColorPicker
+                    textAttribute={textAttribute}
+                    handleTextAttributeChanges={handleTextAttributeChanges}
+                    attributeKey="textColor"
+                  />
+                </div>
+
+                <div className=" flex md:flex-row flex-col justify-center items-center border-1">
+                  <OptionInputStepper
+                    textAttribute={textAttribute}
+                    handleTextAttributeChanges={handleTextAttributeChanges}
+                    attributeKey="textContainer"
+                    keyValue="width"
+                    intervalPerStep={1}
+                  />
+                  <OptionInputStepper
+                    textAttribute={textAttribute}
+                    handleTextAttributeChanges={handleTextAttributeChanges}
+                    attributeKey="textContainer"
+                    keyValue="height"
+                    intervalPerStep={1}
+                  />
+                </div>
+
+                <div className="flex md:flex-row flex-col justify-center items-center ">
                   <div className="flex gap-2 p-2">
                     <div>Stroke</div>
                     <input
@@ -63,7 +84,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                   {textAttribute.textStroke.isOn ? (
                     <>
-                      <div className="border-1">
+                      <div className="flex flex-row justify-center items-center border-1">
                         <OptionInputStepper
                           textAttribute={textAttribute}
                           handleTextAttributeChanges={
@@ -72,12 +93,20 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                           attributeKey="textStroke"
                           keyValue="strokeSize"
                           intervalPerStep={0.1}
-                        />{" "}
+                        />
+                        <OptionColorPicker
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textStroke"
+                          keyValue="strokeColor"
+                        />
                       </div>
                     </>
                   ) : null}
                 </div>
-                <div className="p-1">
+                <div className="flex md:flex-row flex-col justify-center items-center">
                   <div className="flex gap-2 p-2">
                     <div>Shadow</div>
                     <input
@@ -94,7 +123,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                   {textAttribute.textShadow.isOn ? (
                     <>
-                      <div className="md:grid md:grid-cols-3 flex flex-row md:w-full w-screen p-2 border-1">
+                      <div className="md:grid md:grid-cols-2 flex flex-col justify-center items-center md:w-full w-screen p-2 border-1">
                         <OptionInputStepper
                           textAttribute={textAttribute}
                           handleTextAttributeChanges={
@@ -121,6 +150,14 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                           attributeKey="textShadow"
                           keyValue="shadowBlur"
                           intervalPerStep={1}
+                        />
+                        <OptionColorPicker
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          attributeKey="textShadow"
+                          keyValue="shadowColor"
                         />
                       </div>
                     </>
@@ -203,6 +240,15 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       }
                     />
                   </div>
+                </div>
+
+                <div>
+                  <button
+                    onClick={resetDisplayOption}
+                    className="border-1 p-1 hover:bg-background hover:text-foreground"
+                  >
+                    Reset Option
+                  </button>
                 </div>
               </div>
             </div>
