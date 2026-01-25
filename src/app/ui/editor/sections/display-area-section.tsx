@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DisplayPanel from "../display/display-panel";
 import DisplayOptions from "../display/display-options";
 import { DisplayAreaSectionProps, TextAttribute } from "../../../lib/type";
@@ -22,6 +22,13 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
       return defaultTextAttributeData; //test
     });
 
+  useEffect(() => {
+    localStorage.setItem(
+      "TEXT_ATTRIBUTE_DATA",
+      JSON.stringify(displayedTextAttribute),
+    );
+  }, [displayedTextAttribute]);
+
   const handleTextAttributeChanges = <K extends keyof TextAttribute>(
     attribute: K,
     attributeValue: TextAttribute[K],
@@ -30,10 +37,10 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
       ...prev,
       [attribute]: attributeValue,
     }));
-    localStorage.setItem(
-      "TEXT_ATTRIBUTE_DATA",
-      JSON.stringify(displayedTextAttribute),
-    );
+  };
+
+  const handleTextAttributeObjectChanges = (newObject: TextAttribute) => {
+    setDisplayedTextAttribute(newObject);
   };
 
   return (
@@ -48,6 +55,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
         </div>
         <DisplayOptions
           handleTextAttributeChanges={handleTextAttributeChanges}
+          handleTextAttributeObjectChanges={handleTextAttributeObjectChanges}
           textAttribute={displayedTextAttribute}
         />
       </div>

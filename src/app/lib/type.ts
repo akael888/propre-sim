@@ -85,6 +85,7 @@ export interface DisplayOptionsProp {
     attribute: K,
     attributeValue: TextAttribute[K],
   ) => void;
+  handleTextAttributeObjectChanges: (newObject: TextAttribute) => void;
 }
 
 export interface TextFontsSelectionProp {
