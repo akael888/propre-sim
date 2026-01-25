@@ -5,6 +5,7 @@ Link : [propre-sim.vercel.app](https://propre-sim.vercel.app)
 ## Screenshots
 
 <img width="2560" height="1440" alt="ProPresenter Simulator v0.2.0" src="https://github.com/user-attachments/assets/46d6fbff-d642-43e7-8fd4-9a4772c6cf50" />
+> ProPresenter Simulator v0.2.0
 
 
 ## Background..
