@@ -32,11 +32,11 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
         {isOpen ? (
           <div className=" w-full border-1 bottom-0 max-h-[10%] overflow-y-hidden bg-gray-300">
             <div
-              className="md:grid md:grid-cols-2 md:grid-rows-1 flex flex-col md:h-full h-fit w-full
-             overflow-x-auto"
+              className="md:grid md:grid-cols-2 md:grid-rows-1 flex flex-col md:h-full md:max-h-full max-h-[200px] w-[100%]
+             overflow-y-auto"
             >
-              <div className="flex md:flex-col flex-row justify-center w-fit h-full p-1 gap-2">
-                <div className=" flex flex-row justify-center items-center border-1">
+              <div className="flex md:flex-col flex-col justify-center w-fit h-full p-1 gap-2">
+                <div className=" flex md:flex-row flex-col w-full justify-center items-center border-1">
                   <OptionInputStepper
                     textAttribute={textAttribute}
                     handleTextAttributeChanges={handleTextAttributeChanges}
@@ -50,7 +50,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   />
                 </div>
 
-                <div className=" flex flex-row justify-center items-center border-1">
+                <div className=" flex md:flex-row flex-col justify-center items-center border-1">
                   <OptionInputStepper
                     textAttribute={textAttribute}
                     handleTextAttributeChanges={handleTextAttributeChanges}
@@ -67,7 +67,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   />
                 </div>
 
-                <div className="p-1">
+                <div className="flex md:flex-row flex-col justify-center items-center ">
                   <div className="flex gap-2 p-2">
                     <div>Stroke</div>
                     <input
@@ -106,7 +106,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     </>
                   ) : null}
                 </div>
-                <div className="p-1">
+                <div className="flex md:flex-row flex-col justify-center items-center">
                   <div className="flex gap-2 p-2">
                     <div>Shadow</div>
                     <input
@@ -123,7 +123,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                   {textAttribute.textShadow.isOn ? (
                     <>
-                      <div className="md:grid md:grid-cols-2 flex flex-row md:w-full w-screen p-2 border-1">
+                      <div className="md:grid md:grid-cols-2 flex flex-col justify-center items-center md:w-full w-screen p-2 border-1">
                         <OptionInputStepper
                           textAttribute={textAttribute}
                           handleTextAttributeChanges={
