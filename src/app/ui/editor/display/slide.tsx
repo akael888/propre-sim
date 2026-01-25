@@ -61,14 +61,14 @@ const Slide: React.FC<SlideProps> = ({
               fontSize: `${textAttribute.textSize}cqw`,
               fontWeight: `${textAttribute.textStyle.bold ? "bolder" : "normal"}`,
               textShadow: textAttribute.textShadow.isOn
-                ? `${textAttribute.textShadow.x}em ${textAttribute.textShadow.y}em ${textAttribute.textShadow.shadowBlur}px rgba(0,0,0,1)`
+                ? `${textAttribute.textShadow.x}em ${textAttribute.textShadow.y}em ${textAttribute.textShadow.shadowBlur}px ${textAttribute.textShadow.shadowColor}`
                 : "", //0.2 -0.02
               textAlign: textAttribute.textAlign,
               paintOrder: textAttribute.textStroke.isOn ? "stroke fill" : "",
               WebkitTextStroke: textAttribute.textStroke.isOn
-                ? `${textAttribute.textStroke.strokeSize > 0 ? textAttribute.textStroke.strokeSize : "0"}cqw black`
+                ? `${textAttribute.textStroke.strokeSize > 0 ? textAttribute.textStroke.strokeSize : "0"}cqw ${textAttribute.textStroke.strokeColor}`
                 : "",
-              color: "white",
+              color: textAttribute.textColor,
             }}
           >
             {slideContent}
