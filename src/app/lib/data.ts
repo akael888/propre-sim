@@ -82,11 +82,11 @@ export const defaultThemeCollection = [
   },
   {
     themeID: 1,
-    themeName: "Test2",
+    themeName: "Tempus Sans Theme",
     textAttribute: <TextAttribute>{
       textSize: 5,
       textColor: "#FFFFFF",
-      textFont: defaultFontCollection[0].fontData,
+      textFont: defaultFontCollection[1].fontData,
       textAlign: "center",
       textStroke: { isOn: true, strokeSize: 0.89, strokeColor: "#000000" },
       textStyle: {
