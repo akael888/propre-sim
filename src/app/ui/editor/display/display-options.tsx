@@ -23,12 +23,21 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
       <div
         className={`w-full bottom-0 md:h-fit h-${isOpen ? "10%" : "0"} absolute flex flex-col justify-end items-start`}
       >
-        <button
-          className="bg-black w-fit border-1 text-white p-1 "
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          Options
-        </button>
+        <div className="flex flex-row gap-2">
+          <button
+            className="bg-black w-fit border-1 text-white p-1 "
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            Options
+          </button>
+          <button
+            onClick={resetDisplayOption}
+            className="border-1 p-1 bg-foreground hover:bg-background hover:text-foreground"
+          >
+            Reset Option
+          </button>
+        </div>
+
         {isOpen ? (
           <div className=" w-full border-1 bottom-0 max-h-[10%] overflow-y-hidden bg-gray-300">
             <div
@@ -240,15 +249,6 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       }
                     />
                   </div>
-                </div>
-
-                <div>
-                  <button
-                    onClick={resetDisplayOption}
-                    className="border-1 p-1 hover:bg-background hover:text-foreground"
-                  >
-                    Reset Option
-                  </button>
                 </div>
               </div>
             </div>
