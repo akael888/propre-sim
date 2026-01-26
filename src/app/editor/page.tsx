@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import DisplayAreaSection from "../ui/editor/sections/display-area-section";
 import TextAreaSection from "../ui/editor/sections/text-area-section";
-import { parseTextDataToObjects } from "../lib/client-utils";
+import { parseTextDataToObjects } from "../lib/utils";
 
 
 export default function Editor() {
