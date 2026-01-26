@@ -1,9 +1,10 @@
 import { DisplayOptionsProp } from "@/app/lib/type";
 import { useState } from "react";
 import { defaultTextAttributeData, textAlignTypes } from "../../../lib/data";
-import TextFontsSelection from "./text-fonts-selection";
+import TextFontsSelection from "./option/text-fonts-selection";
 import OptionInputStepper from "./option/option-input-stepper";
 import OptionColorPicker from "./option/option-color-picker";
+import OptionThemeMenu from "./option/option-theme-menu";
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   textAttribute,
@@ -249,6 +250,14 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                       }
                     />
                   </div>
+                </div>
+                <div>
+                  <OptionThemeMenu
+                    textAttribute={textAttribute}
+                    handleTextAttributeObjectChanges={
+                      handleTextAttributeObjectChanges
+                    }
+                  />
                 </div>
               </div>
             </div>
