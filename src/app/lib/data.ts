@@ -73,3 +73,36 @@ export const defaultTextAttributeData = <TextAttribute>{
   },
   textContainer: { width: 100, height: 100 },
 };
+
+export const defaultThemeCollection = [
+  {
+    themeID: 0,
+    themeName: "Default HIT",
+    textAttribute: defaultTextAttributeData,
+  },
+  {
+    themeID: 1,
+    themeName: "Test2",
+    textAttribute: <TextAttribute>{
+      textSize: 5,
+      textColor: "#FFFFFF",
+      textFont: defaultFontCollection[0].fontData,
+      textAlign: "center",
+      textStroke: { isOn: true, strokeSize: 0.89, strokeColor: "#000000" },
+      textStyle: {
+        bold: true,
+        italic: false,
+        underlined: false,
+        strikethrough: false,
+      },
+      textShadow: {
+        isOn: true,
+        x: 0.2,
+        y: -0.02,
+        shadowBlur: 0,
+        shadowColor: "#000000",
+      },
+      textContainer: { width: 100, height: 100 },
+    },
+  },
+];

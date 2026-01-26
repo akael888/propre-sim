@@ -44,6 +44,12 @@ export type TextContainer = {
   height: number;
 };
 
+export interface Theme {
+  themeID: number;
+  themeName: string;
+  textAttribute: TextAttribute;
+}
+
 // Text Area -----------------------------
 export interface TextAreaSectionProps {
   textData: string;
@@ -115,4 +121,9 @@ export interface OptionColorPickerProp {
   ) => void;
   attributeKey: keyof TextAttribute;
   keyValue?: string;
+}
+
+export interface OptionThemeMenuProp {
+  textAttribute: TextAttribute;
+  handleTextAttributeObjectChanges: (newObject: TextAttribute) => void;
 }
