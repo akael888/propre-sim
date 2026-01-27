@@ -46,7 +46,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
              overflow-y-auto"
             >
               <div className="flex md:flex-col flex-col justify-center w-fit h-full p-1 gap-2">
-                <div className=" flex md:flex-row flex-col w-full justify-center items-center border-1">
+                <div className=" flex md:flex-row flex-col w-full justify-center items-center border-1 gap-2">
                   <OptionInputStepper
                     textAttribute={textAttribute}
                     handleTextAttributeChanges={handleTextAttributeChanges}
@@ -57,6 +57,11 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     textAttribute={textAttribute}
                     handleTextAttributeChanges={handleTextAttributeChanges}
                     attributeKey="textColor"
+                  />
+                  <OptionColorPicker
+                    textAttribute={textAttribute}
+                    handleTextAttributeChanges={handleTextAttributeChanges}
+                    attributeKey="textSlideColor"
                   />
                 </div>
 
