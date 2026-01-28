@@ -1,4 +1,5 @@
 import { SlideProps, TextAttribute, TextObject } from "@/app/lib/type";
+import { useState } from "react";
 
 const Slide: React.FC<SlideProps> = ({
   slideNum,
@@ -44,7 +45,7 @@ const Slide: React.FC<SlideProps> = ({
     <>
       <div
         id={slideTextCharIndex.toString()}
-        className="aspect-video border-1 flex justify-center items-center relative overflow-hidden"
+        className={`aspect-video border-1 flex justify-center items-center relative overflow-hidden group`}
         style={{
           containerType: "inline-size",
           backgroundColor: `${textAttribute.textSlideColor}`,
@@ -58,6 +59,7 @@ const Slide: React.FC<SlideProps> = ({
             height: `${textAttribute.textContainer.height}%`,
           }}
         >
+          <div className="w-full absolute h-full bg-white/10 group-hover:block hidden"></div>
           <pre
             className={`text-wrap w-full h-full flex items-center justify-center border-black ${textAttribute.textFont.className}`}
             style={{
