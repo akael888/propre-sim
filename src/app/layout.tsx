@@ -14,8 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ProPresenter Simulator",
-  description: "a Tool to Simulate ProPresenter Display using only Text Editor",
+  title: {
+    template: '%s | ProPresenter Simulator',
+    default: 'ProPresenter Simulator',
+  },
+  description: 'a Tool to Simulate ProPresenter Display using only Text Editor',
 };
 
 export default function RootLayout({

@@ -5,6 +5,7 @@ import { NextFontWithVariable } from "next/dist/compiled/@next/font";
 export interface TextAttribute {
   textSize: number;
   textColor: string;
+  textSlideColor: string;
   textFont: NextFontWithVariable;
   textAlign: textAlignTypes;
   textStroke: TextStroke;

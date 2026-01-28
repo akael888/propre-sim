@@ -55,6 +55,7 @@ export const defaultFontCollection = [
 export const defaultTextAttributeData = <TextAttribute>{
   textSize: 6,
   textColor: "#FFFFFF",
+  textSlideColor: "#edadff",
   textFont: defaultFontCollection[0].fontData,
   textAlign: "center",
   textStroke: { isOn: true, strokeSize: 0.89, strokeColor: "#000000" },
@@ -86,6 +87,7 @@ export const defaultThemeCollection = [
     textAttribute: <TextAttribute>{
       textSize: 5,
       textColor: "#FFFFFF",
+      textSlideColor: "#edadff",
       textFont: defaultFontCollection[1].fontData,
       textAlign: "center",
       textStroke: { isOn: true, strokeSize: 0.89, strokeColor: "#000000" },
