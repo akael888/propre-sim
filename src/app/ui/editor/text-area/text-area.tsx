@@ -63,12 +63,13 @@ const TextArea: React.FC<TextAreaProps> = ({
           }}
         ></div> */}
         <textarea
-          className="p-2 w-full h-full border-1 bg-gray-400"
+          className="p-2 w-full h-full border-1 bg-gray-400 resize-none"
           value={textValue}
           onChange={handleTextValueChanges}
           placeholder="Type here.."
           onDoubleClick={clickToScrollSlides}
           ref={textAreaRef}
+          
         />
       </div>
     </>
