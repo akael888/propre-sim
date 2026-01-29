@@ -6,7 +6,7 @@ export default function Help({}) {
 
   return (
     <>
-      <div className="absolute bottom-0 right-4 w-100 flex flex-col justify-end items-end w-[50%]  max-h-[70%]">
+      <div className="absolute bottom-0 md:right-4 right-0 w-100 flex flex-col justify-end items-end md:w-[50%] w-[100%] max-h-[70%]">
         <div className="w-[30%] h-fit">
           <button
             className="bg-green-600 w-full h-full p-2 text-foreground border-1 border-foreground"
