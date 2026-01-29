@@ -67,7 +67,7 @@ const TextArea: React.FC<TextAreaProps> = ({
           value={textValue}
           onChange={handleTextValueChanges}
           placeholder="Type here.."
-          onClick={clickToScrollSlides}
+          onDoubleClick={clickToScrollSlides}
           ref={textAreaRef}
         />
       </div>

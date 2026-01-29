@@ -50,7 +50,7 @@ const Slide: React.FC<SlideProps> = ({
           containerType: "inline-size",
           backgroundColor: `${textAttribute.textSlideColor}`,
         }}
-        onClick={() => FocusOnTextArea(slideContent)}
+        onDoubleClick={() => FocusOnTextArea(slideContent)}
       >
         <div
           className="border-1 border-dashed overflow-hidden"
