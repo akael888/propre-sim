@@ -3,6 +3,7 @@ import DisplayPanel from "../display/display-panel";
 import DisplayOptions from "../display/display-options";
 import { DisplayAreaSectionProps, TextAttribute } from "../../../lib/type";
 import { defaultTextAttributeData } from "../../../lib/data";
+import Help from "../display/help";
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   slideObject,
@@ -58,6 +59,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
           handleTextAttributeObjectChanges={handleTextAttributeObjectChanges}
           textAttribute={displayedTextAttribute}
         />
+        <Help />
       </div>
     </>
   );
