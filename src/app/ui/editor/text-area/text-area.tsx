@@ -11,6 +11,11 @@ const TextArea: React.FC<TextAreaProps> = ({
   const [textValue, setTextValue] = useState(textData);
   const slidePositionList = textObject?.map((object) => object.charIndex);
 
+  const [waitingClick, setWaitingClick] = useState<ReturnType<
+    typeof setTimeout
+  > | null>(null);
+  const [lastClick, setLastClick] = useState(0);
+
   const handleTextValueChanges = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
@@ -35,20 +40,27 @@ const TextArea: React.FC<TextAreaProps> = ({
     if (indexIdToScroll != -1) {
       idToScroll = slidePositionList[indexIdToScroll - 1];
     } else {
-      idToScroll = slidePositionList[slidePositionList.length-1];
+      idToScroll = slidePositionList[slidePositionList.length - 1];
     }
-    // console.log("indexClicked");
-    // console.log(indexClicked);
-    // console.log(slidePositionList);
-
-    // console.log("indexIdToScroll");
-    // console.log(indexIdToScroll);
-    // console.log("idToScroll");
-    // console.log(idToScroll);
-
     document.getElementById(`${idToScroll}`)?.scrollIntoView({
       behavior: "smooth",
     });
+  };
+
+  const processDoubleClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {
+    if (lastClick && e.timeStamp - lastClick < 250 && waitingClick) {
+      setLastClick(0);
+      clearTimeout(waitingClick);
+      setWaitingClick(null);
+      clickToScrollSlides();
+    } else {
+      setLastClick(e.timeStamp);
+      setWaitingClick(
+        setTimeout(() => {
+          setWaitingClick(null);
+        }, 251),
+      );
+    }
   };
 
   return (
@@ -67,9 +79,8 @@ const TextArea: React.FC<TextAreaProps> = ({
           value={textValue}
           onChange={handleTextValueChanges}
           placeholder="Type here.."
-          onDoubleClick={clickToScrollSlides}
+          onClick={processDoubleClick}
           ref={textAreaRef}
-          
         />
       </div>
     </>
