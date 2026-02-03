@@ -1,5 +1,5 @@
 import { SlideProps, TextAttribute, TextObject } from "@/app/lib/type";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 
 const Slide: React.FC<SlideProps> = ({
   slideNum,
@@ -10,6 +10,12 @@ const Slide: React.FC<SlideProps> = ({
   textAreaRef,
 }) => {
   // convertTextAlignEnumToCSS(textAttribute.textAlign);
+
+  
+  const [waitingClick, setWaitingClick] = useState<ReturnType<
+    typeof setTimeout
+  > | null>(null);
+  const [lastClick, setLastClick] = useState(0);
 
   const FocusOnTextArea = (textSearch: string) => {
     const textarea = textAreaRef.current;
@@ -35,9 +41,25 @@ const Slide: React.FC<SlideProps> = ({
 
       const lines = text.substring(0, targetIndex).split("\n").length; //Calculcate how many enter/lines in the text
       const lineHeight = 24; //approx each line height
-      const scrollPosition = (lines - 2) * lineHeight; //-3 to give more context above
+      const scrollPosition = (lines - 1) * lineHeight; //-3 to give more context above
 
       textarea.scrollTop = Math.max(0, scrollPosition);
+    }
+  };
+
+  const processDoubleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (lastClick && e.timeStamp - lastClick < 250 && waitingClick) {
+      setLastClick(0);
+      clearTimeout(waitingClick);
+      setWaitingClick(null);
+      FocusOnTextArea(slideContent);
+    } else {
+      setLastClick(e.timeStamp);
+      setWaitingClick(
+        setTimeout(() => {
+          setWaitingClick(null);
+        }, 251),
+      );
     }
   };
 
@@ -50,7 +72,7 @@ const Slide: React.FC<SlideProps> = ({
           containerType: "inline-size",
           backgroundColor: `${textAttribute.textSlideColor}`,
         }}
-        onClick={() => FocusOnTextArea(slideContent)}
+        onClick={processDoubleClick}
       >
         <div
           className="border-1 border-dashed overflow-hidden"
