@@ -22,7 +22,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   return (
     <>
       <div
-        className={`w-full bottom-0 md:h-fit h-${isOpen ? "10%" : "0"} absolute flex flex-col justify-end items-start`}
+        className={` w-fit left-0 bottom-0 md:h-fit h-${isOpen ? "10%" : "0"} absolute flex flex-col justify-end items-start z-1`}
       >
         <div className="flex flex-row gap-2">
           <button
