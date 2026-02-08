@@ -6,7 +6,6 @@ export async function GET(
 ) {
   const url = await params;
 
-  const f
 
   return NextResponse.json(
     {
