@@ -21,7 +21,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   ) => {
     setTextValue(e.target.value);
     handleTextDataChanges(e.target.value);
-    localStorage.setItem("TEXT_AREA_DATA", e.target.value);
+    // localStorage.setItem("TEXT_AREA_DATA", e.target.value);
   };
 
   const clickToScrollSlides = () => {
