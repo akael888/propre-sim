@@ -9,7 +9,6 @@ import { parseTextDataToObjects } from "@/app/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import TextAreaSection from "./sections/text-area-section";
 import DisplayAreaSection from "./sections/display-area-section";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default function Editor({ slideID }: { slideID?: string }) {
@@ -17,13 +16,21 @@ export default function Editor({ slideID }: { slideID?: string }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  const [slideData, setSlideData] = useState({
+  const [slideDataStatic, setSlideDataStatic] = useState({
     title: "",
     description: "",
     textdata: "",
   });
 
-  const isTextAreaNotChanged = slideData.textdata === textAreaData;
+  const [slideData, setSlideData] = useState({
+    title: "",
+    description: "",
+  });
+
+  const isTextAreaNotChanged =
+    slideDataStatic.textdata === textAreaData &&
+    slideData.title === slideDataStatic.title &&
+    slideData.description === slideDataStatic.description;
 
   const textObject = parseTextDataToObjects(textAreaData);
 
@@ -43,6 +50,7 @@ export default function Editor({ slideID }: { slideID?: string }) {
         stored = await getSlideData(slideID);
 
         if (stored) {
+          setSlideDataStatic(stored);
           setSlideData(stored);
           setTextAreaData(stored.textdata);
         }
@@ -109,13 +117,19 @@ export default function Editor({ slideID }: { slideID?: string }) {
                   name="title"
                   required
                   placeholder="Enter Slide Title"
-                  defaultValue={slideData.title}
+                  defaultValue={slideDataStatic.title}
+                  onChange={(e) =>
+                    setSlideData({ ...slideData, title: e.target.value })
+                  }
                 />
                 <input
                   type="text"
                   name="description"
-                  defaultValue={slideData.description}
+                  defaultValue={slideDataStatic.description}
                   placeholder="Enter Slide Description"
+                  onChange={(e) =>
+                    setSlideData({ ...slideData, description: e.target.value })
+                  }
                 />
                 <input
                   type="hidden"
