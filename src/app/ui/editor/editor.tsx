@@ -1,34 +1,55 @@
 "use client";
 
-import { getSlideData, submitSlideData } from "@/app/lib/action";
+import {
+  getSlideData,
+  submitSlideData,
+  updateSlideData,
+} from "@/app/lib/action";
 import { parseTextDataToObjects } from "@/app/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import TextAreaSection from "./sections/text-area-section";
 import DisplayAreaSection from "./sections/display-area-section";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function Editor({ slideID }: { slideID?: string }) {
   const [textAreaData, setTextAreaData] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
+  const [slideData, setSlideData] = useState({
+    title: "",
+    description: "",
+    textdata: "",
+  });
+
+  const isTextAreaNotChanged = slideData.textdata === textAreaData;
+
   const textObject = parseTextDataToObjects(textAreaData);
 
   const handleTextAreaDataChanges = (textAreaData: string) => {
     setTextAreaData(textAreaData);
-    localStorage.setItem("TEXT_AREA_DATA", textAreaData);
+
+    if (!slideID) {
+      localStorage.setItem("TEXT_AREA_DATA", textAreaData);
+    }
   };
 
   useEffect(() => {
     async function fetchData() {
-      alert(slideID);
+      // alert(slideID);
       let stored = null;
       if (slideID) {
         stored = await getSlideData(slideID);
-        if (stored) handleTextAreaDataChanges(stored.textdata);
+
+        if (stored) {
+          setSlideData(stored);
+          setTextAreaData(stored.textdata);
+        }
       } else {
         stored = localStorage.getItem("TEXT_AREA_DATA");
         if (stored) {
-          handleTextAreaDataChanges(stored);
+          setTextAreaData(stored);
         }
       }
 
@@ -48,32 +69,79 @@ export default function Editor({ slideID }: { slideID?: string }) {
   return (
     <>
       <div className="min-w-screen min-h-screen md:grid-rows-none md:max-h-full max-h-screen bg-foreground grid md:grid-cols-2 gap-2 text-background grid-rows-2">
-        {" "}
-        <div className="absolute top-0 bg-white  p-1">
-          <form action={submitSlideData} className="gap-2 flex">
-            <input
-              type="text"
-              name="title"
-              required
-              placeholder="Enter Slide Title"
-            />
-            <input
-              type="text"
-              name="description"
-              placeholder="Enter Slide Title"
-            />
-            <input
-              type="hidden"
-              name="textdata"
-              placeholder="Enter Text Data"
-              value={textAreaData}
-              readOnly
-            />
-            <button className="border-1 p-1" type="submit">
-              Submit Data
-            </button>
-          </form>
-        </div>
+        {!slideID ? (
+          <>
+            <div className="absolute top-0 left-50 bg-foreground/50  p-1">
+              <form action={submitSlideData} className="gap-2 flex">
+                <input
+                  type="text"
+                  name="title"
+                  required
+                  placeholder="Enter Slide Title"
+                />
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Enter Slide Description"
+                />
+                <input
+                  type="hidden"
+                  name="textdata"
+                  placeholder="Enter Text Data"
+                  value={textAreaData}
+                  readOnly
+                />
+                <button
+                  className="border-1 p-1 hover:bg-gray-500"
+                  type="submit"
+                >
+                  Save Data
+                </button>
+              </form>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="absolute top-0 left-50 bg-foreground/50  p-1 flex flex-row gap-5">
+              <form action={updateSlideData} className="gap-2 flex">
+                <input
+                  type="text"
+                  name="title"
+                  required
+                  placeholder="Enter Slide Title"
+                  defaultValue={slideData.title}
+                />
+                <input
+                  type="text"
+                  name="description"
+                  defaultValue={slideData.description}
+                  placeholder="Enter Slide Description"
+                />
+                <input
+                  type="hidden"
+                  name="textdata"
+                  value={textAreaData}
+                  readOnly
+                />
+                <input type="hidden" name="slideID" value={slideID} readOnly />
+                <button
+                  className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-background disabled:text-foreground"
+                  type="submit"
+                  disabled={isTextAreaNotChanged}
+                >
+                  Save {isTextAreaNotChanged ? null : "*"}
+                </button>
+              </form>
+              <Link
+                href={`/slide/${slideID}/preview`}
+                className="border-1 bg-blue-200 p-1"
+              >
+                Preview
+              </Link>
+            </div>
+          </>
+        )}
+
         <TextAreaSection
           textData={textAreaData}
           textObject={textObject}
