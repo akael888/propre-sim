@@ -2,10 +2,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { userID: string; slideID: string } },
+  { params }: { params: Promise<{ userID: string; slideID: string }> },
 ) {
   const url = await params;
-
 
   return NextResponse.json(
     {
