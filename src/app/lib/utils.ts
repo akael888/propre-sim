@@ -15,7 +15,6 @@ export function parseTextDataToObjects(textData: string) {
   return splittedObject;
 }
 
-
 // console.log(splittedObject);
 // console.log("test");
 
@@ -61,3 +60,14 @@ export function parseTextDataToObjects(textData: string) {
 //   console.log("insertDataBlock");
 
 // }
+
+export async function copyToClipboard(textToCopy: string) {
+  try {
+    await navigator.clipboard.writeText(textToCopy);
+    console.log();
+    return "Copied";
+  } catch (error) {
+    console.log(error);
+    return "Not Copied";
+  }
+}
