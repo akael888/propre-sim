@@ -5,7 +5,7 @@ import {
   submitSlideData,
   updateSlideData,
 } from "@/app/lib/action";
-import { parseTextDataToObjects } from "@/app/lib/utils";
+import { copyToClipboard, parseTextDataToObjects } from "@/app/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import TextAreaSection from "./sections/text-area-section";
 import DisplayAreaSection from "./sections/display-area-section";
@@ -15,6 +15,7 @@ export default function Editor({ slideID }: { slideID?: string }) {
   const [textAreaData, setTextAreaData] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const [copyPressed, setCopyPressed] = useState(false);
 
   const [slideDataStatic, setSlideDataStatic] = useState({
     title: "",
@@ -152,6 +153,14 @@ export default function Editor({ slideID }: { slideID?: string }) {
               >
                 Preview
               </Link>
+              <button
+                onClick={() => {
+                  setCopyPressed(copyToClipboard())
+                }}
+                className="p-1 border-1 bg-white"
+              >
+                Share
+              </button>
             </div>
           </>
         )}
