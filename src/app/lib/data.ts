@@ -108,3 +108,19 @@ export const defaultThemeCollection = [
     },
   },
 ];
+
+export const tempUserData = { userID: 12345, userName: "Elgratio" };
+export const tempSlideData = [
+  {
+    title: "Slide 1",
+    id: "123456",
+    description: "1232141341",
+    textdata: "Najdnjadnjasdnjasda\n\nfasfafa\n\n",
+  },
+  {
+    title: "Slide 2",
+    id: "1234543",
+    description: "1232141341",
+    textdata: "Najdnjadnjasdnjasda\n\nfasfafa\n\n",
+  },
+];
