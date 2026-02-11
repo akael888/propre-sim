@@ -2,12 +2,21 @@
 "use server";
 import { neon } from "@neondatabase/serverless";
 import { redirect } from "next/navigation";
+import { tempSlideData } from "./data";
 
 export async function getData() {
-  if (process.env.DATABASE_URL) {
-    const sql = neon(process.env.DATABASE_URL);
-    const data = await sql`SELECT * FROM name`;
-    return data;
+  try {
+    if (process.env.DATABASE_URL) {
+      const sql = neon(process.env.DATABASE_URL);
+      const data = await sql`SELECT * FROM slide`;
+      console.log(data);
+      //tests
+      return data;
+    }
+    return tempSlideData
+  } catch (error) {
+    console.log(error);
+    return tempSlideData;
   }
 }
 
