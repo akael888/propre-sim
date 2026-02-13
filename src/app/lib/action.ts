@@ -9,7 +9,7 @@ export async function getData() {
     if (process.env.DATABASE_URL) {
       const sql = neon(process.env.DATABASE_URL);
       const data = await sql`SELECT * FROM slide`;
-      console.log(data);
+      console.log(data[1].title);
       //tests
       return data;
     }
