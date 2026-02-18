@@ -1,3 +1,4 @@
+'use client'
 import { SlideProps, TextAttribute, TextObject } from "@/app/lib/type";
 import { MouseEventHandler, useState } from "react";
 
@@ -11,39 +12,44 @@ const Slide: React.FC<SlideProps> = ({
 }) => {
   // convertTextAlignEnumToCSS(textAttribute.textAlign);
 
-  
   const [waitingClick, setWaitingClick] = useState<ReturnType<
     typeof setTimeout
   > | null>(null);
   const [lastClick, setLastClick] = useState(0);
 
   const FocusOnTextArea = (textSearch: string) => {
-    const textarea = textAreaRef.current;
-    if (!textarea) {
-      return;
-    }
+    if (textAreaRef) {
+      const textarea = textAreaRef.current;
+      if (!textarea) {
+        return;
+      }
 
-    const text = textarea.value; //All Text Area Values
+      const text = textarea.value; //All Text Area Values
 
-    // Spliced Text from the Latest Char Index, to Make sure it wont highlight duplicated ones
-    const splicedTextFromCurrentCharIndex = text.substring(
-      slideTextCharIndex,
-      slideTextCharIndex + textSearch.length,
-    );
+      // Spliced Text from the Latest Char Index, to Make sure it wont highlight duplicated ones
+      const splicedTextFromCurrentCharIndex = text.substring(
+        slideTextCharIndex,
+        slideTextCharIndex + textSearch.length,
+      );
 
-    // Set the target index
-    const targetIndex =
-      splicedTextFromCurrentCharIndex.indexOf(textSearch) + slideTextCharIndex;
+      // Set the target index
+      const targetIndex =
+        splicedTextFromCurrentCharIndex.indexOf(textSearch) +
+        slideTextCharIndex;
 
-    if (targetIndex !== 1) {
-      textarea.focus();
-      textarea.setSelectionRange(targetIndex, targetIndex + textSearch.length);
+      if (targetIndex !== 1) {
+        textarea.focus();
+        textarea.setSelectionRange(
+          targetIndex,
+          targetIndex + textSearch.length,
+        );
 
-      const lines = text.substring(0, targetIndex).split("\n").length; //Calculcate how many enter/lines in the text
-      const lineHeight = 24; //approx each line height
-      const scrollPosition = (lines - 1) * lineHeight; //-3 to give more context above
+        const lines = text.substring(0, targetIndex).split("\n").length; //Calculcate how many enter/lines in the text
+        const lineHeight = 24; //approx each line height
+        const scrollPosition = (lines - 1) * lineHeight; //-3 to give more context above
 
-      textarea.scrollTop = Math.max(0, scrollPosition);
+        textarea.scrollTop = Math.max(0, scrollPosition);
+      }
     }
   };
 
@@ -101,7 +107,7 @@ const Slide: React.FC<SlideProps> = ({
             {slideContent}
           </pre>
         </div>
-        <div className="absolute bottom-1 left-1 bg-gray-200/80 p-1 font-bold">
+        <div className="absolute bottom-1 left-1 bg-gray-200/80 p-1 font-bold text-[2cqw]">
           Slide : {slideNum + 1} / {slideMaxNum}
         </div>
       </div>
