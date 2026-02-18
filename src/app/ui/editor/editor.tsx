@@ -51,9 +51,14 @@ export default function Editor({ slideID }: { slideID?: string }) {
         stored = await getSlideData(slideID);
 
         if (stored) {
-          setSlideDataStatic(stored);
-          setSlideData(stored);
-          setTextAreaData(stored.textdata);
+          const data = stored as {
+            title: string;
+            description: string;
+            textdata: string;
+          };
+          setSlideDataStatic(data);
+          setSlideData(data);
+          setTextAreaData(data.textdata);
         }
       } else {
         stored = localStorage.getItem("TEXT_AREA_DATA");
@@ -153,14 +158,14 @@ export default function Editor({ slideID }: { slideID?: string }) {
               >
                 Preview
               </Link>
-              <button
+              {/* <button
                 onClick={() => {
-                  setCopyPressed(copyToClipboard())
+                  setCopyPressed(copyToClipboard());
                 }}
                 className="p-1 border-1 bg-white"
               >
                 Share
-              </button>
+              </button> */}
             </div>
           </>
         )}
