@@ -8,10 +8,16 @@ export default function Header() {
           <div className="p-2">ProPresenter Sim</div>
         </div>
 
-        <div className="flex flex-row justify-end items-center w-full">
+        <div className="flex flex-row justify-end items-center w-full gap-2">
+          <Link
+            href="/slide"
+            className="border-1 p-1 bg-foreground text-background hover:bg-blue-700"
+          >
+            Slide Collections
+          </Link>
           <Link
             href="/editor"
-            className="border-1 p-1 bg-foreground text-background"
+            className="border-1 p-1 bg-foreground text-background hover:bg-yellow-700"
           >
             To Editor
           </Link>

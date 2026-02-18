@@ -75,7 +75,7 @@ export interface DisplayAreaSectionProps {
 export interface DisplayPanelProps {
   slideObject: TextObject[];
   textAttribute: TextAttribute;
-  textAreaRef: RefObject<HTMLTextAreaElement | null>;
+  textAreaRef?: RefObject<HTMLTextAreaElement | null>;
 }
 
 export interface SlideProps {
@@ -84,7 +84,7 @@ export interface SlideProps {
   slideContent: string;
   slideTextCharIndex: number;
   textAttribute: TextAttribute;
-  textAreaRef: RefObject<HTMLTextAreaElement | null>;
+  textAreaRef?: RefObject<HTMLTextAreaElement | null>;
 }
 
 export interface DisplayOptionsProp {
