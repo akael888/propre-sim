@@ -34,7 +34,7 @@ export async function submitSlideData(formData: FormData) {
   try {
     if (process.env.DATABASE_URL) {
       const sql = neon(process.env.DATABASE_URL);
-      data = [];
+
       data = await sql`INSERT INTO slide (title,description,textdata)
       VALUES (${title},${description},${cleanedText}) RETURNING id`;
       console.log(data);
