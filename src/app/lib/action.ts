@@ -13,7 +13,7 @@ export async function getData() {
       //tests
       return data;
     }
-    return tempSlideData
+    return tempSlideData;
   } catch (error) {
     console.log(error);
     return tempSlideData;
@@ -29,11 +29,12 @@ export async function submitSlideData(formData: FormData) {
     .replace(/\r/g, "\n")
     .replace(/\f/g, "\n");
 
-  let data = [{ id: 1 }];
+  let data = null;
 
   try {
     if (process.env.DATABASE_URL) {
       const sql = neon(process.env.DATABASE_URL);
+      data = [];
       data = await sql`INSERT INTO slide (title,description,textdata)
       VALUES (${title},${description},${cleanedText}) RETURNING id`;
       console.log(data);
@@ -42,6 +43,7 @@ export async function submitSlideData(formData: FormData) {
   } catch (error) {
     console.log(error);
   }
+  data = [{ id: 1 }];
   redirect(`/slide/${data[0].id}/edit`);
 }
 
