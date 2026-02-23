@@ -30,7 +30,7 @@ export async function submitSlideData(formData: FormData) {
     .replace(/\f/g, "\n");
 
   let data = null;
-
+  data = [{ id: 1 }];
   try {
     if (process.env.DATABASE_URL) {
       const sql = neon(process.env.DATABASE_URL);
@@ -43,7 +43,7 @@ export async function submitSlideData(formData: FormData) {
   } catch (error) {
     console.log(error);
   }
-  data = [{ id: 1 }];
+
   redirect(`/slide/${data[0].id}/edit`);
 }
 
