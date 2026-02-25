@@ -18,7 +18,7 @@ export default async function SlideManagerPage() {
           </Link>
         </div>
       </div>
-      <div className="flex flex-col gap-5 h-fit md:flex-row">
+      <div className="grid grid-cols-3 gap-5 h-fit md:flex-row">
         {slideData?.map((value, index) => {
           return (
             <div
@@ -28,28 +28,39 @@ export default async function SlideManagerPage() {
               <div className="flex flex-col bg-pink-200">
                 <div className="grid grid-cols-2">
                   <div className="flex flex-col p-2 h-fit">
-                    <h3 className="text-2xl font-bold">{value.title}</h3>
+                    <h3 className="text-2xl font-bold truncate">
+                      {value.title}
+                    </h3>
                     <p className=""> {value.description}</p>
                   </div>
                   <div className="flex flex-row p-2 justify-center items-center gap-2 h-full">
                     <Link
                       href={`/slide/${value.id}/edit`}
-                      className="border-1 p-1 hover:bg-gray-300"
+                      className="border-1 p-1 hover:bg-gray-300 bg-yellow-300"
                     >
                       Edit
                     </Link>
                     <Link
                       href={`/slide/${value.id}/preview`}
-                      className="border-1 p-1 hover:bg-gray-300"
+                      className="border-1 p-1 hover:bg-gray-300 bg-blue-300"
                     >
                       Preview
                     </Link>
+                    <button className="border-1 p-1 hover:bg-gray-300 bg-red-300">
+                      Delete
+                    </button>
                   </div>
                 </div>
 
-                <div className="flex p-1 p-2 h-full">
+                <div className="flex p-1 p-2 h-full flex-col">
                   <div className="border-1 text-left w-full p-1 max-h-1/2 overflow-y-auto truncate">
                     {value.textdata ? value.textdata : "Empty Data"}
+                  </div>
+                  <div className="flex flex-row justify-between p-1">
+                    <p>
+                      {value.textdata ? value.textdata.length + " Letters"  : "Empty Data"}
+                    </p>
+                    <p>Last Edited : 12 Jan 2026</p>
                   </div>
                 </div>
               </div>
