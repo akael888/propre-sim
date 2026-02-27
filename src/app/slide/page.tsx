@@ -8,9 +8,15 @@ export default async function SlideManagerPage() {
 
   return (
     <>
-      <div className="flex justify-between p-1 bg-foreground/50 sticky top-0 text-black">
-        <div> Slide Menu: Hi {tempUserData.userName}! </div>
-        <div>
+      <div className="flex justify-between p-1 bg-background/80 sticky top-0 text-white">
+        <div className="flex justify-center items-center font-bold"> Slide Menu: Hi {tempUserData.userName}! </div>
+        <div className="gap-1 flex">
+          <Link
+            href="/"
+            className="border-1 p-1 hover:bg-gray-300 bg-gray-500"
+          >
+            Home
+          </Link>
           <Link
             href="/editor"
             className="border-1 p-1 hover:bg-gray-300 bg-green-500"
@@ -19,7 +25,7 @@ export default async function SlideManagerPage() {
           </Link>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-5 h-fit md:flex-row">
+      <div className="gap-5 h-fit md:grid-cols-3 md:grid flex flex-col ">
         {slideData?.map((value, index) => {
           return (
             <div
@@ -27,7 +33,7 @@ export default async function SlideManagerPage() {
               key={index}
             >
               <div className="flex flex-col bg-pink-200">
-                <div className="grid grid-cols-2">
+                <div className="2xl:grid 2xl:grid-cols-2 flex flex-col">
                   <div className="flex flex-col p-2 h-fit">
                     <h3 className="text-2xl font-bold truncate">
                       {value.title}
@@ -61,7 +67,7 @@ export default async function SlideManagerPage() {
                         ? value.textdata.length + " Letters"
                         : "Empty Data"}
                     </p>
-                    <p>Last Edited : 12 Jan 2026</p>
+                    <p>Last Edited : 1 Januari 2001</p>
                   </div>
                 </div>
               </div>
