@@ -3,6 +3,7 @@
 import { neon } from "@neondatabase/serverless";
 import { redirect } from "next/navigation";
 import { tempSlideData } from "./data";
+import { revalidatePath } from "next/cache";
 
 export async function getData() {
   try {
@@ -85,5 +86,24 @@ export async function updateSlideData(formData: FormData) {
     }
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function deleteSlideData(slideID: string) {
+  try {
+    if (process.env.DATABASE_URL) {
+      const sql = neon(process.env.DATABASE_URL);
+      const data = await sql`DELETE FROM slide WHERE id=${slideID}`;
+      if (data) {
+        console.log(data[0]);
+        return data[0];
+      }
+      console.log(data);
+      revalidatePath(`/slide`);
+      return null;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 }

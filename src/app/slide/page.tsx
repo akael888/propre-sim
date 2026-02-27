@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { getData } from "../lib/action";
+import { deleteSlideData, getData } from "../lib/action";
 import { tempSlideData, tempUserData } from "../lib/data";
+import DeleteSlideButton from "../ui/slide/delete-slide-button";
 
 export default async function SlideManagerPage() {
   const slideData = await getData();
@@ -46,9 +47,7 @@ export default async function SlideManagerPage() {
                     >
                       Preview
                     </Link>
-                    <button className="border-1 p-1 hover:bg-gray-300 bg-red-300">
-                      Delete
-                    </button>
+                    <DeleteSlideButton slideID={value.id} />
                   </div>
                 </div>
 
@@ -58,7 +57,9 @@ export default async function SlideManagerPage() {
                   </div>
                   <div className="flex flex-row justify-between p-1">
                     <p>
-                      {value.textdata ? value.textdata.length + " Letters"  : "Empty Data"}
+                      {value.textdata
+                        ? value.textdata.length + " Letters"
+                        : "Empty Data"}
                     </p>
                     <p>Last Edited : 12 Jan 2026</p>
                   </div>

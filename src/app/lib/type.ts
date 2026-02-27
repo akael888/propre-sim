@@ -128,3 +128,7 @@ export interface OptionThemeMenuProp {
   textAttribute: TextAttribute;
   handleTextAttributeObjectChanges: (newObject: TextAttribute) => void;
 }
+
+export interface SlideButtonsProp {
+  slideID: string;
+}
