@@ -3,6 +3,7 @@
 import { neon } from "@neondatabase/serverless";
 import { redirect } from "next/navigation";
 import { tempSlideData } from "./data";
+import { revalidatePath } from "next/cache";
 
 export async function getData() {
   try {
@@ -39,11 +40,11 @@ export async function submitSlideData(formData: FormData) {
       VALUES (${title},${description},${cleanedText}) RETURNING id`;
       console.log(data);
       console.log(`Data ${data} is submitted! `);
+      revalidatePath(`/slide`);
     }
   } catch (error) {
     console.log(error);
   }
-
   redirect(`/slide/${data[0].id}/edit`);
 }
 
@@ -82,8 +83,29 @@ export async function updateSlideData(formData: FormData) {
       const data =
         await sql`UPDATE slide SET title = ${title}, description = ${description}, textdata = ${cleanedText} WHERE id=${slideID}`;
       console.log(`Data ${data} is Updated! `);
+      revalidatePath(`/slide`);
     }
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function deleteSlideData(slideID: string) {
+  try {
+    if (process.env.DATABASE_URL) {
+      const sql = neon(process.env.DATABASE_URL);
+      const data = await sql`DELETE FROM slide WHERE id=${slideID}`;
+      if (data) {
+        console.log(data[0]);
+        return data[0];
+      }
+      console.log(data);
+      revalidatePath(`/slide`);
+
+      return null;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 }
