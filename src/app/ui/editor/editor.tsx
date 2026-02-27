@@ -111,6 +111,12 @@ export default function Editor({ slideID }: { slideID?: string }) {
                 >
                   Save Data
                 </button>
+                <Link
+                  href="/slide"
+                  className="border-1 p-1 bg-foreground text-background hover:bg-blue-700"
+                >
+                  Slide Collections
+                </Link>
               </form>
             </div>
           </>
@@ -157,6 +163,12 @@ export default function Editor({ slideID }: { slideID?: string }) {
                 className="border-1 bg-blue-200 p-1"
               >
                 Preview
+              </Link>{" "}
+              <Link
+                href="/slide"
+                className="border-1 p-1 bg-foreground text-background hover:bg-blue-700"
+              >
+                Slide Collections
               </Link>
               {/* <button
                 onClick={() => {

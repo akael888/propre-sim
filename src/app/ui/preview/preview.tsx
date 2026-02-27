@@ -32,6 +32,12 @@ export default async function Preview({ slideID }: { slideID: string }) {
             className="border-1 bg-yellow-500 hover:bg-yellow-300 p-1 text-background"
           >
             Edit
+          </Link>{" "}
+          <Link
+            href="/slide"
+            className="border-1 p-1 bg-foreground text-background hover:bg-blue-700"
+          >
+            Slide Collections
           </Link>
         </div>
         <PreviewPanel slideObject={slideObject} textAttribute={textAttribute} />
