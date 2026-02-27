@@ -40,12 +40,12 @@ export async function submitSlideData(formData: FormData) {
       VALUES (${title},${description},${cleanedText}) RETURNING id`;
       console.log(data);
       console.log(`Data ${data} is submitted! `);
+      revalidatePath(`/slide`);
+      redirect(`/slide/${data[0].id}/edit`);
     }
   } catch (error) {
     console.log(error);
   }
-
-  redirect(`/slide/${data[0].id}/edit`);
 }
 
 export async function getSlideData(slideID: string) {
@@ -83,6 +83,7 @@ export async function updateSlideData(formData: FormData) {
       const data =
         await sql`UPDATE slide SET title = ${title}, description = ${description}, textdata = ${cleanedText} WHERE id=${slideID}`;
       console.log(`Data ${data} is Updated! `);
+      revalidatePath(`/slide`);
     }
   } catch (error) {
     console.log(error);
