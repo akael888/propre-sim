@@ -41,11 +41,11 @@ export async function submitSlideData(formData: FormData) {
       console.log(data);
       console.log(`Data ${data} is submitted! `);
       revalidatePath(`/slide`);
-      redirect(`/slide/${data[0].id}/edit`);
     }
   } catch (error) {
     console.log(error);
   }
+  redirect(`/slide/${data[0].id}/edit`);
 }
 
 export async function getSlideData(slideID: string) {
@@ -101,6 +101,7 @@ export async function deleteSlideData(slideID: string) {
       }
       console.log(data);
       revalidatePath(`/slide`);
+
       return null;
     }
   } catch (error) {
