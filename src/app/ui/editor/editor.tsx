@@ -83,20 +83,25 @@ export default function Editor({ slideID }: { slideID?: string }) {
   return (
     <>
       <div className="min-w-screen min-h-screen md:grid-rows-none md:max-h-full max-h-screen bg-foreground grid md:grid-cols-2 gap-2 text-background grid-rows-2">
-        {!slideID ? (
-          <>
-            <div className="absolute top-0 left-50 bg-foreground/50  p-1">
-              <form action={submitSlideData} className="gap-2 flex">
+        <div className="absolute md:top-0 md:left-50 bg-foreground/50 z-1000 p-1 flex flex-row gap-5 max-w-screen ">
+          {!slideID ? (
+            <>
+              <form
+                action={submitSlideData}
+                className="gap-2 flex max-w-screen"
+              >
                 <input
                   type="text"
                   name="title"
                   required
                   placeholder="Enter Slide Title"
+                  className="w-full"
                 />
                 <input
                   type="text"
                   name="description"
                   placeholder="Enter Slide Description"
+                  className="w-full"
                 />
                 <input
                   type="hidden"
@@ -106,24 +111,22 @@ export default function Editor({ slideID }: { slideID?: string }) {
                   readOnly
                 />
                 <button
-                  className="border-1 p-1 hover:bg-gray-500"
+                  className="border-1 p-1 hover:bg-gray-500 bg-gray-300 w-full"
                   type="submit"
                 >
                   Save Data
                 </button>
                 <Link
                   href="/slide"
-                  className="border-1 p-1 bg-foreground text-background hover:bg-blue-700"
+                  className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center"
                 >
                   Slide Collections
                 </Link>
               </form>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="absolute top-0 left-50 bg-foreground/50  p-1 flex flex-row gap-5">
-              <form action={updateSlideData} className="gap-2 flex">
+            </>
+          ) : (
+            <>
+              <form action={updateSlideData} className="gap-2 flex w-full [&>*]:w-full ">
                 <input
                   type="text"
                   name="title"
@@ -133,12 +136,14 @@ export default function Editor({ slideID }: { slideID?: string }) {
                   onChange={(e) =>
                     setSlideData({ ...slideData, title: e.target.value })
                   }
+                  className="w-[20%]"
                 />
                 <input
                   type="text"
                   name="description"
                   defaultValue={slideDataStatic.description}
                   placeholder="Enter Slide Description"
+                  className="w-[0%]"
                   onChange={(e) =>
                     setSlideData({ ...slideData, description: e.target.value })
                   }
@@ -151,22 +156,23 @@ export default function Editor({ slideID }: { slideID?: string }) {
                 />
                 <input type="hidden" name="slideID" value={slideID} readOnly />
                 <button
-                  className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-background disabled:text-foreground"
+                  className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-background disabled:text-foreground w-fit"
                   type="submit"
                   disabled={isTextAreaNotChanged}
+                
                 >
                   Save {isTextAreaNotChanged ? null : "*"}
                 </button>
               </form>
               <Link
                 href={`/slide/${slideID}/preview`}
-                className="border-1 bg-blue-200 p-1"
+                className="border-1 bg-blue-200 p-1 w-fit items-center flex justify-center"
               >
                 Preview
               </Link>{" "}
               <Link
                 href="/slide"
-                className="border-1 p-1 bg-foreground text-background hover:bg-blue-700"
+                className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 text-center"
               >
                 Slide Collections
               </Link>
@@ -178,10 +184,9 @@ export default function Editor({ slideID }: { slideID?: string }) {
               >
                 Share
               </button> */}
-            </div>
-          </>
-        )}
-
+            </>
+          )}
+        </div>
         <TextAreaSection
           textData={textAreaData}
           textObject={textObject}

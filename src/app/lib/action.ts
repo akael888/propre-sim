@@ -11,7 +11,7 @@ export async function getData() {
       const sql = neon(process.env.DATABASE_URL);
       const data = await sql`SELECT * FROM slide`;
       console.log(data[1].title);
-      //tests
+      revalidatePath(`/slide`);
       return data;
     }
     return tempSlideData;
@@ -95,12 +95,13 @@ export async function deleteSlideData(slideID: string) {
     if (process.env.DATABASE_URL) {
       const sql = neon(process.env.DATABASE_URL);
       const data = await sql`DELETE FROM slide WHERE id=${slideID}`;
+
       if (data) {
         console.log(data[0]);
+        revalidatePath(`/slide`);
         return data[0];
       }
       console.log(data);
-      revalidatePath(`/slide`);
 
       return null;
     }
