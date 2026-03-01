@@ -83,7 +83,7 @@ export default function Editor({ slideID }: { slideID?: string }) {
   return (
     <>
       <div className="min-w-screen min-h-screen md:grid-rows-none md:max-h-full max-h-screen bg-foreground grid md:grid-cols-2 gap-2 text-background grid-rows-2">
-        <div className="absolute md:top-0 md:left-50 bg-foreground/50 z-1000 p-1 flex flex-row gap-5 md:w-full max-w-screen ">
+        <div className="absolute md:top-0 md:left-50 bg-foreground/50 z-1000 p-1 flex flex-row gap-5 max-w-screen ">
           {!slideID ? (
             <>
               <form
@@ -118,7 +118,7 @@ export default function Editor({ slideID }: { slideID?: string }) {
                 </button>
                 <Link
                   href="/slide"
-                  className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full"
+                  className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center"
                 >
                   Slide Collections
                 </Link>
@@ -172,7 +172,7 @@ export default function Editor({ slideID }: { slideID?: string }) {
               </Link>{" "}
               <Link
                 href="/slide"
-                className="border-1 p-1 bg-foreground text-background hover:bg-blue-700"
+                className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 text-center"
               >
                 Slide Collections
               </Link>
