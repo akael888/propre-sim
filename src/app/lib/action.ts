@@ -11,7 +11,7 @@ export async function getData() {
       const sql = neon(process.env.DATABASE_URL);
       const data = await sql`SELECT * FROM slide`;
       console.log(data[1].title);
-      revalidatePath(`/slide`);
+      // revalidatePath(`/slide`);
       return data;
     }
     return tempSlideData;
