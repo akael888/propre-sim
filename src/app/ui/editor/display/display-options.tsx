@@ -83,7 +83,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                 </div>
 
                 <div className="flex md:flex-row flex-col justify-center items-center ">
-                  <div className="flex gap-2 p-2">
+                  <div className="flex flex-col gap-2 p-2">
                     <div>Stroke</div>
                     <input
                       type="checkbox"
@@ -122,7 +122,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   ) : null}
                 </div>
                 <div className="flex md:flex-row flex-col justify-center items-center">
-                  <div className="flex gap-2 p-2">
+                  <div className="flex gap-2 p-2 flex-col">
                     <div>Shadow</div>
                     <input
                       type="checkbox"
