@@ -36,7 +36,7 @@ export default function OptionColorPicker({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className="flex flex-col items-center justify-center h-full p-1">
       <h2>
         {attributeKey} {keyValue ? `(${keyValue})` : "  "}
       </h2>
