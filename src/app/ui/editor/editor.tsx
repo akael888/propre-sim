@@ -5,7 +5,7 @@ import {
   submitSlideData,
   updateSlideData,
 } from "@/app/lib/action";
-import { copyToClipboard, parseTextDataToObjects } from "@/app/lib/utils";
+import { parseTextDataToObjects } from "@/app/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import TextAreaSection from "./sections/text-area-section";
 import DisplayAreaSection from "./sections/display-area-section";
@@ -15,7 +15,7 @@ export default function Editor({ slideID }: { slideID?: string }) {
   const [textAreaData, setTextAreaData] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const [copyPressed, setCopyPressed] = useState(false);
+  //const [copyPressed, setCopyPressed] = useState(false);
 
   const [slideDataStatic, setSlideDataStatic] = useState({
     title: "",
@@ -126,7 +126,10 @@ export default function Editor({ slideID }: { slideID?: string }) {
             </>
           ) : (
             <>
-              <form action={updateSlideData} className="gap-2 flex w-full [&>*]:w-full ">
+              <form
+                action={updateSlideData}
+                className="gap-2 flex w-full [&>*]:w-full "
+              >
                 <input
                   type="text"
                   name="title"
@@ -159,7 +162,6 @@ export default function Editor({ slideID }: { slideID?: string }) {
                   className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-background disabled:text-foreground w-fit"
                   type="submit"
                   disabled={isTextAreaNotChanged}
-                
                 >
                   Save {isTextAreaNotChanged ? null : "*"}
                 </button>
@@ -169,7 +171,7 @@ export default function Editor({ slideID }: { slideID?: string }) {
                 className="border-1 bg-blue-200 p-1 w-fit items-center flex justify-center"
               >
                 Preview
-              </Link>{" "}
+              </Link>
               <Link
                 href="/slide"
                 className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 text-center"
