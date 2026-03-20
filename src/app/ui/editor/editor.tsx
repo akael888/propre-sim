@@ -73,6 +73,13 @@ export default function Editor({ slideID }: { slideID?: string }) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    document.title =
+      slideData.title != ""
+        ? `${slideData.title} | ProPresenter Simulator`
+        : "ProPresenter Simulator";
+  }, [slideData.title]);
+
   const handleSlideDataObjectChanges = (data: {
     title: string;
     description: string;
