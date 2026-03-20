@@ -39,7 +39,7 @@ function SaveSection({
               name="title"
               required
               placeholder="Enter Slide Title"
-              maxLength={15}
+              maxLength={30}
               minLength={3}
               className="w-full font-bold text-center"
               defaultValue={slideID ? slideDataStatic.title : ""}
@@ -57,7 +57,7 @@ function SaveSection({
               type="text"
               name="description"
               placeholder="Enter Slide Description"
-              maxLength={30}
+              maxLength={50}
               minLength={3}
               required
               className="w-full italic text-center "
