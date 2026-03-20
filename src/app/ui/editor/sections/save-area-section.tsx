@@ -41,7 +41,7 @@ function SaveSection({
               placeholder="Enter Slide Title"
               maxLength={30}
               minLength={3}
-              className="w-full font-bold text-center"
+              className="w-full font-bold text-center hover:bg-background/30"
               defaultValue={slideID ? slideDataStatic.title : ""}
               onChange={
                 slideID
@@ -60,7 +60,7 @@ function SaveSection({
               maxLength={50}
               minLength={3}
               required
-              className="w-full italic text-center "
+              className="w-full italic text-center hover:bg-background/30 "
               defaultValue={slideID ? slideDataStatic.description : ""}
               onChange={
                 slideID
@@ -84,25 +84,25 @@ function SaveSection({
           </div>
           <div className="flex flex-row w-full gap-2">
             <button
-              className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-background disabled:text-foreground w-full"
+              className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-background disabled:text-foreground w-full rounded-md hover:font-bold"
               type="submit"
               disabled={slideID ? isTextAreaNotChanged : false}
             >
               {slideID
-                ? `Save ${isTextAreaNotChanged ? "" : "*"}`
+                ? `Save${isTextAreaNotChanged ? "" : "*"}`
                 : "Save Data"}
             </button>
             {slideID ? (
               <Link
                 href={`/slide/${slideID}/preview`}
-                className="border-1 bg-blue-200 p-1 w-full items-center flex justify-center hover:bg-blue-800"
+                className="border-1 bg-blue-200 p-1 w-full items-center flex justify-center hover:bg-blue-800 rounded-md hover:font-bold"
               >
                 Preview
               </Link>
             ) : null}
             <Link
               href="/slide"
-              className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center justify-center items-center flex"
+              className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center justify-center items-center flex rounded-md hover:font-bold"
             >
               Slide Collections
             </Link>
