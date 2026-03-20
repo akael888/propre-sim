@@ -6,10 +6,10 @@ export default function Help({}) {
 
   return (
     <>
-      <div className="absolute bottom-0 md:right-4 right-0 w-100 flex flex-col justify-end items-end md:w-[50%] w-[100%] max-h-[70%]">
+      <div className="absolute bottom-0 md:right-4 right-0 w-100 flex flex-col justify-end items-end md:w-[50%] w-[100%] max-h-[70%] pointer-events-none">
         <div className="w-[30%] h-fit">
           <button
-            className="bg-green-600 w-full h-full p-2 text-foreground border-1 border-foreground"
+            className="bg-green-600 w-full h-full p-2 text-foreground border-1 border-foreground pointer-events-auto"
             onClick={() => setIsOpen(!isOpen)}
           >
             Help
@@ -17,7 +17,7 @@ export default function Help({}) {
         </div>
 
         {isOpen ? (
-          <div className="h-fit max-h-[70%] overflow-y-auto">
+          <div className="h-fit max-h-[70%] overflow-y-auto pointer-events-auto">
             <div className="bg-foreground w-full p-2 border-1">
               <button
                 className="bg-blue-600 w-full h-full p-2 text-foreground border-1 border-foreground"

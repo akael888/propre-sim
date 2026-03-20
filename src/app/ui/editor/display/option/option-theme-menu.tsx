@@ -80,19 +80,19 @@ export default function OptionThemeMenu({
               className="border-1 p-1 hover:bg-foreground bg-green-500"
               onClick={() => loadSelectedTheme(selectedTheme.textAttribute)}
             >
-              Load Selected Theme
+              Load Theme
             </button>
             <button
               className="border-1 p-1 hover:bg-foreground bg-red-500"
               onClick={() => deleteSelectedTheme(selectedTheme)}
             >
-              Delete Selected Theme
+              Delete Theme
             </button>
             <button
               className="border-1 p-1 hover:bg-foreground bg-orange-500"
               onClick={clearLocalTheme}
             >
-              Clear Local Theme
+              Delete Local Theme
             </button>
             <button
               className="border-1 p-1 hover:bg-foreground bg-gray-500"
