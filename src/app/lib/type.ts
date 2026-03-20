@@ -57,6 +57,21 @@ export interface TextAreaSectionProps {
   textObject: TextObject[];
   handleTextDataChanges: (textData: string) => void;
   textAreaRef: RefObject<HTMLTextAreaElement | null>;
+  slideID?: string;
+  textAreaData: string;
+  slideData: {
+    title: string;
+    description: string;
+  };
+  slideDataStatic: {
+    title: string;
+    description: string;
+  };
+  handleSlideDataObjectChanges: (data: {
+    title: string;
+    description: string;
+  }) => void;
+  isTextAreaNotChanged: boolean;
 }
 
 export interface TextAreaProps {

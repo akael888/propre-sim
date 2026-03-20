@@ -91,19 +91,25 @@ export default function Editor({ slideID }: { slideID?: string }) {
   return (
     <>
       <div className="min-w-screen min-h-screen md:grid-rows-none md:max-h-full max-h-screen bg-foreground grid md:grid-cols-2 gap-2 text-background grid-rows-2">
-        <SavePanel
+        {/* <SavePanel
           slideID={slideID}
           textAreaData={textAreaData}
           slideData={slideData}
           slideDataStatic={slideDataStatic}
           handleSlideDataObjectChanges={handleSlideDataObjectChanges}
           isTextAreaNotChanged={isTextAreaNotChanged}
-        />
+        /> */}
         <TextAreaSection
           textData={textAreaData}
           textObject={textObject}
           handleTextDataChanges={handleTextAreaDataChanges}
           textAreaRef={textAreaRef}
+          slideID={slideID}
+          textAreaData={textAreaData}
+          slideData={slideData}
+          slideDataStatic={slideDataStatic}
+          handleSlideDataObjectChanges={handleSlideDataObjectChanges}
+          isTextAreaNotChanged={isTextAreaNotChanged}
         />
         <DisplayAreaSection
           slideObject={textObject}
