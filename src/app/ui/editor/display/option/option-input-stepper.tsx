@@ -41,7 +41,7 @@ export default function OptionInputStepper({
       </div>
       <div className="flex flex-row gap-1 items-center justify-center">
         <button
-          className="w-[10%] bg-red-400 rounded-md"
+          className="w-[10%] bg-red-400 rounded-md hover:bg-red-500"
           onClick={() => updateValue(getCurrentValue() - intervalPerStep)}
         >
           -
@@ -68,7 +68,7 @@ export default function OptionInputStepper({
           placeholder="Text Size"
         />
         <button
-          className="w-[10%] bg-green-400 rounded-md"
+          className="w-[10%] bg-green-400 rounded-md hover:bg-green-500"
           onClick={() => updateValue(getCurrentValue() + intervalPerStep)}
         >
           +
