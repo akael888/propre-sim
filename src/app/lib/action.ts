@@ -110,3 +110,33 @@ export async function deleteSlideData(slideID: string) {
     return null;
   }
 }
+
+export async function registerUser(formData: FormData) {
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+
+  const password = formData.get("password") as string;
+
+  console.log(name);
+  console.log(email);
+  console.log(password);
+
+  try {
+    if (process.env.DATABASE_URL) {
+      // Make sure that Database URl is not Null
+      const sql = neon(process.env.DATABASE_URL);
+      const data = await sql`INSERT INTO neon_auth.user (name,email,password)
+      VALUES (${name},${email},${password}) RETURNING id `;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function loginUser(formData: FormData) {
+  const username = formData.get("username") as string;
+  const password = formData.get("password") as string;
+
+  console.log(username);
+  console.log(password);
+}
