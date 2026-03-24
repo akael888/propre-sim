@@ -2,8 +2,13 @@
 "use server";
 import { neon } from "@neondatabase/serverless";
 import { redirect } from "next/navigation";
-import { tempSlideData } from "./data";
+import {tempSlideData } from "./data";
 import { revalidatePath } from "next/cache";
+
+// const baseUrl =
+//   process.env.NODE_ENV === "production"
+//     ? process.env.ABSOLUTE_PROD_URL
+//     : process.env.ABSOLUTE_TEST_URL;
 
 export async function getData() {
   try {
@@ -111,27 +116,41 @@ export async function deleteSlideData(slideID: string) {
   }
 }
 
-export async function registerUser(formData: FormData) {
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
+// export async function registerUser(formData: FormData) {
+//   const name = formData.get("name") as string;
+//   const email = formData.get("email") as string;
 
-  const password = formData.get("password") as string;
+//   const password = formData.get("password") as string;
 
-  console.log(name);
-  console.log(email);
-  console.log(password);
+//   console.log(name);
+//   console.log(email);
+//   console.log(password);
 
-  try {
-    if (process.env.DATABASE_URL) {
-      // Make sure that Database URl is not Null
-      const sql = neon(process.env.DATABASE_URL);
-      const data = await sql`INSERT INTO neon_auth.user (name,email,password)
-      VALUES (${name},${email},${password}) RETURNING id `;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
+//   try {
+//     if (process.env.DATABASE_URL && authClient) {
+//       // Make sure that Database URl is not Null
+
+//       console.log(process.env.NODE_ENV);
+//       console.log(process.env.ABSOLUTE_PROD_URL);
+//       console.log(process.env.ABSOLUTE_TEST_URL);
+//       console.log(baseUrl);
+
+//       const sql = neon(process.env.DATABASE_URL);
+
+//       await authClient.signUp.email({
+//         email,
+//         password,
+//         name,
+//         callbackURL: `${baseUrl}/register`,
+        
+//       });
+//       // const data = await sql`INSERT INTO neon_auth.user (name,email,password)
+//       // VALUES (${name},${email},${password}) RETURNING id `;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 export async function loginUser(formData: FormData) {
   const username = formData.get("username") as string;
