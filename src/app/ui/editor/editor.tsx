@@ -9,8 +9,6 @@ import { parseTextDataToObjects } from "@/app/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import TextAreaSection from "./sections/text-area-section";
 import DisplayAreaSection from "./sections/display-area-section";
-import Link from "next/link";
-import SavePanel from "./text-area/save-panel";
 
 export default function Editor({ slideID }: { slideID?: string }) {
   const [textAreaData, setTextAreaData] = useState("");
