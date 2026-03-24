@@ -3,7 +3,7 @@ import { loginUser } from "@/app/lib/action";
 export default function LoginPage() {
   return (
     <>
-      <div className="bg-foreground text-black flex flex-col justify-center items-center p-1 h-screen w-screen text-center">
+      <div className="bg-foreground text-black flex flex-col justify-center items-center p-1 h-screen w-full text-center">
         <div>Login: </div>
 
         <form className="p-1 flex gap-1 [&>*]:border-1" action={loginUser}>
