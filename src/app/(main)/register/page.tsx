@@ -1,6 +1,6 @@
 "use client";
 
-import { authClient } from "@/app/lib/data-client";
+import { authClient } from "@/app/lib/data";
 import { useState } from "react";
 
 export default function RegisterPage() {
