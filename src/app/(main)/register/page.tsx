@@ -1,46 +1,25 @@
 "use client";
 
-import { authClient } from "@/app/lib/data";
+import { registerUser } from "@/app/lib/action";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function RegisterPage() {
   const [registerMessage, setRegisterMessage] = useState("Register here..");
 
+  const router = useRouter();
+
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const name = formData.get("name") as string;
+    const result = await registerUser(formData);
 
-    if (!authClient) {
-      console.log("Auth Client Empty");
-      return;
+    if (result?.error) {
+      setRegisterMessage(result.error);
     }
 
-    try {
-      await authClient.signUp.email(
-        {
-          email,
-          password,
-          name,
-          callbackURL: "/register",
-        },
-        {
-          onSuccess: () => {
-            setRegisterMessage("Registered");
-          },
-          onError: (ctx) => {
-            console.log(registerMessage);
-            setRegisterMessage(ctx.error.message);
-          },
-        },
-      );
-    } catch (error) {
-      const errorMessage = error.message as string;
-      console.log(errorMessage);
-      setRegisterMessage(errorMessage);
-    }
+    setRegisterMessage("Registered succesfully! Redirecting...");
+    setTimeout(() => router.push("/login"), 1500);
   };
 
   return (
@@ -55,6 +34,7 @@ export default function RegisterPage() {
 
         <form
           className="p-1 flex gap-1 [&>*]:border-1"
+          // onSubmit={handleRegister}
           onSubmit={handleRegister}
         >
           <input
