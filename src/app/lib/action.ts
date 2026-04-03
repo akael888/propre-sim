@@ -2,8 +2,9 @@
 "use server";
 import { neon } from "@neondatabase/serverless";
 import { redirect } from "next/navigation";
-import {tempSlideData } from "./data";
+import { tempSlideData } from "./data";
 import { revalidatePath } from "next/cache";
+import bcrypt from "bcryptjs";
 
 // const baseUrl =
 //   process.env.NODE_ENV === "production"
@@ -116,41 +117,39 @@ export async function deleteSlideData(slideID: string) {
   }
 }
 
-// export async function registerUser(formData: FormData) {
-//   const name = formData.get("name") as string;
-//   const email = formData.get("email") as string;
+export async function registerUser(formData: FormData) {
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
 
-//   const password = formData.get("password") as string;
+  const password = formData.get("password") as string;
 
-//   console.log(name);
-//   console.log(email);
-//   console.log(password);
+  if (!name || !email || !password) {
+    return { error: "All Fields are Required" };
+  }
 
-//   try {
-//     if (process.env.DATABASE_URL && authClient) {
-//       // Make sure that Database URl is not Null
+  console.log(name);
+  console.log(email);
+  console.log(password);
 
-//       console.log(process.env.NODE_ENV);
-//       console.log(process.env.ABSOLUTE_PROD_URL);
-//       console.log(process.env.ABSOLUTE_TEST_URL);
-//       console.log(baseUrl);
+  try {
+    if (process.env.DATABASE_URL) {
+      const sql = neon(process.env.DATABASE_URL);
 
-//       const sql = neon(process.env.DATABASE_URL);
+      const exisiting = await sql`SELECT id FROM users WHERE email = ${email}`;
 
-//       await authClient.signUp.email({
-//         email,
-//         password,
-//         name,
-//         callbackURL: `${baseUrl}/register`,
-        
-//       });
-//       // const data = await sql`INSERT INTO neon_auth.user (name,email,password)
-//       // VALUES (${name},${email},${password}) RETURNING id `;
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+      if (exisiting.length > 0) return { error: "Email already registered" };
+
+      const hashedPassword = await bcrypt.hash(password, 12);
+
+      await sql`INSERT INTO users (name, email, password) VALUES (${name}, ${email}, ${hashedPassword})`;
+
+      return { success: true };
+    } else return { error: "Database not configured" };
+  } catch (error) {
+    console.log(error);
+    return { error: "Something went Wrong" };
+  }
+}
 
 export async function loginUser(formData: FormData) {
   const username = formData.get("username") as string;
