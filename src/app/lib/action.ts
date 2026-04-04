@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { tempSlideData } from "./data";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcryptjs";
-import { signIn } from "../../../auth";
+import { auth, signIn, signOut } from "../../../auth";
 
 // const baseUrl =
 //   process.env.NODE_ENV === "production"
@@ -17,7 +17,7 @@ export async function getData() {
     if (process.env.DATABASE_URL) {
       const sql = neon(process.env.DATABASE_URL);
       const data = await sql`SELECT * FROM slide`;
-      console.log(data[1].title);
+      console.log(data[1].created_at);
       // revalidatePath(`/slide`);
       return data;
     }
@@ -152,6 +152,16 @@ export async function registerUser(formData: FormData) {
     console.log(error);
     return { error: "Something went Wrong" };
   }
+}
+
+export async function getSession() {
+  const session = await auth();
+  if (!session?.user) return null;
+  return session;
+}
+
+export async function logoutUser() {
+  await signOut({ redirectTo: "/login" });
 }
 
 // export async function loginUser(formData: FormData) {
