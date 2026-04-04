@@ -1,48 +1,54 @@
 "use client";
 
-import { authClient } from "@/app/lib/data";
+import { error } from "console";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
+  const [loginMessage, setLoginMessage] = useState("Login Page..");
+  const router = useRouter();
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
 
-    if (!authClient) {
-      console.log("Auth Client Empty");
+    const result = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      redirect: false,
+    });
+
+    console.log("result:", result);
+
+    if (result?.error) {
+      setLoginMessage("Invalid email or password");
       return;
     }
 
-    try {
-      await authClient.signIn.email({ email: email, password: password });
-      console.log("Logged In!");
-    } catch (error) {
-      console.log(error);
-    }
+    setLoginMessage("Login successful! Redirecting...");
+    setTimeout(() => router.push("/editor"), 1500);
   };
 
   return (
-    <>
-      <div className="bg-foreground text-black flex flex-col justify-center items-center p-1 h-screen w-full text-center">
-        <div>Login: </div>
-
-        <form className="p-1 flex gap-1 [&>*]:border-1" onSubmit={handleLogin}>
-          <input required={true} placeholder="Enter Email" name="email" />
-          <input
-            required={true}
-            placeholder="Enter Password"
-            name="password"
-            type="password"
-          />
-          <button
-            className="p-1 hover:bg-gray-900 hover:text-white"
-            type="submit"
-          >
-            Login
-          </button>
-        </form>
-      </div>
-    </>
+    <div className="bg-foreground text-black flex flex-col justify-center items-center p-1 h-screen w-full text-center">
+      <div>Login:</div>
+      {loginMessage && <div>{loginMessage}</div>}
+      <form className="p-1 flex gap-1 [&>*]:border-1" onSubmit={handleLogin}>
+        <input required placeholder="Enter Email" name="email" type="email" />
+        <input
+          required
+          placeholder="Enter Password"
+          name="password"
+          type="password"
+        />
+        <button
+          className="p-1 hover:bg-gray-900 hover:text-white"
+          type="submit"
+        >
+          Login
+        </button>
+      </form>
+    </div>
   );
 }
