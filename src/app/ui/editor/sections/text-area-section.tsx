@@ -14,6 +14,7 @@ const TextAreaSection: React.FC<TextAreaSectionProps> = ({
   slideDataStatic,
   handleSlideDataObjectChanges,
   isTextAreaNotChanged,
+  user,
 }) => {
   return (
     <>
@@ -25,6 +26,7 @@ const TextAreaSection: React.FC<TextAreaSectionProps> = ({
           slideDataStatic={slideDataStatic}
           handleSlideDataObjectChanges={handleSlideDataObjectChanges}
           isTextAreaNotChanged={isTextAreaNotChanged}
+          user={user}
         />
         <TextArea
           textData={textData}
