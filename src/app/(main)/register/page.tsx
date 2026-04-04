@@ -16,6 +16,7 @@ export default function RegisterPage() {
 
     if (result?.error) {
       setRegisterMessage(result.error);
+      return;
     }
 
     setRegisterMessage("Registered succesfully! Redirecting...");
@@ -26,11 +27,7 @@ export default function RegisterPage() {
     <>
       <div className="bg-foreground text-black flex flex-col justify-center items-center p-1 h-screen w-full text-center">
         <div>Register: </div>
-        {registerMessage ? (
-          <>
-            <div>{registerMessage}</div>
-          </>
-        ) : null}
+        {registerMessage && <div>{registerMessage}</div>}
 
         <form
           className="p-1 flex gap-1 [&>*]:border-1"
