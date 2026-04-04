@@ -1,19 +1,21 @@
 import Link from "next/link";
-import { deleteSlideData, getData } from "../lib/action";
-import { tempSlideData, tempUserData } from "../lib/data";
+import { deleteSlideData, getData, getSession } from "../lib/action";
+// import { tempSlideData, tempUserData } from "../lib/data";
 import DeleteSlideButton from "../ui/slide/delete-slide-button";
 import { Suspense } from "react";
 import Loading from "../ui/loading";
 
 export default async function SlideManagerPage() {
   const slideData = await getData();
+  const session = await getSession();
+  const user = session.user;
 
   return (
     <>
       <div className="flex justify-between p-1 bg-background/80 sticky top-0 text-white">
         <div className="flex justify-center items-center font-bold">
           {" "}
-          Slide Menu: Hi {tempUserData.userName}!{" "}
+          Slide Menu: Hi {user?.name}!{" "}
         </div>
         <div className="gap-1 flex">
           <Link href="/" className="border-1 p-1 hover:bg-gray-300 bg-gray-500">
@@ -70,7 +72,7 @@ export default async function SlideManagerPage() {
                           ? value.textdata.length + " Letters"
                           : "Empty Data"}
                       </p>
-                      <p>Last Edited : 1 Januari 2001</p>
+                      <p>Created At : {value.created_at.toISOString()}</p>
                     </div>
                   </div>
                 </div>
