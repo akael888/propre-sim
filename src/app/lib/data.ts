@@ -130,6 +130,6 @@ if (!process.env.NEXT_PUBLIC_NEON_AUTH_BASE_URL) {
   throw new Error("NEXT_PUBLIC_NEON_AUTH_BASE_URL is not set");
 }
 
-export const authClient = createAuthClient(
-  process.env.NEXT_PUBLIC_NEON_AUTH_BASE_URL,
-);
+// export const authClient = createAuthClient(
+//   process.env.NEXT_PUBLIC_NEON_AUTH_BASE_URL,
+// );
