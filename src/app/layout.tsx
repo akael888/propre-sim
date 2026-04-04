@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,10 +16,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | ProPresenter Simulator',
-    default: 'ProPresenter Simulator',
+    template: "%s | ProPresenter Simulator",
+    default: "ProPresenter Simulator",
   },
-  description: 'a Tool to Simulate ProPresenter Display using only Text Editor',
+  description: "a Tool to Simulate ProPresenter Display using only Text Editor",
 };
 
 export default function RootLayout({
@@ -31,7 +32,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children} <Analytics />
+        <SessionProvider>
+          {children} <Analytics />
+        </SessionProvider>
       </body>
     </html>
   );
