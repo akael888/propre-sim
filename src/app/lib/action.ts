@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { tempSlideData } from "./data";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcryptjs";
+import { signIn } from "../../../auth";
 
 // const baseUrl =
 //   process.env.NODE_ENV === "production"
@@ -137,6 +138,8 @@ export async function registerUser(formData: FormData) {
 
       const exisiting = await sql`SELECT id FROM users WHERE email = ${email}`;
 
+      console.log("exist len" + exisiting.length);
+
       if (exisiting.length > 0) return { error: "Email already registered" };
 
       const hashedPassword = await bcrypt.hash(password, 12);
@@ -151,10 +154,17 @@ export async function registerUser(formData: FormData) {
   }
 }
 
-export async function loginUser(formData: FormData) {
-  const username = formData.get("username") as string;
-  const password = formData.get("password") as string;
+// export async function loginUser(formData: FormData) {
+//   const email = formData.get("email") as string;
+//   const password = formData.get("password") as string;
 
-  console.log(username);
-  console.log(password);
-}
+//   try {
+//     await signIn("credentials", {
+//       email,
+//       password,
+//       redirect: false,
+//     });
+//   } catch (error) {
+//     return { error };
+//   }
+// }
