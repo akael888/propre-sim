@@ -1,8 +1,8 @@
-import { submitSlideData, updateSlideData } from "@/app/lib/action";
+import { getSession, submitSlideData, updateSlideData } from "@/app/lib/action";
 import Link from "next/link";
 import { useState } from "react";
 
-function SaveSection({
+async function SaveSection({
   slideID,
   textAreaData,
   slideData,
@@ -26,6 +26,9 @@ function SaveSection({
   }) => void;
   isTextAreaNotChanged: boolean;
 }) {
+  const session = await getSession();
+  const user = session?.user;
+
   return (
     <>
       <div className="flex flex-col gap-5 max-w-screen w-full p-1 ">
@@ -88,24 +91,24 @@ function SaveSection({
               type="submit"
               disabled={slideID ? isTextAreaNotChanged : false}
             >
-              {slideID
-                ? `Save${isTextAreaNotChanged ? "" : "*"}`
-                : "Save Data"}
+              {slideID ? `Save${isTextAreaNotChanged ? "" : "*"}` : "Save Data"}
             </button>
-            {slideID ? (
+            {slideID && (
               <Link
                 href={`/slide/${slideID}/preview`}
                 className="border-1 bg-blue-200 p-1 w-full items-center flex justify-center hover:bg-blue-800 rounded-md hover:font-bold"
               >
                 Preview
               </Link>
-            ) : null}
-            <Link
-              href="/slide"
-              className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center justify-center items-center flex rounded-md hover:font-bold"
-            >
-              Slide Collections
-            </Link>
+            )}
+            {user && (
+              <Link
+                href="/slide"
+                className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center justify-center items-center flex rounded-md hover:font-bold"
+              >
+                Slide Collections
+              </Link>
+            )}
           </div>
         </form>
       </div>
