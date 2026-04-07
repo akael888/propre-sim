@@ -17,7 +17,7 @@ export async function getData(userID?: string) {
     if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
       const data = await sql`SELECT * FROM slide WHERE user_id=${userID}`;
-      console.log(data[1].created_at);
+      // console.log(data[1].created_at);
       // revalidatePath(`/slide`);
       return data;
     }
@@ -28,7 +28,7 @@ export async function getData(userID?: string) {
   }
 }
 
-export async function submitSlideData(formData: FormData) {
+export async function submitSlideData(userID: string, formData: FormData) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const textdata = formData.get("textdata") as string;
@@ -43,8 +43,8 @@ export async function submitSlideData(formData: FormData) {
     if (process.env.DATABASE_URL) {
       const sql = neon(process.env.DATABASE_URL);
 
-      data = await sql`INSERT INTO slide (title,description,textdata)
-      VALUES (${title},${description},${cleanedText}) RETURNING id`;
+      data = await sql`INSERT INTO slide (title,description,textdata,user_id)
+      VALUES (${title},${description},${cleanedText},${userID}) RETURNING id`;
       console.log(data);
       console.log(`Data ${data} is submitted! `);
       revalidatePath(`/slide`);
