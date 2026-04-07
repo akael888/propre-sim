@@ -12,19 +12,19 @@ import { auth, signIn, signOut } from "../../../auth";
 //     ? process.env.ABSOLUTE_PROD_URL
 //     : process.env.ABSOLUTE_TEST_URL;
 
-export async function getData() {
+export async function getData(userID?: string) {
   try {
-    if (process.env.DATABASE_URL) {
+    if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
-      const data = await sql`SELECT * FROM slide`;
+      const data = await sql`SELECT * FROM slide WHERE user_id=${userID}`;
       console.log(data[1].created_at);
       // revalidatePath(`/slide`);
       return data;
     }
-    return tempSlideData;
+    return null;
   } catch (error) {
     console.log(error);
-    return tempSlideData;
+    return null;
   }
 }
 
