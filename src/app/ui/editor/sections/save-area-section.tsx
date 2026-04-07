@@ -1,7 +1,7 @@
 import { getSession, submitSlideData, updateSlideData } from "@/app/lib/action";
 import { User } from "next-auth";
 import Link from "next/link";
-import { useState } from "react";
+import { use, useState } from "react";
 
 function SaveSection({
   slideID,
@@ -29,12 +29,14 @@ function SaveSection({
   isTextAreaNotChanged: boolean;
   user?: User;
 }) {
+  const submitSlideDatawithID = user?.id && submitSlideData.bind(null, user.id);
+
   return (
     <>
       <div className="flex flex-col gap-5 max-w-screen w-full p-1 ">
         {user ? (
           <form
-            action={slideID ? updateSlideData : submitSlideData}
+            action={slideID ? updateSlideData : submitSlideDatawithID}
             className="gap-2 flex flex-row justify-between max-w-screen w-full"
           >
             <div className="flex flex-col w-full h-full">
