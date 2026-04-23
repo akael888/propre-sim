@@ -9,10 +9,17 @@ import { parseTextDataToObjects } from "@/app/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import TextAreaSection from "./sections/text-area-section";
 import DisplayAreaSection from "./sections/display-area-section";
-import Link from "next/link";
-import SavePanel from "./text-area/save-panel";
+import { Session } from "next-auth";
 
-export default function Editor({ slideID }: { slideID?: string }) {
+type User = Session["user"];
+
+export default function Editor({
+  slideID,
+  user,
+}: {
+  slideID?: string;
+  user?: User;
+}) {
   const [textAreaData, setTextAreaData] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -117,6 +124,7 @@ export default function Editor({ slideID }: { slideID?: string }) {
           slideDataStatic={slideDataStatic}
           handleSlideDataObjectChanges={handleSlideDataObjectChanges}
           isTextAreaNotChanged={isTextAreaNotChanged}
+          user={user}
         />
         <DisplayAreaSection
           slideObject={textObject}

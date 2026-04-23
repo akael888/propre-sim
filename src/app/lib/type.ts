@@ -1,6 +1,7 @@
 import { RefObject } from "react";
 import { textAlignTypes } from "./data";
 import { NextFontWithVariable } from "next/dist/compiled/@next/font";
+import { User } from "next-auth";
 
 export interface TextAttribute {
   textSize: number;
@@ -72,6 +73,7 @@ export interface TextAreaSectionProps {
     description: string;
   }) => void;
   isTextAreaNotChanged: boolean;
+  user?: User;
 }
 
 export interface TextAreaProps {

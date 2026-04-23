@@ -1,9 +1,13 @@
+import { getSession } from "../lib/action";
 import Editor from "../ui/editor/editor";
 
-export default function EditorPage() {
+export default async function EditorPage() {
+  const session = await getSession();
+  const user = session?.user;
+
   return (
     <>
-      <Editor />
+      <Editor user={user} />
     </>
   );
 }
