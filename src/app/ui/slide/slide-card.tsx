@@ -6,7 +6,7 @@ const SlideCard: React.FC<SlideCardProp> = ({ index, userSlideOBject }) => {
   return (
     <>
       <div
-        className="border-1 border-gray-500 bg-foreground h-full w-full text-background text-center overflow-y-hidden p-2 flex flex-col hover:bg-background/20 shadow-xl hover:-translate-y-1 hover:border-white rounded-xl"
+        className="border-1 border-gray-500 bg-foreground h-full w-full text-background text-center overflow-y-hidden p-2 flex flex-col hover:bg-gray-100 shadow-xl hover:-translate-y-1 hover:border-white rounded-xl"
         key={index}
       >
         <div className="flex flex-col h-full">
