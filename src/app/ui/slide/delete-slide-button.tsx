@@ -16,7 +16,7 @@ const DeleteSlideButton: React.FC<SlideButtonsProp> = ({ slideID }) => {
   return (
     <>
       <button
-        className="border-1 p-1 hover:bg-gray-300 bg-red-300"
+        className="border-1 p-1 hover:bg-gray-300 bg-red-300/50 w-20 rounded-sm"
         onClick={() => setIsOpen(!isOpen)}
       >
         Delete
@@ -25,7 +25,7 @@ const DeleteSlideButton: React.FC<SlideButtonsProp> = ({ slideID }) => {
         <>
           <div>
             <button
-              className="border-1 p-1 hover:bg-gray-300 bg-red-400"
+              className="border-1 p-1 hover:bg-red-300 bg-red-400/50 w-30 rounded-sm"
               onClick={deleteSlide}
             >
               Confirm Delete

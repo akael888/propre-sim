@@ -24,7 +24,7 @@ const SlideCard: React.FC<SlideCardProp> = ({ index, userSlideOBject }) => {
           </div>
 
           <div className="flex p-1 p-2 h-full flex-col">
-            <div className="text-left w-full p-2 2xl:max-h-1/2 h-full max-h-40 overflow-y-auto whitespace-pre-wrap inset-shadow-black/50 inset-shadow-sm bg-gray-300 ">
+            <div className="text-left w-full p-2 h-full max-h-40 overflow-y-auto whitespace-pre-wrap inset-shadow-black/50 inset-shadow-sm bg-gray-300 ">
               {userSlideOBject.textdata
                 ? userSlideOBject.textdata
                 : "Empty Data"}
@@ -44,13 +44,13 @@ const SlideCard: React.FC<SlideCardProp> = ({ index, userSlideOBject }) => {
         <div className="flex flex-row p-2 justify-end items-center gap-2 h-full">
           <Link
             href={`/slide/${userSlideOBject.id}/edit`}
-            className="border-1 p-1 hover:bg-gray-300 bg-yellow-300"
+            className="border-1 p-1 hover:bg-gray-300 bg-yellow-300/50 w-20 rounded-sm"
           >
             Edit
           </Link>
           <Link
             href={`/slide/${userSlideOBject.id}/preview`}
-            className="border-1 p-1 hover:bg-gray-300 bg-blue-300"
+            className="border-1 p-1 hover:bg-gray-300 bg-blue-300/50 w-20 rounded-sm"
           >
             Preview
           </Link>
