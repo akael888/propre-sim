@@ -4,6 +4,7 @@ import { deleteSlideData, getData, getSession } from "../lib/action";
 import DeleteSlideButton from "../ui/slide/delete-slide-button";
 import { Suspense } from "react";
 import Loading from "../ui/loading";
+import SlideCard from "../ui/slide/slide-card";
 
 export default async function SlideManagerPage() {
   const session = await getSession();
@@ -12,75 +13,32 @@ export default async function SlideManagerPage() {
   console.log(user);
 
   return (
-    <>
-      <div className="flex justify-between p-1 bg-background/80 sticky top-0 text-white">
-        <div className="flex justify-center items-center font-bold">
-          {" "}
-          Slide Menu: Hi {user?.name}!
+    <div className="bg-white md:h-screen flex flex-col">
+      <div className="flex justify-between p-1 border sticky top-0 text-background bg-white z-100">
+        <div className="flex justify-center items-center font-bold w-full">
+          <span>Hi {user?.name}!</span>
         </div>
-        <div className="gap-1 flex">
-          <Link href="/" className="border-1 p-1 hover:bg-gray-300 bg-gray-500">
+        <div className="w-fit flex flex-row justify-end gap-1 flex">
+          <Link
+            href="/"
+            className="border-1 p-1 hover:bg-gray-300 bg-gray-500 shadow-xl hover:-translate-y-0.5"
+          >
             Home
           </Link>
           <Link
             href="/editor"
-            className="border-1 p-1 hover:bg-gray-300 bg-green-500"
+            className="border-1 p-1 hover:bg-gray-300 bg-green-500 shadow-xl hover:-translate-y-0.5"
           >
             + New
           </Link>
         </div>
       </div>
-      <div className="gap-5 h-full md:grid-cols-3 md:grid flex flex-col bg-gray-200 p-2">
+      <div className="bg-foreground gap-5 h-full md:grid-cols-3 md:grid flex flex-col bg-gray-200 p-2">
         <Suspense fallback={<Loading />}>
           {slideData ? (
             slideData?.map((value, index) => {
               return (
-                <div
-                  className="border-1 bg-foreground w-full text-background text-center overflow-y-hidden p-2 h-fit"
-                  key={index}
-                >
-                  <div className="flex flex-col bg-pink-200">
-                    <div className="2xl:grid 2xl:grid-cols-2 flex flex-col">
-                      <div className="flex flex-col p-2 h-fit">
-                        <h3 className="text-2xl font-bold truncate">
-                          {value.title}
-                        </h3>
-                        <p className=""> {value.description}</p>
-                      </div>
-                      <div className="flex flex-row p-2 justify-center items-center gap-2 h-full">
-                        <Link
-                          href={`/slide/${value.id}/edit`}
-                          className="border-1 p-1 hover:bg-gray-300 bg-yellow-300"
-                        >
-                          Edit
-                        </Link>
-                        <Link
-                          href={`/slide/${value.id}/preview`}
-                          className="border-1 p-1 hover:bg-gray-300 bg-blue-300"
-                        >
-                          Preview
-                        </Link>
-                        <DeleteSlideButton slideID={value.id} />
-                      </div>
-                    </div>
-
-                    <div className="flex p-1 p-2 h-full flex-col">
-                      <div className="border-1 text-left w-full p-1 max-h-1/2 overflow-y-auto truncate">
-                        {value.textdata ? value.textdata : "Empty Data"}
-                      </div>
-                      <div className="flex flex-row justify-between p-1">
-                        <p>
-                          {value.textdata
-                            ? value.textdata.length + " Letters"
-                            : "Empty Data"}
-                        </p>
-                        {value.created_at && (
-                          <p>Created At : {value.created_at.toISOString()}</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <SlideCard index={index} userSlideOBject={value} key={index} />
               );
             })
           ) : (
@@ -90,6 +48,6 @@ export default async function SlideManagerPage() {
           )}
         </Suspense>
       </div>
-    </>
+    </div>
   );
 }
