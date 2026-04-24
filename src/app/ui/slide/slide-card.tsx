@@ -7,15 +7,14 @@ const SlideCard: React.FC<SlideCardProp> = ({ index, userSlideOBject }) => {
     <>
       <div
         className="border-1 border-gray-500 bg-foreground h-full w-full text-background text-center overflow-y-hidden p-2 flex flex-col hover:bg-gray-100 shadow-xl hover:-translate-y-1 hover:border-white rounded-xl"
-        key={index}
       >
         <div className="flex flex-col h-full">
           <div className="2xl:grid 2xl:grid-cols-1 flex flex-col h-full">
             <div className="flex flex-col p-2 h-fit">
-              <h3 className="text-2xl font-bold truncate">
+              <h3 className="text-2xl font-bold truncate h-10">
                 {userSlideOBject.title}
               </h3>
-              <p className="">
+              <p className="h-5">
                 {userSlideOBject.description != ""
                   ? userSlideOBject.description
                   : "..."}
