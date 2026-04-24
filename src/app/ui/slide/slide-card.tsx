@@ -35,7 +35,7 @@ const SlideCard: React.FC<SlideCardProp> = ({ index, userSlideOBject }) => {
                   : "Empty Data"}
               </p>
               {userSlideOBject.created_at && (
-                <p>Created on {userSlideOBject.created_at.toDateString()}</p>
+                <p>Created on {new Date(userSlideOBject.created_at).toDateString()}</p>
               )}
             </div>
           </div>
