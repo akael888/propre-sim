@@ -149,3 +149,14 @@ export interface OptionThemeMenuProp {
 export interface SlideButtonsProp {
   slideID: string;
 }
+
+export interface SlideCardProp {
+  index: number;
+  userSlideOBject: {
+    id?: string;
+    title?: string;
+    description?: string;
+    textdata?: string;
+    created_at?: string;
+  };
+}

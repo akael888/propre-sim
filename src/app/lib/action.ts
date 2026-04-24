@@ -6,6 +6,7 @@ import { tempSlideData } from "./data";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcryptjs";
 import { auth, signIn, signOut } from "../../../auth";
+import { cache } from "react";
 
 // const baseUrl =
 //   process.env.NODE_ENV === "production"
@@ -154,11 +155,11 @@ export async function registerUser(formData: FormData) {
   }
 }
 
-export async function getSession() {
+export const getSession = cache(async () => {
   const session = await auth();
   if (!session?.user) return null;
   return session;
-}
+});
 
 export async function logoutUser() {
   await signOut({ redirectTo: "/login" });
