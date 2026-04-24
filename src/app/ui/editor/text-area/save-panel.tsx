@@ -36,7 +36,7 @@ function SavePanel({
             <>
               <div className="bg-foreground p-1">
                 <form
-                  action={slideID ? updateSlideData : submitSlideData}
+                  // action={slideID ? updateSlideData : submitSlideData}
                   className="gap-2 flex max-w-screen"
                 >
                   <input

@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import { TextAttribute } from "./type";
+import { createAuthClient } from "@neondatabase/neon-js/auth";
 
 export type textAlignTypes = "left" | "center" | "right" | "justify";
 
@@ -124,3 +125,11 @@ export const tempSlideData = [
     textdata: "Najdnjadnjasdnjasda\n\nfasfafa\n\n",
   },
 ];
+
+if (!process.env.NEXT_PUBLIC_NEON_AUTH_BASE_URL) {
+  throw new Error("NEXT_PUBLIC_NEON_AUTH_BASE_URL is not set");
+}
+
+// export const authClient = createAuthClient(
+//   process.env.NEXT_PUBLIC_NEON_AUTH_BASE_URL,
+// );
