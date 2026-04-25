@@ -9,7 +9,9 @@ export default function MainLayout({
   return (
     <>
       <Header />
-      {children}
+      <div className="w-full h-screen flex flex-col justify-center items-center text-background gap-3 bg-gradient-to-r from-cyan-500 to-blue-500">
+        {children}
+      </div>
       <Footer />
     </>
   );
