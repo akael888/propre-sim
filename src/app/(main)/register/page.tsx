@@ -6,19 +6,21 @@ import { useState } from "react";
 
 export default function RegisterPage() {
   const [registerMessage, setRegisterMessage] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    setIsLoading(true);
     const result = await registerUser(formData);
 
     if (result?.error) {
       setRegisterMessage(result.error);
+      setIsLoading(false);
       return;
     }
-
+    setIsLoading(false);
     setRegisterMessage("Registered succesfully! Redirecting...");
     setTimeout(() => router.push("/login"), 1500);
   };
@@ -58,10 +60,11 @@ export default function RegisterPage() {
             className="p-2"
           />
           <button
-            className="p-2 hover:bg-gray-900 hover:text-white rounded-sm"
+            className="p-2 hover:bg-gray-900 hover:text-white rounded-sm disabled:bg-black disabled:hover:text-white disabled:text-white"
+            disabled={isLoading}
             type="submit"
           >
-            Register
+            {isLoading ? "Registering.." : "Register"}
           </button>
         </form>
       </div>
