@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function RegisterPage() {
-  const [registerMessage, setRegisterMessage] = useState("Register here..");
+  const [registerMessage, setRegisterMessage] = useState("");
 
   const router = useRouter();
 
@@ -25,12 +25,13 @@ export default function RegisterPage() {
 
   return (
     <>
-      <div className="bg-foreground text-black flex flex-col justify-center items-center p-1 h-screen w-full text-center">
-        <div>Register: </div>
+      <div className="bg-foreground/80 p-1 xl:w-200 w-full h-100 flex flex-col justify-center items-center text-center gap-2 rounded-sm">
+        <p className="font-bold text-2xl">REGISTER</p>
+
         {registerMessage && <div>{registerMessage}</div>}
 
         <form
-          className="p-1 flex gap-1 [&>*]:border-1"
+          className="p-1 flex gap-1 [&>*]:border-1  xl:flex-row flex-col [&>*]:bg-foreground"
           // onSubmit={handleRegister}
           onSubmit={handleRegister}
         >
@@ -40,16 +41,24 @@ export default function RegisterPage() {
             name="name"
             minLength={3}
             maxLength={20}
+            className="p-2"
           />
-          <input required={true} placeholder="Enter Email" name="email" />
+          <input
+            required={true}
+            placeholder="Enter Email"
+            name="email"
+            type="email"
+            className="p-2"
+          />
           <input
             required={true}
             placeholder="Enter Password"
             name="password"
             type="password"
+            className="p-2"
           />
           <button
-            className="p-1 hover:bg-gray-900 hover:text-white"
+            className="p-2 hover:bg-gray-900 hover:text-white rounded-sm"
             type="submit"
           >
             Register
