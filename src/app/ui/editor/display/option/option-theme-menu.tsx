@@ -55,9 +55,11 @@ export default function OptionThemeMenu({
 
   return (
     <>
-      <div className="p-1">
-        <div>Theme:</div>
-        <div className="p-1 flex flex-col gap-2">
+      <div className="p-1  flex flex-col gap-2 h-full">
+        <div className="flex flex-row gap-2 h-full">
+          <div className=" flex items-center justify-center h-10">
+            <p className="font-bold text-md text-center ">Theme:</p>
+          </div>
           <div className="w-full flex">
             <select
               className="h-full"
@@ -74,34 +76,34 @@ export default function OptionThemeMenu({
               ))}
             </select>
           </div>
-
           <div className="gap-2 flex">
             <button
-              className="border-1 p-1 hover:bg-foreground bg-green-500"
+              className="border-1 p-1 hover:bg-foreground bg-green-500 h-10 w-20"
               onClick={() => loadSelectedTheme(selectedTheme.textAttribute)}
             >
-              Load Theme
+              ↓ Load
             </button>
             <button
-              className="border-1 p-1 hover:bg-foreground bg-red-500"
+              className="border-1 p-1 hover:bg-foreground bg-red-500 h-10 w-20"
               onClick={() => deleteSelectedTheme(selectedTheme)}
             >
-              Delete Theme
+              Delete
             </button>
             <button
-              className="border-1 p-1 hover:bg-foreground bg-orange-500"
+              className="border-1 p-1 hover:bg-foreground bg-orange-500 h-10 w-20"
               onClick={clearLocalTheme}
             >
               Delete Local Theme
             </button>
             <button
-              className="border-1 p-1 hover:bg-foreground bg-gray-500"
+              className="border-1 p-1 hover:bg-foreground bg-gray-500 h-10 w-20"
               onClick={resetThemeToDefault}
             >
               Reset Theme to Default
             </button>
           </div>
         </div>
+
         <div className="p-1 flex gap-2">
           <input
             type="text"

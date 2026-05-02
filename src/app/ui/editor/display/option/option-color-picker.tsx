@@ -36,16 +36,26 @@ export default function OptionColorPicker({
   };
 
   return (
-    <div className="flex flex-col items-center  text-center justify-center h-full p-1">
-      <h2 className="font-bold">
-        {attributeKey} {keyValue ? `(${keyValue})` : "  "}
-      </h2>
-      <input
-        type="color"
-        value={getCurrentValue()}
-        onChange={(e) => handleColorChange(e.currentTarget.value)}
-      />
-      <p>{getCurrentValue()}</p>
+    <div className="flex flex-row items-center  text-start justify-start h-full p-1 gap-2">
+      <div className="flex flex-col">
+        <h2 className="font-bold">
+          {attributeKey} {keyValue ? `(${keyValue})` : "  "}
+        </h2>
+        <p>{getCurrentValue()}</p>
+      </div>
+
+      <label className="relative w-10 h-10 cursor-pointer group">
+        <input
+          type="color"
+          value={getCurrentValue()}
+          onChange={(e) => handleColorChange(e.currentTarget.value)}
+          className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+        />
+        <span
+          className="block w-10 h-10 rounded-full border-1 border-background shadow-sm group-focus-within:ring-2 group-focus-within:ring-blue-400"
+          style={{ backgroundColor: getCurrentValue() }}
+        />
+      </label>
     </div>
   );
 }

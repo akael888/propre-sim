@@ -35,11 +35,11 @@ export default function OptionInputStepper({
   };
 
   return (
-    <div className="flex flex-col p-3 w-fit">
-      <div className="w-full p-2 h-fit flex items-center justify-center text-center font-bold">
-        {attributeKey} {keyValue ? `(${keyValue})` : ""} :
+    <div className="flex flex-row p-3 w-fit">
+      <div className="w-full p-2 h-fit flex items-center justify-start text-center font-bold">
+        {attributeKey} {keyValue ? `(${keyValue})` : ""}
       </div>
-      <div className="flex flex-row gap-1 items-center justify-center">
+      <div className="flex flex-row gap-1 items-center justify-start">
         <button
           className="w-[10%] bg-red-400 rounded-md hover:bg-red-500"
           onClick={() => updateValue(getCurrentValue() - intervalPerStep)}
