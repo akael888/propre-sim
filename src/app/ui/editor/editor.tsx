@@ -96,8 +96,8 @@ export default function Editor({
 
   if (!isLoaded) {
     return (
-      <div className="flex flex-row justify-center items-center">
-        Loading...
+      <div className="flex flex-row justify-center items-center bg-foreground w-screen h-screen">
+        <p className="text-center text-background font-black animate-pulse"> Loading...</p>
       </div>
     );
   }
@@ -105,14 +105,6 @@ export default function Editor({
   return (
     <>
       <div className="min-w-screen min-h-screen md:grid-rows-none md:max-h-full max-h-screen bg-foreground grid md:grid-cols-2 gap-2 text-background grid-rows-2">
-        {/* <SavePanel
-          slideID={slideID}
-          textAreaData={textAreaData}
-          slideData={slideData}
-          slideDataStatic={slideDataStatic}
-          handleSlideDataObjectChanges={handleSlideDataObjectChanges}
-          isTextAreaNotChanged={isTextAreaNotChanged}
-        /> */}
         <TextAreaSection
           textData={textAreaData}
           textObject={textObject}
