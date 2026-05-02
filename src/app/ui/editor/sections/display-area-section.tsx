@@ -46,21 +46,22 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
 
   return (
     <>
-      <div className="border-1 w-full md:max-h-screen bg-gray-500 justify-center flex  md:order-none order-1 max-h-full relative">
-        <div className="flex-1 overflow-y-auto flex h-full justify-center">
+      <div className="border-1 w-full md:max-h-screen bg-gray-500 justify-center flex flex-row  md:order-none order-1 max-h-full ">
+        <div className="flex-1 overflow-y-auto flex flex-row h-full justify-center">
           <DisplayPanel
             slideObject={slideObject}
             textAttribute={displayedTextAttribute}
             textAreaRef={textAreaRef}
-          />
+          />{" "}
         </div>
-        <DisplayOptions
-          handleTextAttributeChanges={handleTextAttributeChanges}
-          handleTextAttributeObjectChanges={handleTextAttributeObjectChanges}
-          textAttribute={displayedTextAttribute}
-        />
+
         <Help />
       </div>
+      <DisplayOptions
+        handleTextAttributeChanges={handleTextAttributeChanges}
+        handleTextAttributeObjectChanges={handleTextAttributeObjectChanges}
+        textAttribute={displayedTextAttribute}
+      />
     </>
   );
 };
