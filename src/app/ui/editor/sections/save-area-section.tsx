@@ -133,6 +133,12 @@ function SaveSection({
                   className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center justify-center items-center flex rounded-md hover:font-bold"
                 >
                   Register
+                </Link>{" "}
+                <Link
+                  href="/"
+                  className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center justify-center items-center flex rounded-md hover:font-bold"
+                >
+                  Home
                 </Link>
               </div>
             </div>
