@@ -26,10 +26,14 @@ function TextAlign({
           className="absolute inset-0 hidden"
         />
         <div
-          className="border-1 h-fit w-fit p-1 bg-white hover:bg-gray-200"
+          className="border-1 h-fit w-fit p-1 bg-white hover:bg-gray-200 rounded-sm"
           style={{
             backgroundColor:
               textAttribute.textAlign == direction ? "grey" : "white",
+            boxShadow:
+              textAttribute.textAlign == direction
+                ? "inset 0 0 5px rgba(0,0,0,0.5)"
+                : " 0 0 5px rgba(0,0,0,0.5)",
           }}
         >
           <Image

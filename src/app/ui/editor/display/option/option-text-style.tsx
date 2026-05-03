@@ -28,11 +28,14 @@ function TextStyle({
           className="absolute inset-0 hidden"
         />
         <div
-          className="border-1 h-fit w-fit p-1 bg-white hover:bg-gray-200"
+          className="border-1 h-fit w-fit p-1 bg-white hover:bg-gray-200 rounded-sm"
           style={{
             backgroundColor: textAttribute.textStyle[styleAttribute]
               ? "grey"
               : "white",
+            boxShadow: (textAttribute.textStyle[styleAttribute] as boolean)
+              ? "inset 0 0 5px rgba(0,0,0,0.5)"
+              : " 0 0 5px rgba(0,0,0,0.5)",
           }}
         >
           <Image
