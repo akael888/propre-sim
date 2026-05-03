@@ -7,6 +7,7 @@ import OptionColorPicker from "./option/option-color-picker";
 import OptionThemeMenu from "./option/option-theme-menu";
 import Image from "next/image";
 import TextAlign from "./option/option-text-align";
+import TextStyle from "./option/option-text-style";
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   textAttribute,
@@ -69,62 +70,28 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     handleTextAttributeChanges={handleTextAttributeChanges}
                   />
                   <div className="flex flex-col gap-3 p-1">
-                    <div>
-                      Text Style: {textAttribute.textFont.style.fontWeight}
-                    </div>
-                    <div className="">
-                      <div>
-                        Bold
-                        <input
-                          type="checkbox"
-                          checked={textAttribute.textStyle.bold}
-                          onChange={(e) =>
-                            handleTextAttributeChanges("textStyle", {
-                              ...textAttribute.textStyle,
-                              bold: e.target.checked,
-                            })
-                          }
-                        />
-                      </div>
-                      <div>
-                        Italic
-                        <input
-                          type="checkbox"
-                          checked={textAttribute.textStyle.italic}
-                          onChange={(e) =>
-                            handleTextAttributeChanges("textStyle", {
-                              ...textAttribute.textStyle,
-                              italic: e.target.checked,
-                            })
-                          }
-                        />
-                      </div>
-                      <div>
-                        Underlined
-                        <input
-                          type="checkbox"
-                          checked={textAttribute.textStyle.underlined}
-                          onChange={(e) =>
-                            handleTextAttributeChanges("textStyle", {
-                              ...textAttribute.textStyle,
-                              underlined: e.target.checked,
-                            })
-                          }
-                        />
-                      </div>
-                      <div>
-                        Strikethrough
-                        <input
-                          type="checkbox"
-                          checked={textAttribute.textStyle.strikethrough}
-                          onChange={(e) =>
-                            handleTextAttributeChanges("textStyle", {
-                              ...textAttribute.textStyle,
-                              strikethrough: e.target.checked,
-                            })
-                          }
-                        />
-                      </div>
+                    <h3 className="font-bold text-sm text-center">Style</h3>
+                    <div className="flex flex-row gap-1 h-fit justify-center items-center">
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="bold"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="italic"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="underlined"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="strikethrough"
+                      />
                     </div>
                   </div>
                   <OptionInputStepper
