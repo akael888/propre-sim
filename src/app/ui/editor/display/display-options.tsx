@@ -5,6 +5,8 @@ import TextFontsSelection from "./option/text-fonts-selection";
 import OptionInputStepper from "./option/option-input-stepper";
 import OptionColorPicker from "./option/option-color-picker";
 import OptionThemeMenu from "./option/option-theme-menu";
+import Image from "next/image";
+import TextAlign from "./option/option-text-align";
 
 const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   textAttribute,
@@ -37,20 +39,30 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
               <div className="border-1 p-1">
                 <h2 className="font-bold text-md">Text Attributes</h2>
                 <div className=" grid grid-cols-2 w-full justify-start items-start gap-2">
-                  <div>
-                    <div>Text Alignment:</div>
-                    <select
-                      value={textAttribute.textAlign}
-                      onChange={(e) => {
-                        const value = e.target.value as textAlignTypes;
-                        handleTextAttributeChanges("textAlign", value);
-                      }}
-                    >
-                      <option value={"left"}>left</option>
-                      <option value={"center"}>center</option>
-                      <option value={"right"}>right</option>
-                      <option value={"justify"}>justify</option>
-                    </select>
+                  <div className="flex flex-col">
+                    <h3 className="font-bold text-sm text-center">Alignment</h3>
+                    <div className="flex flex-row gap-1 h-fit justify-center items-center">
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="left"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="center"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="right"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="justify"
+                      />
+                    </div>
                   </div>
                   <TextFontsSelection
                     textAttribute={textAttribute}
