@@ -36,9 +36,9 @@ export default function OptionColorPicker({
   };
 
   return (
-    <div className="flex flex-row items-center  text-start justify-start h-full p-1 gap-2">
+    <div className="flex 2xl:flex-row flex-col items-center  text-start justify-center h-full p-1 gap-2">
       <div className="flex flex-col">
-        <h2 className="font-bold">
+        <h2 className="font-bold text-sm">
           {attributeKey} {keyValue ? `(${keyValue})` : "  "}
         </h2>
         <p>{getCurrentValue()}</p>
