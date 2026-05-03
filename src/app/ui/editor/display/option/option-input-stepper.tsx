@@ -9,7 +9,7 @@ export default function OptionInputStepper({
 }: OptionInputStepperProp) {
   const currentObject = textAttribute[attributeKey];
 
-  const getCurrentValue = (): number => {
+  const getCurrentValue = (): number | string => {
     if (
       typeof currentObject === "object" &&
       currentObject !== null &&
@@ -18,6 +18,9 @@ export default function OptionInputStepper({
       const obj = currentObject as Record<string, unknown>;
       return typeof obj[keyValue] === "number" ? (obj[keyValue] as number) : 0;
     }
+
+    if (currentObject == "") return "";
+
     return Number(currentObject) || 0;
   };
 
@@ -43,8 +46,8 @@ export default function OptionInputStepper({
       </div>
       <div className="flex flex-row gap-1 items-center justify-center w-fit">
         <button
-          className="w-5 h-8 bg-red-400 rounded-md hover:bg-red-500"
-          onClick={() => updateValue(getCurrentValue() - intervalPerStep)}
+          className="w-5 h-8 bg-red-400/50 rounded-md hover:bg-red-500 hover:-translate-y-0.5 box-shadow shadow-xl"
+          onClick={() => updateValue(Number(getCurrentValue()) - intervalPerStep)}
         >
           -
         </button>
@@ -63,6 +66,11 @@ export default function OptionInputStepper({
                   Number(e.currentTarget.value),
                 );
               }
+            } else {
+              handleTextAttributeChanges(
+                attributeKey,
+                Number(e.currentTarget.value),
+              );
             }
           }}
           type="number"
@@ -70,8 +78,8 @@ export default function OptionInputStepper({
           placeholder="Text Size"
         />
         <button
-          className="w-5 h-8 bg-green-400 rounded-md hover:bg-green-500"
-          onClick={() => updateValue(getCurrentValue() + intervalPerStep)}
+          className="w-5 h-8 bg-green-400/50 rounded-md hover:bg-green-500 hover:-translate-y-0.5 box-shadow shadow-xl"
+          onClick={() => updateValue(Number(getCurrentValue()) + intervalPerStep)}
         >
           +
         </button>
