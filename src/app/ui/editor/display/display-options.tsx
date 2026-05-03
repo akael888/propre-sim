@@ -24,7 +24,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
   return (
     <>
-      <div className="w-full bottom-0 h-full flex flex-col justify-center items-start">
+      <div className="w-full bottom-0 h-full flex flex-col justify-evenly items-start">
         <h1 className="p-1 font-bold text-xl">OPTIONS</h1>
         <div className=" w-full border-1 bottom-0 h-full overflow-y-hidden bg-gray-300 p-1">
           <div>
@@ -37,70 +37,94 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
           </div>
           <div className=" flex flex-col w-full overflow-y-auto">
             <div className="flex md:flex-col flex-col justify-center w-full h-full p-1 gap-2">
-              <div className="border-1 p-1">
-                <h2 className="font-bold text-md">Text Attributes</h2>
-                <div className=" grid grid-cols-2 w-full justify-start items-start gap-2">
-                  <div className="flex flex-col">
-                    <h3 className="font-bold text-sm text-center">Alignment</h3>
-                    <div className="flex flex-row gap-1 h-fit justify-center items-center">
-                      <TextAlign
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        direction="left"
-                      />
-                      <TextAlign
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        direction="center"
-                      />
-                      <TextAlign
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        direction="right"
-                      />
-                      <TextAlign
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        direction="justify"
-                      />
+              <div className=" p-1">
+                <h2 className="font-bold text-md w-full p-1 border-b-1">
+                  Text Attributes
+                </h2>
+                <div className=" grid grid-cols-2 w-full justify-start items-start gap-2 p-2">
+                  <div className="flex flex-row justify-evenly col-span-full">
+                    <div className="flex flex-col">
+                      <h3 className="font-bold text-sm text-center">
+                        Alignment
+                      </h3>
+                      <div className="flex flex-row gap-1 h-fit justify-center items-center">
+                        <TextAlign
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          direction="left"
+                        />
+                        <TextAlign
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          direction="center"
+                        />
+                        <TextAlign
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          direction="right"
+                        />
+                        <TextAlign
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          direction="justify"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col ">
+                      <h3 className="font-bold text-sm text-center">Style</h3>
+                      <div className="flex flex-row gap-1 h-fit justify-center items-center">
+                        <TextStyle
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          styleAttribute="bold"
+                        />
+                        <TextStyle
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          styleAttribute="italic"
+                        />
+                        <TextStyle
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          styleAttribute="underlined"
+                        />
+                        <TextStyle
+                          textAttribute={textAttribute}
+                          handleTextAttributeChanges={
+                            handleTextAttributeChanges
+                          }
+                          styleAttribute="strikethrough"
+                        />
+                      </div>
                     </div>
                   </div>
+
                   <TextFontsSelection
                     textAttribute={textAttribute}
                     handleTextAttributeChanges={handleTextAttributeChanges}
                   />
-                  <div className="flex flex-col gap-3 p-1">
-                    <h3 className="font-bold text-sm text-center">Style</h3>
-                    <div className="flex flex-row gap-1 h-fit justify-center items-center">
-                      <TextStyle
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        styleAttribute="bold"
-                      />
-                      <TextStyle
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        styleAttribute="italic"
-                      />
-                      <TextStyle
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        styleAttribute="underlined"
-                      />
-                      <TextStyle
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        styleAttribute="strikethrough"
-                      />
-                    </div>
-                  </div>
+
                   <OptionInputStepper
                     textAttribute={textAttribute}
                     handleTextAttributeChanges={handleTextAttributeChanges}
                     attributeKey="textSize"
                     intervalPerStep={0.1}
                   />
-                  <div className="flex flex-row gap-2 justify-center items-center h-full w-full">
+                  <div className="flex flex-row gap-2 justify-evenly items-center h-full w-full col-span-2">
                     <OptionColorPicker
                       textAttribute={textAttribute}
                       handleTextAttributeChanges={handleTextAttributeChanges}
@@ -129,9 +153,11 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                 </div>
               </div>
 
-              <div className="flex flex-col justify-center items-center gap-2">
-                <div className="justify-start w-full h-10 flex flex-row gap-2 p-2">
-                  <h2 className="font-bold text-md">Stroke</h2>
+              <div className="flex flex-col justify-center items-center p-1">
+                <div className="justify-start w-full h-full flex flex-row  items-center border-b-1">
+                  <h2 className="font-bold text-md  w-full p-1 text-start  ">
+                    Stroke
+                  </h2>
                   <input
                     type="checkbox"
                     checked={textAttribute.textStroke.isOn}
@@ -146,7 +172,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                 {textAttribute.textStroke.isOn ? (
                   <>
-                    <div className="grid grid-cols-2 justify-between items-center border-1 w-full gap-2">
+                    <div className="grid grid-cols-2 justify-evenly items-center  w-full gap-2">
                       <OptionInputStepper
                         textAttribute={textAttribute}
                         handleTextAttributeChanges={handleTextAttributeChanges}
@@ -164,9 +190,11 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                   </>
                 ) : null}
               </div>
-              <div className="flex flex-col justify-center items-center gap-2">
-                <div className="justify-start w-full h-10 flex flex-row gap-2 p-2">
-                  <h2 className="font-bold text-md">Shadow</h2>
+              <div className="flex flex-col justify-evenly items-center p-1">
+                <div className="justify-start w-full h-full flex flex-row  items-center border-b-1">
+                  <h2 className="font-bold text-md  w-full p-1 text-start  ">
+                    Shadow
+                  </h2>
                   <input
                     type="checkbox"
                     checked={textAttribute.textShadow.isOn}
@@ -181,7 +209,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                 {textAttribute.textShadow.isOn ? (
                   <>
-                    <div className="md:grid md:grid-cols-2 flex flex-col justify-between items-center md:w-full w-screen p-2 border-1">
+                    <div className="md:grid md:grid-cols-2 flex flex-col justify-between items-center md:w-full w-screen p-2 ">
                       <OptionInputStepper
                         textAttribute={textAttribute}
                         handleTextAttributeChanges={handleTextAttributeChanges}
