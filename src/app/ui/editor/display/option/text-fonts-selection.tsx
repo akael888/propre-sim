@@ -8,7 +8,7 @@ export default function TextFontsSelection({
   const fontObjects = defaultFontCollection;
 
   return (
-    <div className="flex flex-row gap-2 justify-center items-center">
+    <div className="flex flex-row gap-2 justify-center items-center h-full">
       <h2 className="text-sm font-bold">Font</h2>
       <select
         value={textAttribute.textFont.className}

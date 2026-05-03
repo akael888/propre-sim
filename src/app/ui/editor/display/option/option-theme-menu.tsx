@@ -62,7 +62,7 @@ export default function OptionThemeMenu({
           </div>
           <div className="w-full flex">
             <select
-              className="h-full"
+              className="h-full bg-white"
               onChange={(e) => {
                 const themeID = Number(e.currentTarget.value);
                 setSelectedTheme(themeCollection[themeID]);
@@ -78,28 +78,28 @@ export default function OptionThemeMenu({
           </div>
           <div className="gap-2 flex">
             <button
-              className="border-1 p-1 hover:bg-foreground bg-green-500 h-10 w-20"
+              className="border-1 p-1 hover:bg-foreground bg-green-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={() => loadSelectedTheme(selectedTheme.textAttribute)}
             >
               ↓ Load
             </button>
             <button
-              className="border-1 p-1 hover:bg-foreground bg-red-500 h-10 w-20"
+              className="border-1 p-1 hover:bg-foreground bg-red-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={() => deleteSelectedTheme(selectedTheme)}
             >
               Delete
             </button>
             <button
-              className="border-1 p-1 hover:bg-foreground bg-orange-500 h-10 w-20"
+              className="border-1 p-1 hover:bg-foreground bg-orange-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={clearLocalTheme}
             >
-              Delete Local Theme
+              Delete Local
             </button>
             <button
-              className="border-1 p-1 hover:bg-foreground bg-gray-500 h-10 w-20"
+              className="border-1 p-1 hover:bg-foreground bg-gray-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={resetThemeToDefault}
             >
-              Reset Theme to Default
+              Reset
             </button>
           </div>
         </div>
