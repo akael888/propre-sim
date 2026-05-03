@@ -16,12 +16,13 @@ export default function OptionInputStepper({
       keyValue
     ) {
       const obj = currentObject as Record<string, unknown>;
+      if (obj[keyValue] == "") return "";
       return typeof obj[keyValue] === "number" ? (obj[keyValue] as number) : 0;
     }
 
     if (currentObject == "") return "";
 
-    return Number(currentObject) || 0;
+    return Number(currentObject) || "";
   };
 
   const updateValue = (newValue: number) => {
@@ -47,7 +48,9 @@ export default function OptionInputStepper({
       <div className="flex flex-row gap-1 items-center justify-center w-fit">
         <button
           className="w-5 h-8 bg-red-400/50 rounded-md hover:bg-red-500 hover:-translate-y-0.5 box-shadow shadow-xl"
-          onClick={() => updateValue(Number(getCurrentValue()) - intervalPerStep)}
+          onClick={() =>
+            updateValue(Number(getCurrentValue()) - intervalPerStep)
+          }
         >
           -
         </button>
@@ -79,7 +82,9 @@ export default function OptionInputStepper({
         />
         <button
           className="w-5 h-8 bg-green-400/50 rounded-md hover:bg-green-500 hover:-translate-y-0.5 box-shadow shadow-xl"
-          onClick={() => updateValue(Number(getCurrentValue()) + intervalPerStep)}
+          onClick={() =>
+            updateValue(Number(getCurrentValue()) + intervalPerStep)
+          }
         >
           +
         </button>
