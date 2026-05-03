@@ -43,113 +43,92 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                 </h2>
                 <div className=" grid grid-cols-2 w-full justify-start items-start gap-2 p-2">
                   <div className="flex flex-row justify-evenly col-span-full">
-                    <div className="flex flex-col">
-                      <h3 className="font-bold text-sm text-center">
-                        Alignment
-                      </h3>
-                      <div className="flex flex-row gap-1 h-fit justify-center items-center">
-                        <TextAlign
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          direction="left"
-                        />
-                        <TextAlign
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          direction="center"
-                        />
-                        <TextAlign
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          direction="right"
-                        />
-                        <TextAlign
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          direction="justify"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex flex-col ">
-                      <h3 className="font-bold text-sm text-center">Style</h3>
-                      <div className="flex flex-row gap-1 h-fit justify-center items-center">
-                        <TextStyle
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          styleAttribute="bold"
-                        />
-                        <TextStyle
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          styleAttribute="italic"
-                        />
-                        <TextStyle
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          styleAttribute="underlined"
-                        />
-                        <TextStyle
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          styleAttribute="strikethrough"
-                        />
-                      </div>
+                    <div className="flex flex-row gap-1 h-fit justify-center items-center">
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="left"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="center"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="right"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="justify"
+                      />
+                      <div className="w-1 h-10 bg-black/20 rounded-sm" />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="bold"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="italic"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="underlined"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="strikethrough"
+                      />{" "}
+                      <div className="w-1 h-10 bg-black/20 rounded-sm" />
+                      <TextFontsSelection
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                      />
                     </div>
                   </div>
-
-                  <TextFontsSelection
-                    textAttribute={textAttribute}
-                    handleTextAttributeChanges={handleTextAttributeChanges}
-                  />
-
-                  <OptionInputStepper
-                    textAttribute={textAttribute}
-                    handleTextAttributeChanges={handleTextAttributeChanges}
-                    attributeKey="textSize"
-                    intervalPerStep={0.1}
-                  />
-                  <div className="flex flex-row gap-2 justify-evenly items-center h-full w-full col-span-2">
-                    <OptionColorPicker
+                  <div className="flex flex-row w-full justify-start col-span-full">
+                    <OptionInputStepper
                       textAttribute={textAttribute}
                       handleTextAttributeChanges={handleTextAttributeChanges}
-                      attributeKey="textColor"
+                      attributeKey="textSize"
+                      intervalPerStep={0.1}
                     />
-                    <OptionColorPicker
-                      textAttribute={textAttribute}
-                      handleTextAttributeChanges={handleTextAttributeChanges}
-                      attributeKey="textSlideColor"
-                    />
+                  </div>{" "}
+                  <div className="flex flex-row justify-evenly col-span-full">
+                    <div className="flex flex-row gap-1 h-fit justify-evenly items-center">
+                      <OptionInputStepper
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        attributeKey="textContainer"
+                        keyValue="width"
+                        intervalPerStep={1}
+                      />
+                      <OptionInputStepper
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        attributeKey="textContainer"
+                        keyValue="height"
+                        intervalPerStep={1}
+                      />
+                    </div>
                   </div>
-                  <OptionInputStepper
+                  <OptionColorPicker
                     textAttribute={textAttribute}
                     handleTextAttributeChanges={handleTextAttributeChanges}
-                    attributeKey="textContainer"
-                    keyValue="width"
-                    intervalPerStep={1}
+                    attributeKey="textColor"
                   />
-                  <OptionInputStepper
+                  <OptionColorPicker
                     textAttribute={textAttribute}
                     handleTextAttributeChanges={handleTextAttributeChanges}
-                    attributeKey="textContainer"
-                    keyValue="height"
-                    intervalPerStep={1}
+                    attributeKey="textSlideColor"
                   />
+                  <div className="flex flex-row gap-2 justify-evenly items-center h-full w-full col-span-2"></div>
                 </div>
               </div>
 

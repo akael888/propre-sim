@@ -39,7 +39,7 @@ export default function OptionInputStepper({
   };
 
   return (
-    <div className="flex 2xl:flex-row flex-col p-3 w-65 justify-center items-center h-full">
+    <div className="flex 2xl:flex-row flex-col p-3 w-30 2xl:w-fit justify-center items-center h-full">
       <div className=" p-2 h-fit flex items-center justify-start  font-bold">
         <h2 className="text-center text-sm">
           {attributeKey} {keyValue ? `(${keyValue})` : ""}
@@ -77,7 +77,7 @@ export default function OptionInputStepper({
             }
           }}
           type="number"
-          className="border-1 w-15 p-1 text-center bg-white rounded-md"
+          className="border-1 w-15 p-1 text-center  rounded-md"
           placeholder="Text Size"
         />
         <button
