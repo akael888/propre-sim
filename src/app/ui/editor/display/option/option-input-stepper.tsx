@@ -6,6 +6,7 @@ export default function OptionInputStepper({
   attributeKey,
   keyValue,
   intervalPerStep,
+  showText = true,
 }: OptionInputStepperProp) {
   const currentObject = textAttribute[attributeKey];
 
@@ -40,14 +41,19 @@ export default function OptionInputStepper({
 
   return (
     <div className="flex 2xl:flex-row flex-col p-3 w-30 2xl:w-fit justify-center items-center h-full">
-      <div className=" p-2 h-fit flex items-center justify-start  font-bold">
-        <h2 className="text-center text-sm">
-          {attributeKey} {keyValue ? `(${keyValue})` : ""}
-        </h2>
-      </div>
+      {showText && (
+        <>
+          <div className=" p-2 h-fit flex items-center justify-start  font-bold">
+            <h2 className="text-center text-sm">
+              {attributeKey} {keyValue ? `(${keyValue})` : ""}
+            </h2>
+          </div>
+        </>
+      )}
+
       <div className="flex flex-row gap-1 items-center justify-center w-fit">
         <button
-          className="w-5 h-8 bg-red-400/50 rounded-md hover:bg-red-500 hover:-translate-y-0.5 box-shadow shadow-xl"
+          className="w-5 h-8  rounded-md hover:bg-gray-500"
           onClick={() =>
             updateValue(Number(getCurrentValue()) - intervalPerStep)
           }
@@ -81,7 +87,7 @@ export default function OptionInputStepper({
           placeholder="Text Size"
         />
         <button
-          className="w-5 h-8 bg-green-400/50 rounded-md hover:bg-green-500 hover:-translate-y-0.5 box-shadow shadow-xl"
+          className="w-5 h-8  rounded-md hover:bg-gray-500"
           onClick={() =>
             updateValue(Number(getCurrentValue()) + intervalPerStep)
           }

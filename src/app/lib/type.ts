@@ -130,6 +130,7 @@ export interface OptionInputStepperProp {
   attributeKey: keyof TextAttribute;
   keyValue?: string;
   intervalPerStep: number;
+  showText?: boolean;
 }
 export interface OptionColorPickerProp {
   textAttribute: TextAttribute;
