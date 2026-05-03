@@ -100,7 +100,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                     attributeKey="textSize"
                     intervalPerStep={0.1}
                   />
-                  <div className="flex flex-row gap-2 justify-center">
+                  <div className="flex flex-row gap-2 justify-center items-center h-full w-full">
                     <OptionColorPicker
                       textAttribute={textAttribute}
                       handleTextAttributeChanges={handleTextAttributeChanges}
@@ -146,7 +146,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                 {textAttribute.textStroke.isOn ? (
                   <>
-                    <div className="flex flex-row justify-center items-center border-1">
+                    <div className="grid grid-cols-2 justify-between items-center border-1 w-full gap-2">
                       <OptionInputStepper
                         textAttribute={textAttribute}
                         handleTextAttributeChanges={handleTextAttributeChanges}
@@ -181,7 +181,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
                 {textAttribute.textShadow.isOn ? (
                   <>
-                    <div className="md:grid md:grid-cols-2 flex flex-col justify-center items-center md:w-full w-screen p-2 border-1">
+                    <div className="md:grid md:grid-cols-2 flex flex-col justify-between items-center md:w-full w-screen p-2 border-1">
                       <OptionInputStepper
                         textAttribute={textAttribute}
                         handleTextAttributeChanges={handleTextAttributeChanges}
