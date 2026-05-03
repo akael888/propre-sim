@@ -52,7 +52,7 @@ export default function OptionColorPicker({
           className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
         />
         <span
-          className="block w-10 h-10 rounded-full border-1 border-background shadow-sm group-focus-within:ring-2 group-focus-within:ring-blue-400"
+          className="block w-10 h-10 rounded-sm border-1 border-background shadow-sm group-focus-within:ring-2 group-focus-within:ring-blue-400"
           style={{ backgroundColor: getCurrentValue() }}
         />
       </label>

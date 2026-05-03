@@ -8,7 +8,7 @@ export default function TextFontsSelection({
   const fontObjects = defaultFontCollection;
 
   return (
-    <div className="flex flex-row gap-2 justify-center items-center h-full">
+    <div className="flex flex-row gap-2 justify-center items-center w-75 h-full">
       <select
         value={textAttribute.textFont.className}
         onChange={(e) => {
@@ -21,7 +21,7 @@ export default function TextFontsSelection({
             handleTextAttributeChanges("textFont", selectedFontObject.fontData);
           }
         }}
-        className={`${textAttribute.textFont.className} rounded-sm h-full w-30 truncate`}
+        className={`${textAttribute.textFont.className} rounded-sm h-full w-full truncate`}
       >
         {fontObjects?.map((object) => (
           <option
