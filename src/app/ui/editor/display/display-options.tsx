@@ -5,7 +5,6 @@ import TextFontsSelection from "./option/text-fonts-selection";
 import OptionInputStepper from "./option/option-input-stepper";
 import OptionColorPicker from "./option/option-color-picker";
 import OptionThemeMenu from "./option/option-theme-menu";
-import Image from "next/image";
 import TextAlign from "./option/option-text-align";
 import TextStyle from "./option/option-text-style";
 
@@ -24,7 +23,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
 
   return (
     <>
-      <div className="w-full bottom-0 h-full flex flex-col justify-evenly items-start">
+      <div className="w-full bottom-0 h-full hidden flex-col justify-evenly items-start md:flex">
         <h1 className="p-1 font-bold text-xl">OPTIONS</h1>
         <div className=" w-full border-1 bottom-0 h-full overflow-y-hidden bg-gray-300 p-1">
           <div>
