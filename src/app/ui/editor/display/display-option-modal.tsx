@@ -17,7 +17,7 @@ const OptionModal: React.FC<DisplayOptionsProp> = ({
       <div className="w-full h-150  z-1001 bg-foreground fixed flex rounded-sm flex-col bottom-0 md:hidden">
         <h2 className="font-bold text-2xl w-full text-center p-1">Option</h2>{" "}
         <div className=" w-full border-1 bottom-0 h-full overflow-y-scroll bg-gray-300 p-1">
-          <div>
+          <div className="w-full flex justify-center">
             <OptionThemeMenu
               textAttribute={textAttribute}
               handleTextAttributeObjectChanges={

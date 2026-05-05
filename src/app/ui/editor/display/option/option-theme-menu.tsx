@@ -56,8 +56,8 @@ export default function OptionThemeMenu({
   return (
     <>
       <div className="p-1  flex flex-col gap-2 h-full">
-        <div className="flex flex-col 2xl:flex-row gap-2 h-full">
-          <div className=" flex flex-row">
+        <div className="flex flex-col 2xl:flex-row gap-2 h-full ">
+          <div className=" flex flex-row justify-center">
             {" "}
             <div className=" flex items-center justify-center h-10">
               <p className="font-bold text-md text-center ">Theme:</p>
