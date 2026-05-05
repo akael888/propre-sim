@@ -47,7 +47,7 @@ function SaveSection({
                 placeholder="Enter Slide Title"
                 maxLength={30}
                 minLength={3}
-                className="w-full font-bold text-center hover:bg-background/30"
+                className="w-full font-bold text-center hover:bg-background/30 underline"
                 defaultValue={slideID ? slideDataStatic.title : ""}
                 onChange={
                   slideID
@@ -90,7 +90,7 @@ function SaveSection({
             </div>
             <div className="flex flex-row w-full gap-2">
               <button
-                className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-background disabled:text-foreground w-full rounded-md hover:font-bold"
+                className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-gray-500 disabled:shadow-inner disabled:shadow-black/80 disabled:text-gray-800 w-full rounded-md enabled:hover:font-bold box-shadow shadow-sm"
                 type="submit"
                 disabled={slideID ? isTextAreaNotChanged : false}
               >
@@ -133,6 +133,12 @@ function SaveSection({
                   className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center justify-center items-center flex rounded-md hover:font-bold"
                 >
                   Register
+                </Link>{" "}
+                <Link
+                  href="/"
+                  className="border-1 p-1 bg-foreground text-background hover:bg-blue-700 w-full text-center justify-center items-center flex rounded-md hover:font-bold"
+                >
+                  Home
                 </Link>
               </div>
             </div>

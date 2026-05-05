@@ -1,32 +1,23 @@
-import { DisplayOptionsProp } from "@/app/lib/type";
-import { useState } from "react";
-import { defaultTextAttributeData, textAlignTypes } from "../../../lib/data";
 import TextFontsSelection from "./option/text-fonts-selection";
 import OptionInputStepper from "./option/option-input-stepper";
 import OptionColorPicker from "./option/option-color-picker";
 import OptionThemeMenu from "./option/option-theme-menu";
 import TextAlign from "./option/option-text-align";
 import TextStyle from "./option/option-text-style";
+import { DisplayOptionsProp } from "@/app/lib/type";
 
-const DisplayOptions: React.FC<DisplayOptionsProp> = ({
+const OptionModal: React.FC<DisplayOptionsProp> = ({
   textAttribute,
   handleTextAttributeChanges,
   handleTextAttributeObjectChanges,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const resetDisplayOption = () => {
-    handleTextAttributeObjectChanges(defaultTextAttributeData);
-    localStorage.removeItem("TEXT_ATTRIBUTE_DATA");
-    alert("Options Successfully Reset");
-  };
-
   return (
     <>
-      <div className="w-full bottom-0 h-full hidden flex-col justify-evenly items-start md:flex">
-        <h1 className="p-1 font-bold text-xl">OPTIONS</h1>
-        <div className=" w-full border-1 bottom-0 h-full overflow-y-hidden bg-gray-300 p-1">
-          <div>
+      {" "}
+      <div className="w-full h-150  z-1001 bg-foreground fixed flex rounded-sm flex-col bottom-0 md:hidden">
+        <h2 className="font-bold text-2xl w-full text-center p-1">Option</h2>{" "}
+        <div className=" w-full border-1 bottom-0 h-full overflow-y-scroll bg-gray-300 p-1">
+          <div className="w-full flex justify-center">
             <OptionThemeMenu
               textAttribute={textAttribute}
               handleTextAttributeObjectChanges={
@@ -254,4 +245,4 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
   );
 };
 
-export default DisplayOptions;
+export default OptionModal;
