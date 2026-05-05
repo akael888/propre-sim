@@ -65,17 +65,9 @@ const TextArea: React.FC<TextAreaProps> = ({
 
   return (
     <>
-      <div className="w-full h-full overflow-hidden">
-        {/* <div
-          className=" w-full h-[50%] bg-black top-100 text-white [&>div]:bg-pink-300 overflow-y-hidden"
-          contentEditable
-          onInput={(e) => convertInnerHTMLToText(e.currentTarget.innerHTML)}
-          onBeforeInput={(e) => {
-            insertDataBlock(e);
-          }}
-        ></div> */}
+      <div className="w-full h-full overflow-hidden ">
         <textarea
-          className="p-2 w-full h-full border-1 bg-gray-400 resize-none"
+          className="p-2 w-full h-full border-1 bg-gray-300 resize-none shadow-inner shadow-background/50"
           value={textValue}
           onChange={handleTextValueChanges}
           placeholder="Type here.."

@@ -6,19 +6,24 @@ export default function OptionInputStepper({
   attributeKey,
   keyValue,
   intervalPerStep,
+  showText = true,
 }: OptionInputStepperProp) {
   const currentObject = textAttribute[attributeKey];
 
-  const getCurrentValue = (): number => {
+  const getCurrentValue = (): number | string => {
     if (
       typeof currentObject === "object" &&
       currentObject !== null &&
       keyValue
     ) {
       const obj = currentObject as Record<string, unknown>;
+      if (obj[keyValue] == "") return "";
       return typeof obj[keyValue] === "number" ? (obj[keyValue] as number) : 0;
     }
-    return Number(currentObject) || 0;
+
+    if (currentObject == "") return "";
+
+    return Number(currentObject) || "";
   };
 
   const updateValue = (newValue: number) => {
@@ -35,14 +40,23 @@ export default function OptionInputStepper({
   };
 
   return (
-    <div className="flex flex-col p-3 w-fit">
-      <div className="w-full p-2 h-fit flex items-center justify-center text-center font-bold">
-        {attributeKey} {keyValue ? `(${keyValue})` : ""} :
-      </div>
-      <div className="flex flex-row gap-1 items-center justify-center">
+    <div className="flex 2xl:flex-row flex-col p-3 w-30 2xl:w-fit justify-center items-center h-full">
+      {showText && (
+        <>
+          <div className=" p-2 h-fit flex items-center justify-start  font-bold">
+            <h2 className="text-center text-sm">
+              {attributeKey} {keyValue ? `(${keyValue})` : ""}
+            </h2>
+          </div>
+        </>
+      )}
+
+      <div className="flex flex-row gap-1 items-center justify-center w-fit">
         <button
-          className="w-[10%] bg-red-400 rounded-md hover:bg-red-500"
-          onClick={() => updateValue(getCurrentValue() - intervalPerStep)}
+          className="w-5 h-8  rounded-md hover:bg-gray-500"
+          onClick={() =>
+            updateValue(Number(getCurrentValue()) - intervalPerStep)
+          }
         >
           -
         </button>
@@ -61,15 +75,22 @@ export default function OptionInputStepper({
                   Number(e.currentTarget.value),
                 );
               }
+            } else {
+              handleTextAttributeChanges(
+                attributeKey,
+                Number(e.currentTarget.value),
+              );
             }
           }}
           type="number"
-          className="border-1 p-1 max-w-[30%] text-center bg-white rounded-md"
+          className="border-1 w-15 p-1 text-center  rounded-md"
           placeholder="Text Size"
         />
         <button
-          className="w-[10%] bg-green-400 rounded-md hover:bg-green-500"
-          onClick={() => updateValue(getCurrentValue() + intervalPerStep)}
+          className="w-5 h-8  rounded-md hover:bg-gray-500"
+          onClick={() =>
+            updateValue(Number(getCurrentValue()) + intervalPerStep)
+          }
         >
           +
         </button>

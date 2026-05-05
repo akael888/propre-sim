@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { auth } from "../auth";
 
 export default auth((req) => {
-  console.log("middleware running:", req.nextUrl.pathname); // ← add this
-  console.log("isLoggedIn:", !!req.auth); // ← add this
+  console.log("middleware running:", req.nextUrl.pathname);
+  console.log("isLoggedIn:", !!req.auth);
 
   const isLoggedIn = !!req.auth;
   const isProtectedRoute = req.nextUrl.pathname.startsWith("/slide");

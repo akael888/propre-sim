@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { SlideProps, TextAttribute, TextObject } from "@/app/lib/type";
 import { MouseEventHandler, useState } from "react";
 
@@ -93,6 +93,14 @@ const Slide: React.FC<SlideProps> = ({
             style={{
               fontSize: `${textAttribute.textSize}cqw`,
               fontWeight: `${textAttribute.textStyle.bold ? "bolder" : "normal"}`,
+              fontStyle: `${textAttribute.textStyle.italic ? "italic" : "normal"}`,
+              textDecoration:
+                [
+                  textAttribute.textStyle.underlined ? "underline" : "",
+                  textAttribute.textStyle.strikethrough ? "line-through" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ") || "none",
               textShadow: textAttribute.textShadow.isOn
                 ? `${textAttribute.textShadow.x}em ${textAttribute.textShadow.y}em ${textAttribute.textShadow.shadowBlur}px ${textAttribute.textShadow.shadowColor}`
                 : "", //0.2 -0.02

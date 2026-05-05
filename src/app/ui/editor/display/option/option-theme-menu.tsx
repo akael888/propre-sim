@@ -55,53 +55,59 @@ export default function OptionThemeMenu({
 
   return (
     <>
-      <div className="p-1">
-        <div>Theme:</div>
-        <div className="p-1 flex flex-col gap-2">
-          <div className="w-full flex">
-            <select
-              className="h-full"
-              onChange={(e) => {
-                const themeID = Number(e.currentTarget.value);
-                setSelectedTheme(themeCollection[themeID]);
-              }}
-              value={selectedTheme.themeID}
-            >
-              {themeCollection.map((theme, index) => (
-                <option key={index} value={theme.themeID}>
-                  {theme.themeName}
-                </option>
-              ))}
-            </select>
+      <div className="p-1  flex flex-col gap-2 h-full">
+        <div className="flex flex-col 2xl:flex-row gap-2 h-full ">
+          <div className=" flex flex-row justify-center">
+            {" "}
+            <div className=" flex items-center justify-center h-10">
+              <p className="font-bold text-md text-center ">Theme:</p>
+            </div>
+            <div className="w-full flex">
+              <select
+                className="h-full bg-white"
+                onChange={(e) => {
+                  const themeID = Number(e.currentTarget.value);
+                  setSelectedTheme(themeCollection[themeID]);
+                }}
+                value={selectedTheme.themeID}
+              >
+                {themeCollection.map((theme, index) => (
+                  <option key={index} value={theme.themeID}>
+                    {theme.themeName}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <div className="gap-2 flex">
+          <div className="gap-2 flex ">
             <button
-              className="border-1 p-1 hover:bg-foreground bg-green-500"
+              className="border-1 p-1 hover:bg-foreground bg-green-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={() => loadSelectedTheme(selectedTheme.textAttribute)}
             >
-              Load Theme
+              ↓ Load
             </button>
             <button
-              className="border-1 p-1 hover:bg-foreground bg-red-500"
+              className="border-1 p-1 hover:bg-foreground bg-red-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={() => deleteSelectedTheme(selectedTheme)}
             >
-              Delete Theme
+              Delete
             </button>
-            <button
-              className="border-1 p-1 hover:bg-foreground bg-orange-500"
+            {/* <button
+              className="border-1 p-1 hover:bg-foreground bg-orange-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={clearLocalTheme}
             >
-              Delete Local Theme
-            </button>
+              Delete Local
+            </button> */}
             <button
-              className="border-1 p-1 hover:bg-foreground bg-gray-500"
+              className="border-1 p-1 hover:bg-foreground bg-gray-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={resetThemeToDefault}
             >
-              Reset Theme to Default
+              Reset
             </button>
           </div>
         </div>
+
         <div className="p-1 flex gap-2">
           <input
             type="text"
