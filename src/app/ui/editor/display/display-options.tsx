@@ -56,7 +56,7 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                             handleTextAttributeChanges
                           }
                           attributeKey="textSize"
-                          intervalPerStep={0.1}
+                          intervalPerStep={1}
                           showText={false}
                         />
                       </div>

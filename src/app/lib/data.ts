@@ -54,7 +54,7 @@ export const defaultFontCollection = [
 ];
 
 export const defaultTextAttributeData = <TextAttribute>{
-  textSize: 6,
+  textSize: 98,
   textColor: "#FFFFFF",
   textSlideColor: "#edadff",
   textFont: defaultFontCollection[0].fontData,
