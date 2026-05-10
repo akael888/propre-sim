@@ -35,10 +35,25 @@ const Slide: React.FC<SlideProps> = ({
     return () => observer.disconnect();
   }, []);
 
-  // textSize Calculation
+  // text Scaling Calculation
   const CANVAS_WIDTH = 1920;
   const scaleFactor = slideWidth / CANVAS_WIDTH;
   const fontSizePx = textAttribute.textSize * 1.333 * scaleFactor;
+  const strokeSizePx =
+    textAttribute.textStroke.strokeSize * 1.333 * scaleFactor;
+
+  // const shadowBlur = textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
+
+  const angleRad = (textAttribute.textShadow.angle * Math.PI) / 180;
+  const offset = textAttribute.textShadow.offset;
+
+  const shadowX = Math.cos(angleRad) * offset;
+  const shadowY = Math.sin(angleRad) * offset;
+
+  const shadowXPx = shadowX * 1.333 * scaleFactor;
+  const shadowYPx = shadowY * 1.333 * scaleFactor;
+  const shadowBlurPx =
+    textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
 
   const FocusOnTextArea = (textSearch: string) => {
     if (textAreaRef) {
@@ -126,12 +141,12 @@ const Slide: React.FC<SlideProps> = ({
                   .filter(Boolean)
                   .join(" ") || "none",
               textShadow: textAttribute.textShadow.isOn
-                ? `${textAttribute.textShadow.x}em ${textAttribute.textShadow.y}em ${textAttribute.textShadow.shadowBlur}px ${textAttribute.textShadow.shadowColor}`
+                ? `${shadowXPx}px ${shadowYPx}px ${shadowBlurPx}px ${textAttribute.textShadow.shadowColor}`
                 : "", //0.2 -0.02
               textAlign: textAttribute.textAlign,
               paintOrder: textAttribute.textStroke.isOn ? "stroke fill" : "",
               WebkitTextStroke: textAttribute.textStroke.isOn
-                ? `${textAttribute.textStroke.strokeSize > 0 ? textAttribute.textStroke.strokeSize : "0"}cqw ${textAttribute.textStroke.strokeColor}`
+                ? `${strokeSizePx > 0 ? strokeSizePx : "0"}px ${textAttribute.textStroke.strokeColor}`
                 : "",
               color: textAttribute.textColor,
             }}

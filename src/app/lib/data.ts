@@ -59,7 +59,7 @@ export const defaultTextAttributeData = <TextAttribute>{
   textSlideColor: "#edadff",
   textFont: defaultFontCollection[0].fontData,
   textAlign: "center",
-  textStroke: { isOn: true, strokeSize: 0.89, strokeColor: "#000000" },
+  textStroke: { isOn: true, strokeSize: 10, strokeColor: "#000000" },
   textStyle: {
     bold: true,
     italic: false,
@@ -68,10 +68,10 @@ export const defaultTextAttributeData = <TextAttribute>{
   },
   textShadow: {
     isOn: true,
-    x: 0.2,
-    y: -0.02,
-    shadowBlur: 0,
+    shadowBlur: 3,
     shadowColor: "#000000",
+    offset: 23,
+    angle: 4,
   },
   textContainer: { width: 100, height: 100 },
 };
