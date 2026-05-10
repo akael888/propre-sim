@@ -60,69 +60,54 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                           showText={false}
                         />
                       </div>
-                      <div className="2xl:flex hidden w-1 h-10 bg-black/20 rounded-sm" />
-                      <div className="flex flex-row h-full w-full justify-center">
-                        {" "}
-                        <TextAlign
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          direction="left"
-                        />
-                        <TextAlign
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          direction="center"
-                        />
-                        <TextAlign
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          direction="right"
-                        />
-                        <TextAlign
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          direction="justify"
-                        />
-                      </div>
-                      <div className="2xl:flex hidden w-1 h-10 bg-black/20 rounded-sm" />
-                      <div className="flex flex-row h-full w-full justify-center">
-                        <TextStyle
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          styleAttribute="bold"
-                        />
-                        <TextStyle
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          styleAttribute="italic"
-                        />
-                        <TextStyle
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          styleAttribute="underlined"
-                        />
-                        <TextStyle
-                          textAttribute={textAttribute}
-                          handleTextAttributeChanges={
-                            handleTextAttributeChanges
-                          }
-                          styleAttribute="strikethrough"
-                        />{" "}
-                      </div>
+                    </div>
+                  </div>
+                  <div className="flex 2xl:flex-row  flex-col col-span-full">
+                    {" "}
+                    <div className="flex flex-row h-full w-full justify-center">
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="left"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="center"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="right"
+                      />
+                      <TextAlign
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        direction="justify"
+                      />
+                    </div>
+                    <div className="2xl:flex hidden w-1 h-10 bg-black/20 rounded-sm" />
+                    <div className="flex flex-row h-full w-full justify-center">
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="bold"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="italic"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="underlined"
+                      />
+                      <TextStyle
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        styleAttribute="strikethrough"
+                      />{" "}
                     </div>
                   </div>
                   <div className="flex flex-row w-full justify-start col-span-full"></div>{" "}
@@ -183,7 +168,9 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                         handleTextAttributeChanges={handleTextAttributeChanges}
                         attributeKey="textStroke"
                         keyValue="strokeSize"
-                        intervalPerStep={0.1}
+                        intervalPerStep={1}
+                        min={0}
+                        max={1000}
                       />
                       <OptionColorPicker
                         textAttribute={textAttribute}
@@ -219,28 +206,34 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
                         textAttribute={textAttribute}
                         handleTextAttributeChanges={handleTextAttributeChanges}
                         attributeKey="textShadow"
-                        keyValue="x"
-                        intervalPerStep={0.01}
-                      />
-                      <OptionInputStepper
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        attributeKey="textShadow"
-                        keyValue="y"
-                        intervalPerStep={0.01}
-                      />
-                      <OptionInputStepper
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
-                        attributeKey="textShadow"
                         keyValue="shadowBlur"
                         intervalPerStep={1}
+                        min={0}
+                        max={100}
                       />
                       <OptionColorPicker
                         textAttribute={textAttribute}
                         handleTextAttributeChanges={handleTextAttributeChanges}
                         attributeKey="textShadow"
                         keyValue="shadowColor"
+                      />{" "}
+                      <OptionInputStepper
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        attributeKey="textShadow"
+                        keyValue="offset"
+                        intervalPerStep={1}
+                        min={0}
+                        max={100}
+                      />
+                      <OptionInputStepper
+                        textAttribute={textAttribute}
+                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        attributeKey="textShadow"
+                        keyValue="angle"
+                        intervalPerStep={1}
+                        min={0}
+                        max={359}
                       />
                     </div>
                   </>

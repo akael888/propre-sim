@@ -7,8 +7,16 @@ export default function OptionInputStepper({
   keyValue,
   intervalPerStep,
   showText = true,
+  max,
+  min,
 }: OptionInputStepperProp) {
   const currentObject = textAttribute[attributeKey];
+
+  const clamp = (value: number): number => {
+    if (min !== undefined && value < min) return min;
+    if (max !== undefined && value > max) return max;
+    return value;
+  };
 
   const getCurrentValue = (): number | string => {
     if (
@@ -27,15 +35,16 @@ export default function OptionInputStepper({
   };
 
   const updateValue = (newValue: number) => {
+    const clamped = clamp(newValue);
     if (typeof currentObject === "object" && currentObject !== null) {
       if (keyValue) {
         handleTextAttributeChanges(attributeKey, {
           ...currentObject,
-          [keyValue]: newValue,
+          [keyValue]: clamped,
         });
       }
     } else {
-      handleTextAttributeChanges(attributeKey, newValue);
+      handleTextAttributeChanges(attributeKey, clamped);
     }
   };
 
@@ -62,24 +71,21 @@ export default function OptionInputStepper({
         </button>
         <input
           value={getCurrentValue()}
+          min={min}
+          max={max}
           onInput={(e) => {
+            const clamped = clamp(Number(e.currentTarget.value));
             if (typeof currentObject === "object" && currentObject !== null) {
               if (keyValue) {
                 handleTextAttributeChanges(attributeKey, {
                   ...currentObject,
-                  [keyValue]: Number(e.currentTarget.value),
+                  [keyValue]: clamped,
                 });
               } else {
-                handleTextAttributeChanges(
-                  attributeKey,
-                  Number(e.currentTarget.value),
-                );
+                handleTextAttributeChanges(attributeKey, clamped);
               }
             } else {
-              handleTextAttributeChanges(
-                attributeKey,
-                Number(e.currentTarget.value),
-              );
+              handleTextAttributeChanges(attributeKey, clamped);
             }
           }}
           type="number"
