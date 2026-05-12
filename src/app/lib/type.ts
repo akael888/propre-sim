@@ -21,6 +21,8 @@ export type TextShadow = {
   y: number;
   shadowBlur: number;
   shadowColor: string;
+  offset: number;
+  angle: number;
 };
 
 export type TextStroke = {
@@ -131,6 +133,8 @@ export interface OptionInputStepperProp {
   keyValue?: string;
   intervalPerStep: number;
   showText?: boolean;
+  max?: number;
+  min?: number;
 }
 export interface OptionColorPickerProp {
   textAttribute: TextAttribute;

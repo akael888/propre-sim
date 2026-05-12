@@ -1,6 +1,6 @@
 "use client";
 import { SlideProps, TextAttribute, TextObject } from "@/app/lib/type";
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useEffect, useRef, useState } from "react";
 
 const Slide: React.FC<SlideProps> = ({
   slideNum,
@@ -16,6 +16,44 @@ const Slide: React.FC<SlideProps> = ({
     typeof setTimeout
   > | null>(null);
   const [lastClick, setLastClick] = useState(0);
+
+  // getSlideCurrentWidth for TextSize Calculation
+  const slideRef = useRef<HTMLDivElement>(null);
+  const [slideWidth, setSlideWidth] = useState(0);
+
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setSlideWidth(entry.contentRect.width);
+      }
+    });
+
+    if (slideRef.current) {
+      observer.observe(slideRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // text Scaling Calculation
+  const CANVAS_WIDTH = 1920;
+  const scaleFactor = slideWidth / CANVAS_WIDTH;
+  const fontSizePx = textAttribute.textSize * 1.333 * scaleFactor;
+  const strokeSizePx =
+    textAttribute.textStroke.strokeSize * 1.333 * scaleFactor;
+
+  // const shadowBlur = textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
+
+  const angleRad = (textAttribute.textShadow.angle * Math.PI) / 180;
+  const offset = textAttribute.textShadow.offset;
+
+  const shadowX = Math.cos(angleRad) * offset;
+  const shadowY = Math.sin(angleRad) * offset;
+
+  const shadowXPx = shadowX * 1.333 * scaleFactor;
+  const shadowYPx = shadowY * 1.333 * scaleFactor;
+  const shadowBlurPx =
+    textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
 
   const FocusOnTextArea = (textSearch: string) => {
     if (textAreaRef) {
@@ -75,10 +113,11 @@ const Slide: React.FC<SlideProps> = ({
         id={slideTextCharIndex.toString()}
         className={`aspect-video border-1 flex justify-center items-center relative overflow-hidden group`}
         style={{
-          containerType: "inline-size",
+          containerType: "size",
           backgroundColor: `${textAttribute.textSlideColor}`,
         }}
         onClick={processDoubleClick}
+        ref={slideRef}
       >
         <div
           className="border-1 border-dashed overflow-hidden"
@@ -91,7 +130,7 @@ const Slide: React.FC<SlideProps> = ({
           <pre
             className={`text-wrap w-full h-full flex items-center justify-center border-black ${textAttribute.textFont.className}`}
             style={{
-              fontSize: `${textAttribute.textSize}cqw`,
+              fontSize: `${fontSizePx}px`,
               fontWeight: `${textAttribute.textStyle.bold ? "bolder" : "normal"}`,
               fontStyle: `${textAttribute.textStyle.italic ? "italic" : "normal"}`,
               textDecoration:
@@ -102,12 +141,12 @@ const Slide: React.FC<SlideProps> = ({
                   .filter(Boolean)
                   .join(" ") || "none",
               textShadow: textAttribute.textShadow.isOn
-                ? `${textAttribute.textShadow.x}em ${textAttribute.textShadow.y}em ${textAttribute.textShadow.shadowBlur}px ${textAttribute.textShadow.shadowColor}`
+                ? `${shadowXPx}px ${shadowYPx}px ${shadowBlurPx}px ${textAttribute.textShadow.shadowColor}`
                 : "", //0.2 -0.02
               textAlign: textAttribute.textAlign,
               paintOrder: textAttribute.textStroke.isOn ? "stroke fill" : "",
               WebkitTextStroke: textAttribute.textStroke.isOn
-                ? `${textAttribute.textStroke.strokeSize > 0 ? textAttribute.textStroke.strokeSize : "0"}cqw ${textAttribute.textStroke.strokeColor}`
+                ? `${strokeSizePx > 0 ? strokeSizePx : "0"}px ${textAttribute.textStroke.strokeColor}`
                 : "",
               color: textAttribute.textColor,
             }}
