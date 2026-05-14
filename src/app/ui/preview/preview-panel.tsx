@@ -8,7 +8,7 @@ export default function PreviewPanel({
   slideObject,
   textAttribute,
 }: {
-  slideObject: TextObject[];
+  slideObject?: TextObject[];
   textAttribute: TextAttribute;
 }) {
   const mainPanelRef = useRef<HTMLDivElement>(null);
