@@ -1,4 +1,4 @@
-
+import { AppProvider } from "@/app/context/app-provider";
 import { getSession } from "@/app/lib/action";
 import Editor from "@/app/ui/editor/editor";
 
@@ -13,7 +13,9 @@ export default async function SlideEditor({
 
   return (
     <>
-      <Editor slideID={slideID} user={user} />
+      <AppProvider>
+        <Editor slideID={slideID} user={user} />
+      </AppProvider>
     </>
   );
 }

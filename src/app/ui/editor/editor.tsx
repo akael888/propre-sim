@@ -1,15 +1,11 @@
 "use client";
 
-import {
-  getSlideData,
-  submitSlideData,
-  updateSlideData,
-} from "@/app/lib/action";
-import { parseTextDataToObjects } from "@/app/lib/utils";
+import { getSlideData } from "@/app/lib/action";
 import { useEffect, useRef, useState } from "react";
 import TextAreaSection from "./sections/text-area-section";
 import DisplayAreaSection from "./sections/display-area-section";
 import { Session } from "next-auth";
+import { useTextData } from "@/app/context/text-data-context";
 
 type User = Session["user"];
 
@@ -20,40 +16,17 @@ export default function Editor({
   slideID?: string;
   user?: User;
 }) {
-  const [textAreaData, setTextAreaData] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  //const [copyPressed, setCopyPressed] = useState(false);
-
-  const [slideDataStatic, setSlideDataStatic] = useState({
-    title: "",
-    description: "",
-    textdata: "",
-  });
-
-  const [slideData, setSlideData] = useState({
-    title: "",
-    description: "",
-  });
-
-  const isTextAreaNotChanged =
-    slideDataStatic.textdata === textAreaData &&
-    slideData.title === slideDataStatic.title &&
-    slideData.description === slideDataStatic.description;
-
-  const textObject = parseTextDataToObjects(textAreaData);
-
-  const handleTextAreaDataChanges = (textAreaData: string) => {
-    setTextAreaData(textAreaData);
-
-    if (!slideID) {
-      localStorage.setItem("TEXT_AREA_DATA", textAreaData);
-    }
-  };
+  const handleStaticSlideDataObjectChanges =
+    useTextData().handleStaticSlideDataObjectChanges;
+  const handleSlideDataObjectChanges =
+    useTextData().handleSlideDataObjectChanges;
+  const handleTextStringChanges = useTextData().handleTextStringChanges;
+  const slideData = useTextData().slideData;
 
   useEffect(() => {
     async function fetchData() {
-      // alert(slideID);
       let stored = null;
       if (slideID) {
         stored = await getSlideData(slideID);
@@ -64,14 +37,15 @@ export default function Editor({
             description: string;
             textdata: string;
           };
-          setSlideDataStatic(data);
-          setSlideData(data);
-          setTextAreaData(data.textdata);
+          handleStaticSlideDataObjectChanges(data);
+          handleSlideDataObjectChanges(data);
+
+          handleTextStringChanges(data.textdata);
         }
       } else {
         stored = localStorage.getItem("TEXT_AREA_DATA");
         if (stored) {
-          setTextAreaData(stored);
+          handleTextStringChanges(stored);
         }
       }
 
@@ -86,13 +60,6 @@ export default function Editor({
         ? `${slideData.title} | ProPresenter Simulator`
         : "ProPresenter Simulator";
   }, [slideData.title]);
-
-  const handleSlideDataObjectChanges = (data: {
-    title: string;
-    description: string;
-  }) => {
-    setSlideData(data);
-  };
 
   if (!isLoaded) {
     return (
@@ -109,22 +76,11 @@ export default function Editor({
     <>
       <div className="min-w-screen min-h-screen md:grid-rows-none md:max-h-full max-h-screen bg-foreground grid md:grid-cols-3 gap-2 text-background grid-rows-2">
         <TextAreaSection
-          textData={textAreaData}
-          textObject={textObject}
-          handleTextDataChanges={handleTextAreaDataChanges}
           textAreaRef={textAreaRef}
           slideID={slideID}
-          textAreaData={textAreaData}
-          slideData={slideData}
-          slideDataStatic={slideDataStatic}
-          handleSlideDataObjectChanges={handleSlideDataObjectChanges}
-          isTextAreaNotChanged={isTextAreaNotChanged}
           user={user}
         />
-        <DisplayAreaSection
-          slideObject={textObject}
-          textAreaRef={textAreaRef}
-        />
+        <DisplayAreaSection textAreaRef={textAreaRef} />
       </div>
     </>
   );

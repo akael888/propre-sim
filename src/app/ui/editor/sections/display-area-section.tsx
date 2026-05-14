@@ -5,12 +5,12 @@ import { DisplayAreaSectionProps, TextAttribute } from "../../../lib/type";
 import OptionModal from "../display/display-option-modal";
 import HelpModal from "../display/help-modal";
 import { useTextAttribute } from "@/app/context/text-attribute-context";
+import { useTextData } from "@/app/context/text-data-context";
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
-  slideObject,
   textAreaRef,
 }) => {
-  const displayedTextAttribute = useTextAttribute().textAttribute;
+  const slideObject = useTextData().textObject;
 
   // Modal States
   const [isOptionOpen, setIsOptionOpen] = useState(false);

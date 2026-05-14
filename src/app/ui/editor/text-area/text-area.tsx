@@ -1,13 +1,13 @@
 "use client";
 import { useState, RefObject } from "react";
 import { TextAreaProps } from "@/app/lib/type";
+import { useTextData } from "@/app/context/text-data-context";
 
-const TextArea: React.FC<TextAreaProps> = ({
-  textData,
-  textObject,
-  handleTextDataChanges,
-  textAreaRef,
-}) => {
+const TextArea: React.FC<TextAreaProps> = ({ textAreaRef }) => {
+  const textObject = useTextData().textObject;
+  const textData = useTextData().textData;
+  const handleTextDataChanges = useTextData().handleTextStringChanges;
+
   const [textValue, setTextValue] = useState(textData);
   const slidePositionList = textObject?.map((object) => object.charIndex);
 
@@ -25,26 +25,28 @@ const TextArea: React.FC<TextAreaProps> = ({
   };
 
   const clickToScrollSlides = () => {
-    const refClicked = textAreaRef.current;
-    if (!refClicked) {
-      return;
+    if (slidePositionList) {
+      const refClicked = textAreaRef.current;
+      if (!refClicked) {
+        return;
+      }
+
+      const indexClicked = refClicked.selectionStart;
+
+      const indexIdToScroll = slidePositionList.findIndex(
+        (pos) => indexClicked < pos,
+      );
+
+      let idToScroll = null;
+      if (indexIdToScroll != -1) {
+        idToScroll = slidePositionList[indexIdToScroll - 1];
+      } else {
+        idToScroll = slidePositionList[slidePositionList.length - 1];
+      }
+      document.getElementById(`${idToScroll}`)?.scrollIntoView({
+        behavior: "smooth",
+      });
     }
-
-    const indexClicked = refClicked.selectionStart;
-
-    const indexIdToScroll = slidePositionList.findIndex(
-      (pos) => indexClicked < pos,
-    );
-
-    let idToScroll = null;
-    if (indexIdToScroll != -1) {
-      idToScroll = slidePositionList[indexIdToScroll - 1];
-    } else {
-      idToScroll = slidePositionList[slidePositionList.length - 1];
-    }
-    document.getElementById(`${idToScroll}`)?.scrollIntoView({
-      behavior: "smooth",
-    });
   };
 
   const processDoubleClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {

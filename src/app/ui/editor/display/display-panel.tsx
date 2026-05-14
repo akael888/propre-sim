@@ -5,7 +5,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
   slideObject,
   textAreaRef,
 }) => {
-  const slideMaxNum = slideObject.length;
+  const slideMaxNum = slideObject ? slideObject.length : undefined;
 
   return (
     <>
