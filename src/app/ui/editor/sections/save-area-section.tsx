@@ -2,7 +2,7 @@ import { useTextData } from "@/app/context/text-data-context";
 import { getSession, submitSlideData, updateSlideData } from "@/app/lib/action";
 import { User } from "next-auth";
 import Link from "next/link";
-import { use, useActionState, useState } from "react";
+import { use, useActionState, useEffect, useState } from "react";
 
 function SaveSection({ slideID, user }: { slideID?: string; user?: User }) {
   const submitSlideDatawithID = user?.id && submitSlideData.bind(null, user.id);
@@ -12,8 +12,20 @@ function SaveSection({ slideID, user }: { slideID?: string; user?: User }) {
   const slideData = useTextData().slideData;
   const handleSlideDataObjectChanges =
     useTextData().handleSlideDataObjectChanges;
+  const handleStaticSlideDataObjectChanges =
+    useTextData().handleStaticSlideDataObjectChanges;
   const textString = useTextData().textData;
   const isTextStringChanged = useTextData().isTextStringChanged;
+
+  useEffect(() => {
+    if (state?.success) {
+      handleStaticSlideDataObjectChanges({
+        title: slideData.title,
+        description: slideData.description,
+        textdata: textString,
+      });
+    }
+  }, [state]);
 
   return (
     <>
@@ -81,7 +93,9 @@ function SaveSection({ slideID, user }: { slideID?: string; user?: User }) {
                 {isPending
                   ? "Saving..."
                   : state?.success
-                    ? "Saved ✓"
+                    ? isTextStringChanged
+                      ? "Saved ✓"
+                      : "Save*"
                     : isTextStringChanged
                       ? "Save"
                       : "Save*"}
