@@ -1,5 +1,5 @@
 import { textAlignTypes } from "@/app/lib/data";
-import { DisplayOptionsProp, TextAttribute } from "@/app/lib/type";
+import {TextAttribute } from "@/app/lib/type";
 import Image from "next/image";
 
 function TextAlign({

@@ -15,7 +15,6 @@ export default async function Preview({ slideID }: { slideID: string }) {
     ? { title: stored.title, description: stored.description }
     : null;
 
-  console.log(slideObject.length);
 
   const textAttribute = defaultTextAttributeData;
 

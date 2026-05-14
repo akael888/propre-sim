@@ -1,18 +1,21 @@
-import { DisplayOptionsProp } from "@/app/lib/type";
 import { useState } from "react";
-import { defaultTextAttributeData, textAlignTypes } from "../../../lib/data";
+import { defaultTextAttributeData } from "../../../lib/data";
 import TextFontsSelection from "./option/text-fonts-selection";
 import OptionInputStepper from "./option/option-input-stepper";
 import OptionColorPicker from "./option/option-color-picker";
 import OptionThemeMenu from "./option/option-theme-menu";
 import TextAlign from "./option/option-text-align";
 import TextStyle from "./option/option-text-style";
+import { useTextAttribute } from "@/app/context/text-attribute-context";
 
-const DisplayOptions: React.FC<DisplayOptionsProp> = ({
-  textAttribute,
-  handleTextAttributeChanges,
-  handleTextAttributeObjectChanges,
-}) => {
+function DisplayOptions({}) {
+  //Use Text Attribute
+  const textAttribute = useTextAttribute().textAttribute;
+  const handleTextAttributeChanges =
+    useTextAttribute().handleTextAttributeChanges;
+  const handleTextAttributeObjectChanges =
+    useTextAttribute().handleTextAttributeObjectChanges;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const resetDisplayOption = () => {
@@ -245,6 +248,6 @@ const DisplayOptions: React.FC<DisplayOptionsProp> = ({
       </div>
     </>
   );
-};
+}
 
 export default DisplayOptions;
