@@ -59,7 +59,7 @@ export default function PreviewPanel({
         // style={{ gridColumn: `${isOpen ? "span 3" : "span 3"}` }}
         ref={mainPanelRef}
       >
-        <DisplayPanel slideObject={slideObject} textAttribute={textAttribute} />
+        <DisplayPanel slideObject={slideObject} />
       </div>
 
       <div
@@ -67,7 +67,7 @@ export default function PreviewPanel({
         ref={sidePanelRef}
         // style={{ display: `${isOpen ? "flex" : "none"}` }}
       >
-        <DisplayPanel slideObject={slideObject} textAttribute={textAttribute} />
+        <DisplayPanel slideObject={slideObject} />
       </div>
     </>
   );
