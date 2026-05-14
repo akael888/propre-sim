@@ -75,7 +75,7 @@ export async function getSlideData(slideID: string) {
   }
 }
 
-export async function updateSlideData(formData: FormData) {
+export async function updateSlideData(prevState: any, formData: FormData) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const textdata = formData.get("textdata") as string;
@@ -92,6 +92,7 @@ export async function updateSlideData(formData: FormData) {
         await sql`UPDATE slide SET title = ${title}, description = ${description}, textdata = ${cleanedText} WHERE id=${slideID}`;
       console.log(`Data ${data} is Updated! `);
       revalidatePath(`/slide`);
+      return { success: true };
     }
   } catch (error) {
     console.log(error);

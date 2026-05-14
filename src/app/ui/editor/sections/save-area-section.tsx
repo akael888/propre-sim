@@ -1,7 +1,7 @@
 import { getSession, submitSlideData, updateSlideData } from "@/app/lib/action";
 import { User } from "next-auth";
 import Link from "next/link";
-import { use, useState } from "react";
+import { use, useActionState, useState } from "react";
 
 function SaveSection({
   slideID,
@@ -30,13 +30,14 @@ function SaveSection({
   user?: User;
 }) {
   const submitSlideDatawithID = user?.id && submitSlideData.bind(null, user.id);
+  const [state, formAction, isPending] = useActionState(updateSlideData, null);
 
   return (
     <>
       <div className="flex flex-col gap-5 max-w-screen w-full p-1 ">
         {user ? (
           <form
-            action={slideID ? updateSlideData : submitSlideDatawithID}
+            action={slideID ? formAction : submitSlideDatawithID}
             className="gap-2 flex flex-row justify-between max-w-screen w-full"
           >
             <div className="flex flex-col w-full h-full">
@@ -92,11 +93,15 @@ function SaveSection({
               <button
                 className="border-1 p-1 bg-green-500 hover:bg-green-600 disabled:bg-gray-500 disabled:shadow-inner disabled:shadow-black/80 disabled:text-gray-800 w-full rounded-md enabled:hover:font-bold box-shadow shadow-sm"
                 type="submit"
-                disabled={slideID ? isTextAreaNotChanged : false}
+                disabled={isPending || isTextAreaNotChanged}
               >
-                {slideID
-                  ? `Save${isTextAreaNotChanged ? "" : "*"}`
-                  : "Save Data"}
+                {isPending
+                  ? "Saving..."
+                  : state?.success
+                    ? "Saved ✓"
+                    : isTextAreaNotChanged
+                      ? "Save"
+                      : "Save*"}
               </button>
               {slideID && (
                 <Link
