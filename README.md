@@ -4,8 +4,12 @@ Link : [propre-sim.vercel.app](https://propre-sim.vercel.app)
 
 ## Screenshots
 
+### ProPresenter Simulator v0.2.0
 <img width="2560" height="1440" alt="ProPresenter Simulator v0.2.0" src="https://github.com/user-attachments/assets/46d6fbff-d642-43e7-8fd4-9a4772c6cf50" />
-> ProPresenter Simulator v0.2.0
+
+### ProPresenter Simulator v0.5.2
+<img width="2504" height="1341" alt="image" src="https://github.com/user-attachments/assets/3eff1fda-2984-4ecb-93b0-924fc66b9adf" />
+
 
 
 ## Background..
@@ -25,8 +29,10 @@ Therefore this ProPresenter Sim will offer that Simulation on a web app accessib
 ## Features
 
 - Simulate ProPresenter Display from a text editor
-- (Planned) Auth and Account (Register and Login) Feature
-- (Planned) Parsing text using ProPresenter formatting for specific ProPre Settings
+- Authentication
+- Text Data parsing into a ProPresenter Slide
+- ProPresenter Slide and Text Attribute Format Simulation
+- Preview Slide feature
 - To Be Added..
 
 ## Tech Stack
