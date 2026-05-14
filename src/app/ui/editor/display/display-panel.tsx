@@ -3,7 +3,6 @@ import { DisplayPanelProps } from "@/app/lib/type";
 
 const DisplayPanel: React.FC<DisplayPanelProps> = ({
   slideObject,
-  textAttribute,
   textAreaRef,
 }) => {
   const slideMaxNum = slideObject.length;
@@ -21,7 +20,6 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
             slideMaxNum={slideMaxNum}
             slideContent={slideData.content}
             slideTextCharIndex={slideData.charIndex}
-            textAttribute={textAttribute}
             textAreaRef={textAreaRef}
           />
         ))}

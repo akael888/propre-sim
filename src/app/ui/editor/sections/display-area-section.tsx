@@ -1,51 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DisplayPanel from "../display/display-panel";
 import DisplayOptions from "../display/display-options";
 import { DisplayAreaSectionProps, TextAttribute } from "../../../lib/type";
-import { defaultTextAttributeData } from "../../../lib/data";
-import Help from "../display/help";
 import OptionModal from "../display/display-option-modal";
 import HelpModal from "../display/help-modal";
+import { useTextAttribute } from "@/app/context/text-attribute-context";
 
 const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   slideObject,
   textAreaRef,
 }) => {
-  const [displayedTextAttribute, setDisplayedTextAttribute] =
-    useState<TextAttribute>(() => {
-      try {
-        const stored = localStorage.getItem("TEXT_ATTRIBUTE_DATA");
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          return parsed;
-        }
-      } catch (err) {
-        console.log(err);
-      }
-      return defaultTextAttributeData; //test
-    });
+  const displayedTextAttribute = useTextAttribute().textAttribute;
 
-  useEffect(() => {
-    localStorage.setItem(
-      "TEXT_ATTRIBUTE_DATA",
-      JSON.stringify(displayedTextAttribute),
-    );
-  }, [displayedTextAttribute]);
-
-  const handleTextAttributeChanges = <K extends keyof TextAttribute>(
-    attribute: K,
-    attributeValue: TextAttribute[K],
-  ) => {
-    setDisplayedTextAttribute((prev) => ({
-      ...prev,
-      [attribute]: attributeValue,
-    }));
-  };
-
-  const handleTextAttributeObjectChanges = (newObject: TextAttribute) => {
-    setDisplayedTextAttribute(newObject);
-  };
-
+  // Modal States
   const [isOptionOpen, setIsOptionOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
@@ -53,11 +20,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
     <>
       {isOptionOpen && (
         <>
-          <OptionModal
-            handleTextAttributeChanges={handleTextAttributeChanges}
-            handleTextAttributeObjectChanges={handleTextAttributeObjectChanges}
-            textAttribute={displayedTextAttribute}
-          />{" "}
+          <OptionModal />
           <div
             className="bg-background/50 w-screen h-screen fixed z-1000 md:hidden"
             onClick={() => setIsOptionOpen(!isOptionOpen)}
@@ -91,18 +54,13 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
         <div className="flex-1 overflow-y-auto flex flex-row h-full justify-center ">
           <DisplayPanel
             slideObject={slideObject}
-            textAttribute={displayedTextAttribute}
             textAreaRef={textAreaRef}
           />{" "}
         </div>
 
         {/* <Help /> */}
       </div>
-      <DisplayOptions
-        handleTextAttributeChanges={handleTextAttributeChanges}
-        handleTextAttributeObjectChanges={handleTextAttributeObjectChanges}
-        textAttribute={displayedTextAttribute}
-      />
+      <DisplayOptions />
     </>
   );
 };

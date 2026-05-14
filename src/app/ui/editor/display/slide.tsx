@@ -1,5 +1,6 @@
 "use client";
-import { SlideProps, TextAttribute, TextObject } from "@/app/lib/type";
+import { useTextAttribute } from "@/app/context/text-attribute-context";
+import { SlideProps } from "@/app/lib/type";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
 
 const Slide: React.FC<SlideProps> = ({
@@ -7,11 +8,14 @@ const Slide: React.FC<SlideProps> = ({
   slideMaxNum,
   slideContent,
   slideTextCharIndex,
-  textAttribute,
   textAreaRef,
 }) => {
-  // convertTextAlignEnumToCSS(textAttribute.textAlign);
 
+  // Calls Text Attribute Context
+  const textAttribute = useTextAttribute().textAttribute;
+
+
+  // Double Click Window Value
   const [waitingClick, setWaitingClick] = useState<ReturnType<
     typeof setTimeout
   > | null>(null);
@@ -35,7 +39,7 @@ const Slide: React.FC<SlideProps> = ({
     return () => observer.disconnect();
   }, []);
 
-  // text Scaling Calculation
+  // text Scaling Calculation ===============
   const CANVAS_WIDTH = 1920;
   const scaleFactor = slideWidth / CANVAS_WIDTH;
   const fontSizePx = textAttribute.textSize * 1.333 * scaleFactor;
@@ -55,6 +59,9 @@ const Slide: React.FC<SlideProps> = ({
   const shadowBlurPx =
     textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
 
+
+    // ===============================================================
+  
   const FocusOnTextArea = (textSearch: string) => {
     if (textAreaRef) {
       const textarea = textAreaRef.current;

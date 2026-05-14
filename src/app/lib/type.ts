@@ -93,7 +93,6 @@ export interface DisplayAreaSectionProps {
 
 export interface DisplayPanelProps {
   slideObject: TextObject[];
-  textAttribute: TextAttribute;
   textAreaRef?: RefObject<HTMLTextAreaElement | null>;
 }
 
@@ -102,19 +101,8 @@ export interface SlideProps {
   slideMaxNum: number;
   slideContent: string;
   slideTextCharIndex: number;
-  textAttribute: TextAttribute;
   textAreaRef?: RefObject<HTMLTextAreaElement | null>;
 }
-
-export interface DisplayOptionsProp {
-  textAttribute: TextAttribute;
-  handleTextAttributeChanges: <K extends keyof TextAttribute>(
-    attribute: K,
-    attributeValue: TextAttribute[K],
-  ) => void;
-  handleTextAttributeObjectChanges: (newObject: TextAttribute) => void;
-}
-
 export interface TextFontsSelectionProp {
   textAttribute: TextAttribute;
   handleTextAttributeChanges: <K extends keyof TextAttribute>(

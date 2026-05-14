@@ -1,3 +1,4 @@
+import { TextAttributeProvider } from "../context/text-attribute-context";
 import { getSession } from "../lib/action";
 import Editor from "../ui/editor/editor";
 
@@ -7,7 +8,9 @@ export default async function EditorPage() {
 
   return (
     <>
-      <Editor user={user} />
+      <TextAttributeProvider>
+        <Editor user={user} />
+      </TextAttributeProvider>
     </>
   );
 }

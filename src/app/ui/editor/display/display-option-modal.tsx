@@ -4,13 +4,15 @@ import OptionColorPicker from "./option/option-color-picker";
 import OptionThemeMenu from "./option/option-theme-menu";
 import TextAlign from "./option/option-text-align";
 import TextStyle from "./option/option-text-style";
-import { DisplayOptionsProp } from "@/app/lib/type";
 
-const OptionModal: React.FC<DisplayOptionsProp> = ({
-  textAttribute,
-  handleTextAttributeChanges,
-  handleTextAttributeObjectChanges,
-}) => {
+import { useTextAttribute } from "@/app/context/text-attribute-context";
+
+function OptionModal({}) {
+  const textAttribute = useTextAttribute().textAttribute;
+  const handleTextAttributeChanges =
+    useTextAttribute().handleTextAttributeChanges;
+  const handleTextAttributeObjectChanges =
+    useTextAttribute().handleTextAttributeObjectChanges;
   return (
     <>
       {" "}
@@ -243,6 +245,6 @@ const OptionModal: React.FC<DisplayOptionsProp> = ({
       </div>
     </>
   );
-};
+}
 
 export default OptionModal;
