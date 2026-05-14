@@ -23,6 +23,13 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
             textAreaRef={textAreaRef}
           />
         ))}
+        {!slideObject && (
+          <>
+            <div className="aspect-video text-center flex items-center justify-center bg-white italic">
+              Write some text in the Text Editor
+            </div>
+          </>
+        )}
       </div>
     </>
   );
