@@ -1,3 +1,4 @@
+import { AppProvider } from "@/app/context/app-provider";
 import Editor from "@/app/ui/editor/editor";
 import Preview from "@/app/ui/preview/preview";
 
@@ -10,7 +11,10 @@ export default async function SlidePreview({
 
   return (
     <>
-      <Preview slideID={slideID} />
+      <AppProvider>
+        {" "}
+        <Preview slideID={slideID} />
+      </AppProvider>
     </>
   );
 }

@@ -3,10 +3,9 @@ import { DisplayPanelProps } from "@/app/lib/type";
 
 const DisplayPanel: React.FC<DisplayPanelProps> = ({
   slideObject,
-  textAttribute,
   textAreaRef,
 }) => {
-  const slideMaxNum = slideObject.length;
+  const slideMaxNum = slideObject ? slideObject.length : undefined;
 
   return (
     <>
@@ -21,10 +20,16 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
             slideMaxNum={slideMaxNum}
             slideContent={slideData.content}
             slideTextCharIndex={slideData.charIndex}
-            textAttribute={textAttribute}
             textAreaRef={textAreaRef}
           />
         ))}
+        {!slideObject && (
+          <>
+            <div className="aspect-video text-center flex items-center justify-center bg-white italic">
+              Write some text in the Text Editor
+            </div>
+          </>
+        )}
       </div>
     </>
   );

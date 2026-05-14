@@ -1,3 +1,4 @@
+import { AppProvider } from "../context/app-provider";
 import { getSession } from "../lib/action";
 import Editor from "../ui/editor/editor";
 
@@ -7,7 +8,9 @@ export default async function EditorPage() {
 
   return (
     <>
-      <Editor user={user} />
+      <AppProvider>
+        <Editor user={user} />
+      </AppProvider>
     </>
   );
 }
