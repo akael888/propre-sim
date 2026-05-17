@@ -1,7 +1,7 @@
 // context/text-attribute-context.tsx
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { TextAttribute } from "../lib/type";
 import { defaultTextAttributeData } from "../lib/data";
 
@@ -23,28 +23,35 @@ export function TextAttributeProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [textAttribute, setTextAttribute] = useState<TextAttribute>(() => {
+  const [textAttribute, setTextAttribute] = useState<TextAttribute>(
+    defaultTextAttributeData,
+  );
+
+  useEffect(() => {
     try {
       const stored = localStorage.getItem("TEXT_ATTRIBUTE_DATA");
       if (stored) {
         const parsed = JSON.parse(stored);
-        return parsed;
+        setTextAttribute(parsed);
       }
     } catch (err) {
       console.log(err);
+      setTextAttribute(defaultTextAttributeData);
     }
-    return defaultTextAttributeData;
-  });
+  }, []);
 
   const handleTextAttributeChanges = <K extends keyof TextAttribute>(
     attribute: K,
     value: TextAttribute[K],
   ) => {
-    setTextAttribute((prev) => ({ ...prev, [attribute]: value }));
+    const updated = { ...textAttribute, [attribute]: value };
+    setTextAttribute(updated);
+    localStorage.setItem("TEXT_ATTRIBUTE_DATA", JSON.stringify(updated));
   };
 
   const handleTextAttributeObjectChanges = (newObject: TextAttribute) => {
     setTextAttribute(newObject);
+    localStorage.setItem("TEXT_ATTRIBUTE_DATA", JSON.stringify(newObject));
   };
 
   return (
