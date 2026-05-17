@@ -8,7 +8,7 @@ export default function PreviewLayout({
 }) {
   return (
     <>
-      <div className="w-full h-full flex-row justify-center text-black bg-gray-600 relative">
+      <div className="w-full h-screen overflow-hidden flex flex-col justify-center text-black bg-gray-600 relative">
         <Suspense fallback={<LoadingScreen />}> {children}</Suspense>
       </div>
     </>
