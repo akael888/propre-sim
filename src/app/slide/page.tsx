@@ -1,11 +1,11 @@
 import Link from "next/link";
 // import { tempSlideData, tempUserData } from "../lib/data";
 import { Suspense } from "react";
-import Loading from "../ui/loading";
+import Loading from "../ui/fallback/loading";
 
 import SlideCollectionHeader from "../ui/slide/slide-collection-header";
 import SlideCollectionWrapper from "../ui/slide/slide-collection-wrapper";
-import LoadingSlide from "../ui/loading-slide";
+import LoadingSlide from "../ui/fallback/loading-slide";
 
 export default async function SlideManagerPage() {
 
