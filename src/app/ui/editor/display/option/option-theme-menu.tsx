@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export default function OptionThemeMenu({
   textAttribute,
   handleTextAttributeObjectChanges,
+  menuType,
 }: OptionThemeMenuProp) {
   const getThemeCollection = (): Theme[] => {
     try {
@@ -87,45 +88,54 @@ export default function OptionThemeMenu({
             >
               ↓ Load
             </button>
-            <button
-              className="border-1 p-1 hover:bg-foreground bg-red-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
-              onClick={() => deleteSelectedTheme(selectedTheme)}
-            >
-              Delete
-            </button>
-            {/* <button
+            {menuType == "Edit" && (
+              <>
+                <button
+                  className="border-1 p-1 hover:bg-foreground bg-red-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
+                  onClick={() => deleteSelectedTheme(selectedTheme)}
+                >
+                  Delete
+                </button>
+                {/* <button
               className="border-1 p-1 hover:bg-foreground bg-orange-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={clearLocalTheme}
             >
               Delete Local
             </button> */}
-            <button
-              className="border-1 p-1 hover:bg-foreground bg-gray-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
-              onClick={resetThemeToDefault}
-            >
-              Reset
-            </button>
+                <button
+                  className="border-1 p-1 hover:bg-foreground bg-gray-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
+                  onClick={resetThemeToDefault}
+                >
+                  Reset
+                </button>
+              </>
+            )}
           </div>
         </div>
 
-        <div className="p-1 flex gap-2">
-          <input
-            type="text"
-            placeholder="Theme Name"
-            value={createdThemeName}
-            onChange={(e) => {
-              setCreatedThemeName(e.target.value);
-            }}
-            className="border-1 p-1 bg-white"
-          />
-          <button
-            className="border-1 p-1 hover:bg-foreground disabled:bg-background disabled:text-foreground"
-            disabled={createdThemeName === ""}
-            onClick={saveTheme}
-          >
-            Save Theme
-          </button>
-        </div>
+        {menuType == "Edit" && (
+          <>
+            {" "}
+            <div className="p-1 flex gap-2">
+              <input
+                type="text"
+                placeholder="Theme Name"
+                value={createdThemeName}
+                onChange={(e) => {
+                  setCreatedThemeName(e.target.value);
+                }}
+                className="border-1 p-1 bg-white"
+              />
+              <button
+                className="border-1 p-1 hover:bg-foreground disabled:bg-background disabled:text-foreground"
+                disabled={createdThemeName === ""}
+                onClick={saveTheme}
+              >
+                Save Theme
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
