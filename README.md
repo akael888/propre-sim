@@ -1,19 +1,7 @@
 # ProPresenter Simulator // ProPre Sim
 
 Link : [propre-sim.vercel.app](https://propre-sim.vercel.app)
-
-## Screenshots
-
-### ProPresenter Simulator v0.2.0
-<img width="2560" height="1440" alt="ProPresenter Simulator v0.2.0" src="https://github.com/user-attachments/assets/46d6fbff-d642-43e7-8fd4-9a4772c6cf50" />
-
-### ProPresenter Simulator v0.5.2 (14/05/2026)
-<img width="2504" height="1341" alt="image" src="https://github.com/user-attachments/assets/3eff1fda-2984-4ecb-93b0-924fc66b9adf" />
-<img width="2506" height="1345" alt="image" src="https://github.com/user-attachments/assets/e2a65b15-416d-4178-9bce-0dbb52287a26" />
-<img width="2504" height="1345" alt="image" src="https://github.com/user-attachments/assets/60a5f709-09a6-4395-8f24-f8f9986de4af" />
-
-
-
+Checkout my blogpost about this project [here](https://elgratiofc.vercel.app/blog/propresenter-sim)
 
 
 ## Background..
@@ -48,3 +36,14 @@ Therefore this ProPresenter Sim will offer that Simulation on a web app accessib
 
 - Tailwindcss
 - To Be Added..
+
+## Screenshots
+
+### ProPresenter Simulator v0.2.0
+<img width="2560" height="1440" alt="ProPresenter Simulator v0.2.0" src="https://github.com/user-attachments/assets/46d6fbff-d642-43e7-8fd4-9a4772c6cf50" />
+
+### ProPresenter Simulator v0.5.2 (14/05/2026)
+<img width="2504" height="1341" alt="image" src="https://github.com/user-attachments/assets/3eff1fda-2984-4ecb-93b0-924fc66b9adf" />
+<img width="2506" height="1345" alt="image" src="https://github.com/user-attachments/assets/e2a65b15-416d-4178-9bce-0dbb52287a26" />
+<img width="2504" height="1345" alt="image" src="https://github.com/user-attachments/assets/60a5f709-09a6-4395-8f24-f8f9986de4af" />
+
