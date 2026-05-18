@@ -35,6 +35,7 @@ function DisplayOptions({}) {
               handleTextAttributeObjectChanges={
                 handleTextAttributeObjectChanges
               }
+              menuType="Edit"
             />
           </div>
           <div className=" flex flex-col w-full overflow-y-auto">

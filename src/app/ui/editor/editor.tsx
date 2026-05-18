@@ -6,6 +6,7 @@ import TextAreaSection from "./sections/text-area-section";
 import DisplayAreaSection from "./sections/display-area-section";
 import { Session } from "next-auth";
 import { useTextData } from "@/app/context/text-data-context";
+import LoadingScreen from "../fallback/loading-screen";
 
 type User = Session["user"];
 
@@ -62,14 +63,7 @@ export default function Editor({
   }, [slideData.title]);
 
   if (!isLoaded) {
-    return (
-      <div className="flex flex-row justify-center items-center bg-foreground w-screen h-screen">
-        <p className="text-center text-background font-black animate-pulse">
-          {" "}
-          Loading...
-        </p>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (

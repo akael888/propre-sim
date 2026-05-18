@@ -116,6 +116,7 @@ export interface OptionColorPickerProp {
 export interface OptionThemeMenuProp {
   textAttribute: TextAttribute;
   handleTextAttributeObjectChanges: (newObject: TextAttribute) => void;
+  menuType: "Preview" | "Edit";
 }
 
 export interface SlideButtonsProp {
