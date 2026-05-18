@@ -81,7 +81,7 @@ export default function OptionThemeMenu({
             </div>
           </div>
 
-          <div className="gap-2 flex ">
+          <div className="gap-2 flex flex-row justify-evenly items-center">
             <button
               className="border-1 p-1 hover:bg-foreground bg-green-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
               onClick={() => loadSelectedTheme(selectedTheme.textAttribute)}

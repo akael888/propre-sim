@@ -54,7 +54,7 @@ export default function PreviewPanel({
 
   return (
     <>
-      <div className="grid grid-cols-4 flex-1 min-h-0 overflow-hidden">
+      <div className="grid grid-cols-4 flex-1 min-h-0 overflow-hidden shadow-inner">
         <div
           className="col-span-full md:col-span-3 min-h-0 flex w-full xl:col-span-3 justify-center overflow-y-auto p-10"
           ref={mainPanelRef}
