@@ -54,20 +54,19 @@ export default function PreviewPanel({
 
   return (
     <>
-      <div
-        className={`col-span-3 flex w-full justify-center h-screen overflow-y-auto p-10`}
-        // style={{ gridColumn: `${isOpen ? "span 3" : "span 3"}` }}
-        ref={mainPanelRef}
-      >
-        <DisplayPanel slideObject={slideObject} />
-      </div>
-
-      <div
-        className="h-screen col-span-1 w-full overflow-y-auto flex justify-center"
-        ref={sidePanelRef}
-        // style={{ display: `${isOpen ? "flex" : "none"}` }}
-      >
-        <DisplayPanel slideObject={slideObject} />
+      <div className="grid grid-cols-4 flex-1 min-h-0 overflow-hidden shadow-inner">
+        <div
+          className="col-span-full md:col-span-3 min-h-0 flex w-full xl:col-span-3 justify-center overflow-y-auto p-10"
+          ref={mainPanelRef}
+        >
+          <DisplayPanel slideObject={slideObject} />
+        </div>
+        <div
+          className="hidden md:flex md:col-span-1 min-h-0 w-full overflow-y-auto justify-center"
+          ref={sidePanelRef}
+        >
+          <DisplayPanel slideObject={slideObject} />
+        </div>
       </div>
     </>
   );
