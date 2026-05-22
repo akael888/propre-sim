@@ -23,16 +23,12 @@ const Slide: React.FC<SlideProps> = ({
 
   // getSlideCurrentWidth for TextSize Calculation
 
-
   // text Scaling Calculation ===============
   const CANVAS_WIDTH = parentSlideSize.width;
   const CANVAS_HEIGHT = parentSlideSize.height;
-  const scaleFactor = Math.min(
-    slideSize.width / CANVAS_WIDTH,
-    slideSize.height / CANVAS_HEIGHT,
-  );
-  const scaledWidth = slideSize.width * 1.333 * scaleFactor;
-  const scaledHeight = slideSize.height * 1.333 * scaleFactor;
+  const scaleFactor = CANVAS_WIDTH / slideSize.width;
+  const scaledWidth = slideSize.width * scaleFactor;
+  const scaledHeight = slideSize.height * scaleFactor;
   const fontSizePx = textAttribute.textSize * 1.333 * scaleFactor;
   const strokeSizePx =
     textAttribute.textStroke.strokeSize * 1.333 * scaleFactor;
