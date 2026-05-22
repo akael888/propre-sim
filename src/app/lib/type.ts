@@ -80,6 +80,7 @@ export interface SlideProps {
   slideMaxNum?: number | undefined;
   slideContent: string;
   slideTextCharIndex: number;
+  slideSize: { width: number; height: number };
   textAreaRef?: RefObject<HTMLTextAreaElement | null>;
 }
 export interface TextFontsSelectionProp {

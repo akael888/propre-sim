@@ -9,11 +9,10 @@ const Slide: React.FC<SlideProps> = ({
   slideContent,
   slideTextCharIndex,
   textAreaRef,
+  slideSize,
 }) => {
-
   // Calls Text Attribute Context
   const textAttribute = useTextAttribute().textAttribute;
-
 
   // Double Click Window Value
   const [waitingClick, setWaitingClick] = useState<ReturnType<
@@ -40,7 +39,7 @@ const Slide: React.FC<SlideProps> = ({
   }, []);
 
   // text Scaling Calculation ===============
-  const CANVAS_WIDTH = 1920;
+  const CANVAS_WIDTH = slideSize.width;
   const scaleFactor = slideWidth / CANVAS_WIDTH;
   const fontSizePx = textAttribute.textSize * 1.333 * scaleFactor;
   const strokeSizePx =
@@ -59,9 +58,8 @@ const Slide: React.FC<SlideProps> = ({
   const shadowBlurPx =
     textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
 
+  // ===============================================================
 
-    // ===============================================================
-  
   const FocusOnTextArea = (textSearch: string) => {
     if (textAreaRef) {
       const textarea = textAreaRef.current;
@@ -78,9 +76,7 @@ const Slide: React.FC<SlideProps> = ({
       );
 
       // Set the target index
-      const targetIndex =
-        splicedTextFromCurrentCharIndex.indexOf(textSearch) +
-        slideTextCharIndex;
+      const targetIndex = slideTextCharIndex;
 
       if (targetIndex !== 1) {
         textarea.focus();
@@ -122,6 +118,8 @@ const Slide: React.FC<SlideProps> = ({
         style={{
           containerType: "size",
           backgroundColor: `${textAttribute.textSlideColor}`,
+          // width: slideSize.width,
+          // height: slideSize.height,
         }}
         onClick={processDoubleClick}
         ref={slideRef}
