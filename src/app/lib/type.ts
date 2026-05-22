@@ -81,6 +81,7 @@ export interface SlideProps {
   slideContent: string;
   slideTextCharIndex: number;
   slideSize: { width: number; height: number };
+  parentSlideSize: { width: number; height: number };
   textAreaRef?: RefObject<HTMLTextAreaElement | null>;
 }
 export interface TextFontsSelectionProp {

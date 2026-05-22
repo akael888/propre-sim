@@ -10,6 +10,7 @@ const Slide: React.FC<SlideProps> = ({
   slideTextCharIndex,
   textAreaRef,
   slideSize,
+  parentSlideSize,
 }) => {
   // Calls Text Attribute Context
   const textAttribute = useTextAttribute().textAttribute;
@@ -21,26 +22,17 @@ const Slide: React.FC<SlideProps> = ({
   const [lastClick, setLastClick] = useState(0);
 
   // getSlideCurrentWidth for TextSize Calculation
-  const slideRef = useRef<HTMLDivElement>(null);
-  const [slideWidth, setSlideWidth] = useState(0);
 
-  useEffect(() => {
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setSlideWidth(entry.contentRect.width);
-      }
-    });
-
-    if (slideRef.current) {
-      observer.observe(slideRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   // text Scaling Calculation ===============
-  const CANVAS_WIDTH = slideSize.width;
-  const scaleFactor = slideWidth / CANVAS_WIDTH;
+  const CANVAS_WIDTH = parentSlideSize.width;
+  const CANVAS_HEIGHT = parentSlideSize.height;
+  const scaleFactor = Math.min(
+    slideSize.width / CANVAS_WIDTH,
+    slideSize.height / CANVAS_HEIGHT,
+  );
+  const scaledWidth = slideSize.width * 1.333 * scaleFactor;
+  const scaledHeight = slideSize.height * 1.333 * scaleFactor;
   const fontSizePx = textAttribute.textSize * 1.333 * scaleFactor;
   const strokeSizePx =
     textAttribute.textStroke.strokeSize * 1.333 * scaleFactor;
@@ -114,15 +106,15 @@ const Slide: React.FC<SlideProps> = ({
     <>
       <div
         id={slideTextCharIndex.toString()}
-        className={`aspect-video border-1 flex justify-center items-center relative overflow-hidden group`}
+        className={` border-1 flex justify-center items-center relative overflow-hidden group`}
         style={{
           containerType: "size",
           backgroundColor: `${textAttribute.textSlideColor}`,
-          // width: slideSize.width,
-          // height: slideSize.height,
+          width: scaledWidth,
+          height: scaledHeight,
         }}
         onClick={processDoubleClick}
-        ref={slideRef}
+        // ref={slideRef}
       >
         <div
           className="border-1 border-dashed overflow-hidden"
