@@ -35,9 +35,33 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
   return (
     <>
       <div
-        className="border-1 p-2 gap-1 h-fit w-[80%] flex flex-col gap-1  relative"
+        className="border-1 p-2 gap-1 h-fit w-full flex flex-col gap-1  relative justify-center items-center relative"
         style={{ scrollBehavior: "smooth" }}
       >
+        {" "}
+        <div className="bg-white h-fit w-fit p-1 gap-2 flex absolute top-0 z-100">
+          {" "}
+          <input
+            defaultValue={slideSize.width}
+            onInput={(e) =>
+              setSlideSize((prev) => ({
+                ...prev,
+                width: Number(e.target.value),
+              }))
+            }
+          />
+          <label>Width</label>
+          <input
+            defaultValue={slideSize.height}
+            onInput={(e) =>
+              setSlideSize((prev) => ({
+                ...prev,
+                height: Number(e.target.value),
+              }))
+            }
+          />
+          <label>Height</label>
+        </div>
         {slideObject?.map((slideData) => (
           <Slide
             key={slideData.id}
@@ -83,29 +107,6 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
               }))
             }
           /> */}
-          <div className="bg-white h-fit w-fit p-1 gap-2 flex">
-            {" "}
-            <input
-              defaultValue={slideSize.width}
-              onInput={(e) =>
-                setSlideSize((prev) => ({
-                  ...prev,
-                  width: Number(e.target.value),
-                }))
-              }
-            />
-            <label>Width</label>
-            <input
-              defaultValue={slideSize.height}
-              onInput={(e) =>
-                setSlideSize((prev) => ({
-                  ...prev,
-                  height: Number(e.target.value),
-                }))
-              }
-            />
-            <label>Height</label>
-          </div>
         </div>{" "}
       </div>
     </>
