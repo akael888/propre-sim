@@ -36,7 +36,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
           />
         </>
       )}
-      <div className="border-1 w-full md:max-h-screen bg-gray-500 justify-center flex flex-row  md:order-none order-1 max-h-full relative">
+      <div className="border-1 w-full md:h-dvh bg-gray-500 justify-center flex flex-row  md:order-none order-1 max-h-full relative">
         <div className="md:hidden flex absolute bottom-0 z-100 p-1 bg-foreground/10 w-full justify-evenly gap-2">
           <button
             className="border-1 p-1 w-20 rounded-sm bg-foreground"

@@ -15,9 +15,10 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        setParentSlideSize({
-          width: entry.contentRect.width,
-          height: entry.contentRect.height,
+        const newWidth = entry.contentRect.width;
+        setParentSlideSize((prev) => {
+          if (prev.width === newWidth) return prev;
+          return { ...prev, width: newWidth };
         });
       }
     });
@@ -36,35 +37,42 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
     <>
       {" "}
       <div
-        className="flex-1 overflow-y-auto flex flex-row h-full w-full justify-center "
+        className="flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative"
         ref={slideRef}
       >
+        {" "}
+        <div className="bg-white h-fit w-fit p-1 gap-2 fixed  top-0 z-100">
+          <div>
+            Parent Slide Size {parentSlideSize.width} x {parentSlideSize.height}
+          </div>{" "}
+          <div>
+            Slide Size {slideSize.width} x {slideSize.height}
+          </div>
+          <input
+            defaultValue={slideSize.width}
+            onInput={(e) =>
+              setSlideSize((prev) => ({
+                ...prev,
+                width: Number(e.target.value),
+              }))
+            }
+          />
+          <label>Width</label>
+          <input
+            defaultValue={slideSize.height}
+            onInput={(e) =>
+              setSlideSize((prev) => ({
+                ...prev,
+                height: Number(e.target.value),
+              }))
+            }
+          />
+          <label>Height</label>
+        </div>
         <div
-          className="border-1 p-2 gap-1 h-fit w-full flex flex-col gap-1  relative justify-center items-center"
+          className="border-1 p-2 gap-1 h-fit w-full flex flex-col gap-1   justify-center items-center"
           style={{ scrollBehavior: "smooth" }}
         >
-          <div className="bg-white h-fit w-fit p-1 gap-2 flex absolute top-0 z-100">
-            <input
-              defaultValue={slideSize.width}
-              onInput={(e) =>
-                setSlideSize((prev) => ({
-                  ...prev,
-                  width: Number(e.target.value),
-                }))
-              }
-            />
-            <label>Width</label>
-            <input
-              defaultValue={slideSize.height}
-              onInput={(e) =>
-                setSlideSize((prev) => ({
-                  ...prev,
-                  height: Number(e.target.value),
-                }))
-              }
-            />
-            <label>Height</label>
-          </div>
           {slideObject?.map((slideData) => (
             <Slide
               key={slideData.id}
