@@ -73,6 +73,7 @@ export interface DisplayAreaSectionProps {
 export interface DisplayPanelProps {
   slideObject?: TextObject[];
   textAreaRef?: RefObject<HTMLTextAreaElement | null>;
+  parentSlideSize: { width: number; height: number };
 }
 
 export interface SlideProps {

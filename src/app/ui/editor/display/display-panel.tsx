@@ -5,41 +5,15 @@ import { DisplayPanelProps } from "@/app/lib/type";
 const DisplayPanel: React.FC<DisplayPanelProps> = ({
   slideObject,
   textAreaRef,
+  parentSlideSize,
 }) => {
-  const slideRef = useRef<HTMLDivElement>(null);
-  const [parentSlideSize, setParentSlideSize] = useState({
-    width: 1920,
-    height: 1080,
-  });
-
-  useEffect(() => {
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const newWidth = entry.contentRect.width;
-        setParentSlideSize((prev) => {
-          if (prev.width === newWidth) return prev;
-          return { ...prev, width: newWidth };
-        });
-      }
-    });
-
-    if (slideRef.current) {
-      observer.observe(slideRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   const slideMaxNum = slideObject ? slideObject.length : undefined;
   const [slideSize, setSlideSize] = useState({ width: 1920, height: 1080 });
 
   return (
     <>
       {" "}
-      <div
-        className="flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative"
-        ref={slideRef}
-      >
+      <div className="flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative">
         {" "}
         <div className="bg-white h-fit w-fit p-1 gap-2 fixed  top-0 z-100">
           <div>
