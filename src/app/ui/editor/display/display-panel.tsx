@@ -51,7 +51,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
                   onInput={(e) =>
                     setSlideSize((prev) => ({
                       ...prev,
-                      height:Math.max(600, Math.min(800, Number(e.target.value))),
+                      height:Math.max(600, Math.min(1080, Number(e.target.value))),
                     }))
                   }
                   placeholder="Height"
@@ -68,7 +68,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
           </div>
         </div>
         <div
-          className="border-1 p-2 gap-1 h-fit w-full flex flex-col gap-1   justify-center items-center"
+          className="border-1 p-2 gap-1 h-fit w-full flex flex-col gap-1 justify-center items-center overflow-hidden"
           style={{ scrollBehavior: "smooth" }}
         >
           {slideObject?.map((slideData) => (
