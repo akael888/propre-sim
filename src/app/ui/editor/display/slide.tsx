@@ -24,14 +24,13 @@ const Slide: React.FC<SlideProps> = ({
   // getSlideCurrentWidth for TextSize Calculation
 
   // text Scaling Calculation ===============
-  const CANVAS_WIDTH = parentSlideSize.width;
-  const CANVAS_HEIGHT = parentSlideSize.height;
-  const scaleFactor = CANVAS_WIDTH / slideSize.width;
+  const CANVAS_WIDTH = parentSlideSize.width / slideSize.width;
+  const CANVAS_HEIGHT = parentSlideSize.height / slideSize.height;
+  const scaleFactor = Math.min(CANVAS_HEIGHT, CANVAS_WIDTH);
   const scaledWidth = slideSize.width * scaleFactor;
   const scaledHeight = slideSize.height * scaleFactor;
-  const fontSizePx = textAttribute.textSize * 1.333 * scaleFactor;
-  const strokeSizePx =
-    textAttribute.textStroke.strokeSize * 1.333 * scaleFactor;
+  const fontSizePx = textAttribute.textSize * scaleFactor;
+  const strokeSizePx = textAttribute.textStroke.strokeSize * scaleFactor;
 
   // const shadowBlur = textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
 
@@ -41,8 +40,8 @@ const Slide: React.FC<SlideProps> = ({
   const shadowX = Math.cos(angleRad) * offset;
   const shadowY = Math.sin(angleRad) * offset;
 
-  const shadowXPx = shadowX * 1.333 * scaleFactor;
-  const shadowYPx = shadowY * 1.333 * scaleFactor;
+  const shadowXPx = shadowX * scaleFactor;
+  const shadowYPx = shadowY * scaleFactor;
   const shadowBlurPx =
     textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
 
@@ -83,6 +82,13 @@ const Slide: React.FC<SlideProps> = ({
   };
 
   const processDoubleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log("parentSlideSize.width", parentSlideSize.width);
+    console.log("parentSlideSize.height", parentSlideSize.height);
+
+    console.log("slideSize", slideSize.width);
+    console.log("scaleFactor", parentSlideSize.width / slideSize.width);
+    console.log("textSize", textAttribute.textSize);
+    console.log("fontSizePx", fontSizePx);
     if (lastClick && e.timeStamp - lastClick < 250 && waitingClick) {
       setLastClick(0);
       clearTimeout(waitingClick);
