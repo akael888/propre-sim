@@ -26,9 +26,10 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const newWidth = entry.contentRect.width;
+        const newHeight = entry.contentRect.height;
         setParentSlideSize((prev) => {
-          if (prev.width === newWidth) return prev;
-          return { ...prev, width: newWidth };
+          if (prev.width === newWidth && prev.height === newHeight) return prev;
+          return { ...prev, width: newWidth, height: newHeight };
         });
       }
     });
