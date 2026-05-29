@@ -9,11 +9,14 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
 }) => {
   const slideMaxNum = slideObject ? slideObject.length : undefined;
   const [slideSize, setSlideSize] = useState({ width: 1920, height: 1080 });
+  const paddingSize = 10; //in Px
 
   return (
     <>
       {" "}
-      <div className="flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative">
+      <div
+        className={`flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative p-[${paddingSize}px]`}
+      >
         {" "}
         <div className="bg-white h-fit w-fit p-1 gap-2 fixed top-0 z-100 rounded-sm">
           <div className="flex flex-col">
@@ -31,7 +34,10 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
                   onInput={(e) =>
                     setSlideSize((prev) => ({
                       ...prev,
-                      width: Math.max(800, Math.min(1920, Number(e.target.value))),
+                      width: Math.max(
+                        800,
+                        Math.min(1920, Number(e.target.value)),
+                      ),
                     }))
                   }
                   placeholder="Width"
@@ -51,7 +57,10 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
                   onInput={(e) =>
                     setSlideSize((prev) => ({
                       ...prev,
-                      height:Math.max(600, Math.min(1080, Number(e.target.value))),
+                      height: Math.max(
+                        600,
+                        Math.min(1080, Number(e.target.value)),
+                      ),
                     }))
                   }
                   placeholder="Height"
@@ -68,7 +77,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
           </div>
         </div>
         <div
-          className="border-1 p-2 gap-1 h-fit w-full flex flex-col gap-1 justify-center items-center overflow-hidden"
+          className="border-1  gap-1 h-fit w-full flex flex-col gap-1 justify-center items-center overflow-hidden"
           style={{ scrollBehavior: "smooth" }}
         >
           {slideObject?.map((slideData) => (
@@ -80,7 +89,10 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
               slideTextCharIndex={slideData.charIndex}
               textAreaRef={textAreaRef}
               slideSize={slideSize}
-              parentSlideSize={parentSlideSize}
+              parentSlideSize={{
+                width: parentSlideSize.width - paddingSize * 2,
+                height: parentSlideSize.height - paddingSize * 2,
+              }}
             />
           ))}
           {!slideObject && (
