@@ -15,7 +15,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
     <>
       {" "}
       <div
-        className={`flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative p-[${paddingSize}px]`}
+        className={`flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative `}
       >
         {" "}
         <div className="bg-white h-fit w-fit p-1 gap-2 fixed top-0 z-100 rounded-sm">
@@ -78,7 +78,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
         </div>
         <div
           className="border-1  gap-1 h-fit w-full flex flex-col gap-1 justify-center items-center overflow-hidden"
-          style={{ scrollBehavior: "smooth" }}
+          style={{ padding: `${paddingSize}px`, scrollBehavior: "smooth" }}
         >
           {slideObject?.map((slideData) => (
             <Slide
