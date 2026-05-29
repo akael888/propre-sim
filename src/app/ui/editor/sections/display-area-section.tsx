@@ -76,12 +76,16 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
           >
             Help
           </button>
+        </div>{" "}
+        <div
+          className={`flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative `}
+        >
+          <DisplayPanel
+            slideObject={slideObject}
+            textAreaRef={textAreaRef}
+            parentSlideSize={parentSlideSize}
+          />{" "}
         </div>
-        <DisplayPanel
-          slideObject={slideObject}
-          textAreaRef={textAreaRef}
-          parentSlideSize={parentSlideSize}
-        />{" "}
         {/* <Help /> */}
       </div>
       <DisplayOptions />
