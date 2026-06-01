@@ -6,7 +6,7 @@ import { User } from "next-auth";
 export interface TextAttribute {
   textSize: number;
   textColor: string;
-  textSlideColor: string;
+  // textSlideColor: string;
   textFont: NextFontWithVariable;
   textAlign: textAlignTypes;
   textStroke: TextStroke;
@@ -14,6 +14,13 @@ export interface TextAttribute {
   textShadow: TextShadow;
   textContainer: TextContainer;
 }
+
+export interface SlideAttribute {
+  slideColor: string;
+  slideSize: SlideSize;
+}
+
+export type SlideSize = { width: number; height: number };
 
 export type TextShadow = {
   isOn: boolean;
