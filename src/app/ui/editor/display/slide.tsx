@@ -1,4 +1,5 @@
 "use client";
+import { useSlideAttribute } from "@/app/context/slide-attribute-context";
 import { useTextAttribute } from "@/app/context/text-attribute-context";
 import { SlideProps } from "@/app/lib/type";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
@@ -14,6 +15,7 @@ const Slide: React.FC<SlideProps> = ({
 }) => {
   // Calls Text Attribute Context
   const textAttribute = useTextAttribute().textAttribute;
+  const slideAttribute = useSlideAttribute().slideAttribute;
 
   // Double Click Window Value
   const [waitingClick, setWaitingClick] = useState<ReturnType<
@@ -111,7 +113,7 @@ const Slide: React.FC<SlideProps> = ({
         className={` border-1 flex justify-center items-center relative overflow-hidden group`}
         style={{
           containerType: "size",
-          backgroundColor: `${textAttribute.textSlideColor}`,
+          backgroundColor: `${slideAttribute.slideColor}`,
           width: scaledWidth,
           height: scaledHeight,
         }}
