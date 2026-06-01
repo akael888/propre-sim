@@ -78,7 +78,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
           </button>
         </div>{" "}
         <div
-          className={`flex-1 overflow-y-auto flex flex-row h-full w-full justify-center relative `}
+          className={`flex-1 overflow-y-auto flex  h-full w-full justify-center  `}
         >
           <DisplayPanel
             slideObject={slideObject}

@@ -14,7 +14,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
   return (
     <>
       {" "}
-      <div className="bg-white h-fit w-fit p-1 gap-2 fixed top-0 z-100 rounded-sm">
+      <div className="bg-white h-fit w-fit p-1 gap-2 top-0 z-100 rounded-sm absolute ">
         <div className="flex flex-col">
           {" "}
           {/* <div>
