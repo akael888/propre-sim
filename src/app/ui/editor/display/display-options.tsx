@@ -40,8 +40,12 @@ function DisplayOptions({}) {
           <div>
             <OptionThemeMenu
               textAttribute={textAttribute}
+              slideAttribute={slideAttribute}
               handleTextAttributeObjectChanges={
                 handleTextAttributeObjectChanges
+              }
+              handleSlideAttributeObjectChanges={
+                handleSlideAttributeObjectChanges
               }
               menuType="Edit"
             />
@@ -186,7 +190,9 @@ function DisplayOptions({}) {
                       />
                       <OptionColorPicker
                         objectAttribute={textAttribute}
-                        handleObjectAttributeChanges={handleTextAttributeChanges}
+                        handleObjectAttributeChanges={
+                          handleTextAttributeChanges
+                        }
                         attributeKey="textStroke"
                         keyValue="strokeColor"
                       />
@@ -225,7 +231,9 @@ function DisplayOptions({}) {
                       />
                       <OptionColorPicker
                         objectAttribute={textAttribute}
-                        handleObjectAttributeChanges={handleTextAttributeChanges}
+                        handleObjectAttributeChanges={
+                          handleTextAttributeChanges
+                        }
                         attributeKey="textShadow"
                         keyValue="shadowColor"
                       />{" "}
