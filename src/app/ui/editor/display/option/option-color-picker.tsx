@@ -22,7 +22,7 @@ export default function OptionColorPicker<T>({
   };
 
   const handleColorChange = (newValue: string) => {
-    console.log(newValue);
+    // console.log(newValue);
     if (typeof currentObject === "object" && currentObject !== null) {
       if (keyValue) {
         handleObjectAttributeChanges(attributeKey, {
