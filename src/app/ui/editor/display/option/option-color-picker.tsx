@@ -1,13 +1,13 @@
 import { OptionColorPickerProp } from "@/app/lib/type";
 import { useState } from "react";
 
-export default function OptionColorPicker({
-  textAttribute,
-  handleTextAttributeChanges,
+export default function OptionColorPicker<T>({
+  objectAttribute,
+  handleObjectAttributeChanges,
   attributeKey,
   keyValue,
-}: OptionColorPickerProp) {
-  const currentObject = textAttribute[attributeKey];
+}: OptionColorPickerProp<T>) {
+  const currentObject = objectAttribute[attributeKey];
 
   const getCurrentValue = (): string => {
     if (
@@ -25,13 +25,13 @@ export default function OptionColorPicker({
     console.log(newValue);
     if (typeof currentObject === "object" && currentObject !== null) {
       if (keyValue) {
-        handleTextAttributeChanges(attributeKey, {
+        handleObjectAttributeChanges(attributeKey, {
           ...currentObject,
           [keyValue]: newValue,
         });
       }
     } else {
-      handleTextAttributeChanges(attributeKey, newValue);
+      handleObjectAttributeChanges(attributeKey, newValue);
     }
   };
 
