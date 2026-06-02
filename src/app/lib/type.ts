@@ -59,6 +59,7 @@ export interface Theme {
   themeID: number;
   themeName: string;
   textAttribute: TextAttribute;
+  slideAttribute: SlideAttribute;
 }
 
 // Text Area -----------------------------
@@ -125,7 +126,9 @@ export interface OptionColorPickerProp<T> {
 
 export interface OptionThemeMenuProp {
   textAttribute: TextAttribute;
+  slideAttribute: SlideAttribute;
   handleTextAttributeObjectChanges: (newObject: TextAttribute) => void;
+  handleSlideAttributeObjectChanges: (newObject: SlideAttribute) => void;
   menuType: "Preview" | "Edit";
 }
 

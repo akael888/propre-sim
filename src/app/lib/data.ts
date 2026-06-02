@@ -86,6 +86,7 @@ export const defaultThemeCollection = [
     themeID: 0,
     themeName: "Default HIT",
     textAttribute: defaultTextAttributeData,
+    slideAttribute: defaultSlideAttributeData,
   },
   {
     themeID: 1,
@@ -111,6 +112,10 @@ export const defaultThemeCollection = [
         shadowColor: "#000000",
       },
       textContainer: { width: 100, height: 100 },
+    },
+    slideAttribute: <SlideAttribute>{
+      slideColor: "#edadff",
+      slideSize: { width: 1920, height: 1080 },
     },
   },
 ];
