@@ -113,13 +113,13 @@ export interface OptionInputStepperProp {
   max?: number;
   min?: number;
 }
-export interface OptionColorPickerProp {
-  textAttribute: TextAttribute;
-  handleTextAttributeChanges: <K extends keyof TextAttribute>(
+export interface OptionColorPickerProp<T> {
+  objectAttribute: T;
+  handleObjectAttributeChanges: <K extends keyof T>(
     attribute: K,
-    attributeValue: TextAttribute[K],
+    attributeValue: T[K],
   ) => void;
-  attributeKey: keyof TextAttribute;
+  attributeKey: keyof T;
   keyValue?: string;
 }
 
