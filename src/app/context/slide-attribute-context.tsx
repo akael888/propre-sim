@@ -22,22 +22,32 @@ export function SlideAttributeProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [slideAttribute, setSlideAttribute] = useState(
-    defaultSlideAttributeData,
-  );
-
-  useEffect(() => {
-    try {
+  const [slideAttribute, setSlideAttribute] = useState(() => {
+    if (typeof window !== "undefined") {
       const stored = localStorage.getItem("SLIDE_ATTRIBUTE_DATA");
       if (stored) {
-        const parsed = JSON.parse(stored);
-        setSlideAttribute(parsed);
+        try {
+          return JSON.parse(stored);
+        } catch (err) {
+          console.error("Malformed storage data:", err);
+        }
       }
-    } catch (err) {
-      console.log(err);
-      setSlideAttribute(defaultSlideAttributeData);
     }
-  }, []);
+    return defaultSlideAttributeData;
+  });
+
+  // useEffect(() => {
+  //   try {
+  //     const stored = localStorage.getItem("SLIDE_ATTRIBUTE_DATA");
+  //     if (stored) {
+  //       const parsed = JSON.parse(stored);
+  //       setSlideAttribute(parsed);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     setSlideAttribute(defaultSlideAttributeData);
+  //   }
+  // }, []);
 
   const handleSlideAttributeChanges = <K extends keyof SlideAttribute>(
     attribute: K,
