@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import Slide from "./slide";
 import { DisplayPanelProps } from "@/app/lib/type";
+import { SlideAttribute, SlideSize } from "../../../lib/type";
+import { useSlideAttribute } from "@/app/context/slide-attribute-context";
 
 const DisplayPanel: React.FC<DisplayPanelProps> = ({
   slideObject,
   textAreaRef,
   parentSlideSize,
 }) => {
+  const slideAttribute = useSlideAttribute().slideAttribute;
+  const handleSlideAttributeChanges =
+    useSlideAttribute().handleSlideAttributeChanges;
   const slideMaxNum = slideObject ? slideObject.length : undefined;
   const [slideSize, setSlideSize] = useState({ width: 1920, height: 1080 });
   const paddingSize = 10; //in Px
@@ -26,16 +31,21 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
           <div className="flex flex-row gap-2 p-2">
             <div className="relative">
               <input
-                defaultValue={slideSize.width}
-                onInput={(e) =>
-                  setSlideSize((prev) => ({
-                    ...prev,
-                    width: Math.max(
-                      800,
-                      Math.min(1920, Number(e.target.value)),
-                    ),
-                  }))
-                }
+                defaultValue={slideAttribute.slideSize.width}
+                onInput={(e) => {
+                  const constrainedInput = Math.max(
+                    800,
+                    Math.min(1920, Number(e.target.value)),
+                  );
+                  handleSlideAttributeChanges("slideSize", {
+                    ...slideAttribute.slideSize,
+                    width: constrainedInput,
+                  });
+                  // setSlideSize((prev) => ({
+                  //   ...prev,
+                  //   width: constrainedInput,
+                  // }));
+                }}
                 placeholder="Width"
                 className="w-20 border-1 p-1 truncate"
                 type="number"
@@ -49,16 +59,17 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
             <div className="relative">
               {" "}
               <input
-                defaultValue={slideSize.height}
-                onInput={(e) =>
-                  setSlideSize((prev) => ({
-                    ...prev,
-                    height: Math.max(
-                      600,
-                      Math.min(1080, Number(e.target.value)),
-                    ),
-                  }))
-                }
+                defaultValue={slideAttribute.slideSize.height}
+                onInput={(e) => {
+                  const constrainedInput = Math.max(
+                    600,
+                    Math.min(1080, Number(e.target.value)),
+                  );
+                  handleSlideAttributeChanges("slideSize", {
+                    ...slideAttribute.slideSize,
+                    height: constrainedInput,
+                  });
+                }}
                 placeholder="Height"
                 className="w-20 border-1 p-1 truncate"
                 type="number"
@@ -84,7 +95,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
             slideContent={slideData.content}
             slideTextCharIndex={slideData.charIndex}
             textAreaRef={textAreaRef}
-            slideSize={slideSize}
+            slideSize={slideAttribute.slideSize}
             parentSlideSize={{
               width: parentSlideSize.width - paddingSize * 2,
               height: parentSlideSize.height - paddingSize * 2,
