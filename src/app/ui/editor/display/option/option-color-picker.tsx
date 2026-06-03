@@ -18,7 +18,7 @@ export default function OptionColorPicker<T>({
       const obj = currentObject as Record<string, unknown>;
       return typeof obj[keyValue] === "string" ? (obj[keyValue] as string) : "";
     }
-    return currentObject.toString() || "";
+    return (currentObject as string) || "";
   };
 
   const handleColorChange = (newValue: string) => {
@@ -31,7 +31,7 @@ export default function OptionColorPicker<T>({
         });
       }
     } else {
-      handleObjectAttributeChanges(attributeKey, newValue);
+      handleObjectAttributeChanges(attributeKey, newValue as T[keyof T]);
     }
   };
 
@@ -39,7 +39,7 @@ export default function OptionColorPicker<T>({
     <div className="flex 2xl:flex-row flex-col items-center  text-start justify-center h-full p-1 gap-2">
       <div className="flex flex-col">
         <h2 className="font-bold text-sm">
-          {attributeKey} {keyValue ? `(${keyValue})` : "  "}
+          {attributeKey as string} {keyValue ? `(${keyValue})` : "  "}
         </h2>
         <p>{getCurrentValue()}</p>
       </div>
