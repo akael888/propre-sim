@@ -67,7 +67,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
                     const targetHTMLInput = e.target as HTMLInputElement;
                     const constrainedInput = Math.max(
                       600,
-                      Math.min(1080, Number(targetHTMLInput.value)
+                      Math.min(1080, Number(targetHTMLInput.value)),
                     );
                     handleSlideAttributeChanges("slideSize", {
                       ...slideAttribute.slideSize,
