@@ -6,13 +6,22 @@ import TextAlign from "./option/option-text-align";
 import TextStyle from "./option/option-text-style";
 
 import { useTextAttribute } from "@/app/context/text-attribute-context";
+import { useSlideAttribute } from "@/app/context/slide-attribute-context";
 
 function OptionModal({}) {
+  //Use Text Attribute
   const textAttribute = useTextAttribute().textAttribute;
   const handleTextAttributeChanges =
     useTextAttribute().handleTextAttributeChanges;
   const handleTextAttributeObjectChanges =
     useTextAttribute().handleTextAttributeObjectChanges;
+
+  //Use Slide Attribute
+  const slideAttribute = useSlideAttribute().slideAttribute;
+  const handleSlideAttributeChanges =
+    useSlideAttribute().handleSlideAttributeChanges;
+  const handleSlideAttributeObjectChanges =
+    useSlideAttribute().handleSlideAttributeObjectChanges;
   return (
     <>
       {" "}
@@ -22,8 +31,12 @@ function OptionModal({}) {
           <div className="w-full flex justify-center">
             <OptionThemeMenu
               textAttribute={textAttribute}
+              slideAttribute={slideAttribute}
               handleTextAttributeObjectChanges={
                 handleTextAttributeObjectChanges
+              }
+              handleSlideAttributeObjectChanges={
+                handleSlideAttributeObjectChanges
               }
               menuType="Edit"
             />
@@ -139,14 +152,14 @@ function OptionModal({}) {
                     </div>
                   </div>
                   <OptionColorPicker
-                    textAttribute={textAttribute}
-                    handleTextAttributeChanges={handleTextAttributeChanges}
+                    objectAttribute={textAttribute}
+                    handleObjectAttributeChanges={handleTextAttributeChanges}
                     attributeKey="textColor"
                   />
                   <OptionColorPicker
-                    textAttribute={textAttribute}
-                    handleTextAttributeChanges={handleTextAttributeChanges}
-                    attributeKey="textSlideColor"
+                    objectAttribute={slideAttribute}
+                    handleObjectAttributeChanges={handleSlideAttributeChanges}
+                    attributeKey="slideColor"
                   />
                   <div className="flex flex-row gap-2 justify-evenly items-center h-full w-full col-span-2"></div>
                 </div>
@@ -180,8 +193,10 @@ function OptionModal({}) {
                         intervalPerStep={0.1}
                       />
                       <OptionColorPicker
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        objectAttribute={textAttribute}
+                        handleObjectAttributeChanges={
+                          handleTextAttributeChanges
+                        }
                         attributeKey="textStroke"
                         keyValue="strokeColor"
                       />
@@ -231,8 +246,10 @@ function OptionModal({}) {
                         intervalPerStep={1}
                       />
                       <OptionColorPicker
-                        textAttribute={textAttribute}
-                        handleTextAttributeChanges={handleTextAttributeChanges}
+                        objectAttribute={textAttribute}
+                        handleObjectAttributeChanges={
+                          handleTextAttributeChanges
+                        }
                         attributeKey="textShadow"
                         keyValue="shadowColor"
                       />
