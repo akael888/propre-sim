@@ -1,6 +1,6 @@
 {
   "name": "propre-sim",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

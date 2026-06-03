@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { TextAttribute } from "./type";
+import { SlideAttribute, TextAttribute } from "./type";
 import { createAuthClient } from "@neondatabase/neon-js/auth";
 
 export type textAlignTypes = "left" | "center" | "right" | "justify";
@@ -54,9 +54,9 @@ export const defaultFontCollection = [
 ];
 
 export const defaultTextAttributeData = <TextAttribute>{
-  textSize: 98,
+  textSize: 124,
   textColor: "#FFFFFF",
-  textSlideColor: "#edadff",
+  // textSlideColor: "#edadff",
   textFont: defaultFontCollection[0].fontData,
   textAlign: "center",
   textStroke: { isOn: true, strokeSize: 10, strokeColor: "#000000" },
@@ -76,11 +76,17 @@ export const defaultTextAttributeData = <TextAttribute>{
   textContainer: { width: 100, height: 100 },
 };
 
+export const defaultSlideAttributeData = <SlideAttribute>{
+  slideColor: "#edadff",
+  slideSize: { width: 1920, height: 1080 },
+};
+
 export const defaultThemeCollection = [
   {
     themeID: 0,
     themeName: "Default HIT",
     textAttribute: defaultTextAttributeData,
+    slideAttribute: defaultSlideAttributeData,
   },
   {
     themeID: 1,
@@ -88,7 +94,7 @@ export const defaultThemeCollection = [
     textAttribute: <TextAttribute>{
       textSize: 5,
       textColor: "#FFFFFF",
-      textSlideColor: "#edadff",
+      // textSlideColor: "#edadff",
       textFont: defaultFontCollection[1].fontData,
       textAlign: "center",
       textStroke: { isOn: true, strokeSize: 0.89, strokeColor: "#000000" },
@@ -106,6 +112,10 @@ export const defaultThemeCollection = [
         shadowColor: "#000000",
       },
       textContainer: { width: 100, height: 100 },
+    },
+    slideAttribute: <SlideAttribute>{
+      slideColor: "#edadff",
+      slideSize: { width: 1920, height: 1080 },
     },
   },
 ];

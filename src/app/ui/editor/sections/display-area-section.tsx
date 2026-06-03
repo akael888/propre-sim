@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DisplayPanel from "../display/display-panel";
 import DisplayOptions from "../display/display-options";
 import { DisplayAreaSectionProps, TextAttribute } from "../../../lib/type";
@@ -15,6 +15,31 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
   // Modal States
   const [isOptionOpen, setIsOptionOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+
+  const slideRef = useRef<HTMLDivElement>(null);
+  const [parentSlideSize, setParentSlideSize] = useState({
+    width: 1920,
+    height: 1080,
+  });
+
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const newWidth = entry.contentRect.width;
+        const newHeight = entry.contentRect.height;
+        setParentSlideSize((prev) => {
+          if (prev.width === newWidth && prev.height === newHeight) return prev;
+          return { ...prev, width: newWidth, height: newHeight };
+        });
+      }
+    });
+
+    if (slideRef.current) {
+      observer.observe(slideRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -36,7 +61,8 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
           />
         </>
       )}
-      <div className="border-1 w-full md:max-h-screen bg-gray-500 justify-center flex flex-row  md:order-none order-1 max-h-full relative">
+      <div className="border-1 w-full h-dvh bg-gray-500 justify-center flex flex-row  md:order-none order-1 max-h-full relative overflow-hidden">
+        <div ref={slideRef} className="absolute inset-0 pointer-events-none" />
         <div className="md:hidden flex absolute bottom-0 z-100 p-1 bg-foreground/10 w-full justify-evenly gap-2">
           <button
             className="border-1 p-1 w-20 rounded-sm bg-foreground"
@@ -50,14 +76,17 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
           >
             Help
           </button>
-        </div>
-        <div className="flex-1 overflow-y-auto flex flex-row h-full justify-center ">
+        </div>{" "}
+        <div
+          className={`flex-1 overflow-y-auto flex  h-full w-full justify-center  `}
+        >
           <DisplayPanel
             slideObject={slideObject}
             textAreaRef={textAreaRef}
+            parentSlideSize={parentSlideSize}
+            editable={true}
           />{" "}
         </div>
-
         {/* <Help /> */}
       </div>
       <DisplayOptions />

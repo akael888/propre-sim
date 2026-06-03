@@ -1,4 +1,5 @@
 "use client";
+import { useSlideAttribute } from "@/app/context/slide-attribute-context";
 import { useTextAttribute } from "@/app/context/text-attribute-context";
 import { SlideProps } from "@/app/lib/type";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
@@ -9,11 +10,12 @@ const Slide: React.FC<SlideProps> = ({
   slideContent,
   slideTextCharIndex,
   textAreaRef,
+  slideSize,
+  parentSlideSize,
 }) => {
-
   // Calls Text Attribute Context
   const textAttribute = useTextAttribute().textAttribute;
-
+  const slideAttribute = useSlideAttribute().slideAttribute;
 
   // Double Click Window Value
   const [waitingClick, setWaitingClick] = useState<ReturnType<
@@ -22,29 +24,15 @@ const Slide: React.FC<SlideProps> = ({
   const [lastClick, setLastClick] = useState(0);
 
   // getSlideCurrentWidth for TextSize Calculation
-  const slideRef = useRef<HTMLDivElement>(null);
-  const [slideWidth, setSlideWidth] = useState(0);
-
-  useEffect(() => {
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setSlideWidth(entry.contentRect.width);
-      }
-    });
-
-    if (slideRef.current) {
-      observer.observe(slideRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   // text Scaling Calculation ===============
-  const CANVAS_WIDTH = 1920;
-  const scaleFactor = slideWidth / CANVAS_WIDTH;
-  const fontSizePx = textAttribute.textSize * 1.333 * scaleFactor;
-  const strokeSizePx =
-    textAttribute.textStroke.strokeSize * 1.333 * scaleFactor;
+  const CANVAS_WIDTH = parentSlideSize.width / slideSize.width;
+  const CANVAS_HEIGHT = parentSlideSize.height / slideSize.height;
+  const scaleFactor = Math.min(CANVAS_HEIGHT, CANVAS_WIDTH);
+  const scaledWidth = slideSize.width * scaleFactor;
+  const scaledHeight = slideSize.height * scaleFactor;
+  const fontSizePx = textAttribute.textSize * scaleFactor;
+  const strokeSizePx = textAttribute.textStroke.strokeSize * scaleFactor;
 
   // const shadowBlur = textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
 
@@ -54,14 +42,13 @@ const Slide: React.FC<SlideProps> = ({
   const shadowX = Math.cos(angleRad) * offset;
   const shadowY = Math.sin(angleRad) * offset;
 
-  const shadowXPx = shadowX * 1.333 * scaleFactor;
-  const shadowYPx = shadowY * 1.333 * scaleFactor;
+  const shadowXPx = shadowX * scaleFactor;
+  const shadowYPx = shadowY * scaleFactor;
   const shadowBlurPx =
     textAttribute.textShadow.shadowBlur * 1.333 * scaleFactor;
 
+  // ===============================================================
 
-    // ===============================================================
-  
   const FocusOnTextArea = (textSearch: string) => {
     if (textAreaRef) {
       const textarea = textAreaRef.current;
@@ -78,9 +65,7 @@ const Slide: React.FC<SlideProps> = ({
       );
 
       // Set the target index
-      const targetIndex =
-        splicedTextFromCurrentCharIndex.indexOf(textSearch) +
-        slideTextCharIndex;
+      const targetIndex = slideTextCharIndex;
 
       if (targetIndex !== 1) {
         textarea.focus();
@@ -99,6 +84,13 @@ const Slide: React.FC<SlideProps> = ({
   };
 
   const processDoubleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log("parentSlideSize.width", parentSlideSize.width);
+    console.log("parentSlideSize.height", parentSlideSize.height);
+
+    console.log("slideSize", slideSize.width);
+    console.log("scaleFactor", parentSlideSize.width / slideSize.width);
+    console.log("textSize", textAttribute.textSize);
+    console.log("fontSizePx", fontSizePx);
     if (lastClick && e.timeStamp - lastClick < 250 && waitingClick) {
       setLastClick(0);
       clearTimeout(waitingClick);
@@ -118,13 +110,15 @@ const Slide: React.FC<SlideProps> = ({
     <>
       <div
         id={slideTextCharIndex.toString()}
-        className={`aspect-video border-1 flex justify-center items-center relative overflow-hidden group`}
+        className={` border-1 flex justify-center items-center relative overflow-hidden group`}
         style={{
           containerType: "size",
-          backgroundColor: `${textAttribute.textSlideColor}`,
+          backgroundColor: `${slideAttribute.slideColor}`,
+          width: scaledWidth,
+          height: scaledHeight,
         }}
         onClick={processDoubleClick}
-        ref={slideRef}
+        // ref={slideRef}
       >
         <div
           className="border-1 border-dashed overflow-hidden"

@@ -6,7 +6,7 @@ import { User } from "next-auth";
 export interface TextAttribute {
   textSize: number;
   textColor: string;
-  textSlideColor: string;
+  // textSlideColor: string;
   textFont: NextFontWithVariable;
   textAlign: textAlignTypes;
   textStroke: TextStroke;
@@ -14,6 +14,13 @@ export interface TextAttribute {
   textShadow: TextShadow;
   textContainer: TextContainer;
 }
+
+export interface SlideAttribute {
+  slideColor: string;
+  slideSize: SlideSize;
+}
+
+export type SlideSize = { width: number; height: number };
 
 export type TextShadow = {
   isOn: boolean;
@@ -52,6 +59,7 @@ export interface Theme {
   themeID: number;
   themeName: string;
   textAttribute: TextAttribute;
+  slideAttribute: SlideAttribute;
 }
 
 // Text Area -----------------------------
@@ -73,6 +81,8 @@ export interface DisplayAreaSectionProps {
 export interface DisplayPanelProps {
   slideObject?: TextObject[];
   textAreaRef?: RefObject<HTMLTextAreaElement | null>;
+  parentSlideSize: { width: number; height: number };
+  editable?: boolean;
 }
 
 export interface SlideProps {
@@ -80,6 +90,8 @@ export interface SlideProps {
   slideMaxNum?: number | undefined;
   slideContent: string;
   slideTextCharIndex: number;
+  slideSize: { width: number; height: number };
+  parentSlideSize: { width: number; height: number };
   textAreaRef?: RefObject<HTMLTextAreaElement | null>;
 }
 export interface TextFontsSelectionProp {
@@ -103,19 +115,21 @@ export interface OptionInputStepperProp {
   max?: number;
   min?: number;
 }
-export interface OptionColorPickerProp {
-  textAttribute: TextAttribute;
-  handleTextAttributeChanges: <K extends keyof TextAttribute>(
+export interface OptionColorPickerProp<T> {
+  objectAttribute: T;
+  handleObjectAttributeChanges: <K extends keyof T>(
     attribute: K,
-    attributeValue: TextAttribute[K],
+    attributeValue: T[K],
   ) => void;
-  attributeKey: keyof TextAttribute;
+  attributeKey: keyof T;
   keyValue?: string;
 }
 
 export interface OptionThemeMenuProp {
   textAttribute: TextAttribute;
+  slideAttribute: SlideAttribute;
   handleTextAttributeObjectChanges: (newObject: TextAttribute) => void;
+  handleSlideAttributeObjectChanges: (newObject: SlideAttribute) => void;
   menuType: "Preview" | "Edit";
 }
 

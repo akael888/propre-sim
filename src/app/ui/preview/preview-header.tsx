@@ -3,6 +3,7 @@ import Link from "next/link";
 import OptionThemeMenu from "../editor/display/option/option-theme-menu";
 import { useTextAttribute } from "@/app/context/text-attribute-context";
 import OptionColorPicker from "../editor/display/option/option-color-picker";
+import { useSlideAttribute } from "@/app/context/slide-attribute-context";
 
 export default function PreviewHeader({
   slideID,
@@ -39,6 +40,10 @@ export default function PreviewHeader({
           </div>
           <OptionThemeMenu
             textAttribute={useTextAttribute().textAttribute}
+            slideAttribute={useSlideAttribute().slideAttribute}
+            handleSlideAttributeObjectChanges={
+              useSlideAttribute().handleSlideAttributeObjectChanges
+            }
             handleTextAttributeObjectChanges={
               useTextAttribute().handleTextAttributeObjectChanges
             }
