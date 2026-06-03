@@ -23,22 +23,32 @@ export function TextAttributeProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [textAttribute, setTextAttribute] = useState<TextAttribute>(
-    defaultTextAttributeData,
-  );
-
-  useEffect(() => {
-    try {
+  const [textAttribute, setTextAttribute] = useState<TextAttribute>(() => {
+    if (typeof window !== "undefined") {
       const stored = localStorage.getItem("TEXT_ATTRIBUTE_DATA");
       if (stored) {
-        const parsed = JSON.parse(stored);
-        setTextAttribute(parsed);
+        try {
+          return JSON.parse(stored);
+        } catch (err) {
+          console.error("Malformed storage data:", err);
+        }
       }
-    } catch (err) {
-      console.log(err);
-      setTextAttribute(defaultTextAttributeData);
     }
-  }, []);
+    return defaultTextAttributeData;
+  });
+
+  // useEffect(() => {
+  //   try {
+  //     const stored = localStorage.getItem("TEXT_ATTRIBUTE_DATA");
+  //     if (stored) {
+  //       const parsed = JSON.parse(stored);
+  //       setTextAttribute(parsed);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //     setTextAttribute(defaultTextAttributeData);
+  //   }
+  // }, []);
 
   const handleTextAttributeChanges = <K extends keyof TextAttribute>(
     attribute: K,

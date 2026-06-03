@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 
 export default function OptionThemeMenu({
   textAttribute,
+  slideAttribute,
   handleTextAttributeObjectChanges,
+  handleSlideAttributeObjectChanges,
   menuType,
 }: OptionThemeMenuProp) {
   const getThemeCollection = (): Theme[] => {
@@ -23,8 +25,9 @@ export default function OptionThemeMenu({
   const [selectedTheme, setSelectedTheme] = useState(themeCollection[0]);
   const [createdThemeName, setCreatedThemeName] = useState("");
 
-  const loadSelectedTheme = (themeSettings: TextAttribute) => {
-    handleTextAttributeObjectChanges(themeSettings);
+  const loadSelectedTheme = (selectedTheme: Theme) => {
+    handleTextAttributeObjectChanges(selectedTheme.textAttribute);
+    handleSlideAttributeObjectChanges(selectedTheme.slideAttribute);
   };
 
   const deleteSelectedTheme = (deletedTheme: Theme) => {
@@ -48,6 +51,7 @@ export default function OptionThemeMenu({
       themeID: themeCollection.length,
       themeName: createdThemeName,
       textAttribute: textAttribute,
+      slideAttribute: slideAttribute,
     };
     setThemeCollection((prevItems) => [...prevItems, newTheme]);
 
@@ -84,7 +88,7 @@ export default function OptionThemeMenu({
           <div className="gap-2 flex flex-row justify-evenly items-center">
             <button
               className="border-1 p-1 hover:bg-foreground bg-green-500/50 h-10 w-20 hover:-translate-y-0.5 box-shadow shadow-md rounded-sm"
-              onClick={() => loadSelectedTheme(selectedTheme.textAttribute)}
+              onClick={() => loadSelectedTheme(selectedTheme)}
             >
               ↓ Load
             </button>
