@@ -8,6 +8,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
   slideObject,
   textAreaRef,
   parentSlideSize,
+  editable,
 }) => {
   const slideAttribute = useSlideAttribute().slideAttribute;
   const handleSlideAttributeChanges =
@@ -19,70 +20,72 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
   return (
     <>
       {" "}
-      <div className="bg-white h-fit w-fit p-1 gap-2 top-0 z-100 rounded-sm absolute ">
-        <div className="flex flex-col">
-          {" "}
-          {/* <div>
+      {editable && (
+        <div className="bg-white h-fit w-fit p-1 gap-2 top-0 z-100 rounded-sm absolute ">
+          <div className="flex flex-col">
+            {" "}
+            {/* <div>
             Parent Slide Size {parentSlideSize.width} x {parentSlideSize.height}
           </div>{" "}
           <div>
             Slide Size {slideSize.width} x {slideSize.height}
           </div> */}
-          <div className="flex flex-row gap-2 p-2">
-            <div className="relative">
-              <input
-                defaultValue={slideAttribute.slideSize.width}
-                onInput={(e) => {
-                  const constrainedInput = Math.max(
-                    800,
-                    Math.min(1920, Number(e.target.value)),
-                  );
-                  handleSlideAttributeChanges("slideSize", {
-                    ...slideAttribute.slideSize,
-                    width: constrainedInput,
-                  });
-                  // setSlideSize((prev) => ({
-                  //   ...prev,
-                  //   width: constrainedInput,
-                  // }));
-                }}
-                placeholder="Width"
-                className="w-20 border-1 p-1 truncate"
-                type="number"
-                max={1920}
-                min={800}
-              />
-              <div className="absolute right-1 top-1 p-0.5 bg-background/10">
-                pt
-              </div>
-            </div>{" "}
-            <div className="relative">
-              {" "}
-              <input
-                defaultValue={slideAttribute.slideSize.height}
-                onInput={(e) => {
-                  const constrainedInput = Math.max(
-                    600,
-                    Math.min(1080, Number(e.target.value)),
-                  );
-                  handleSlideAttributeChanges("slideSize", {
-                    ...slideAttribute.slideSize,
-                    height: constrainedInput,
-                  });
-                }}
-                placeholder="Height"
-                className="w-20 border-1 p-1 truncate"
-                type="number"
-                max={1080}
-                min={600}
-              />{" "}
-              <div className="absolute right-1 top-1 p-0.5 bg-background/10">
-                pt
+            <div className="flex flex-row gap-2 p-2">
+              <div className="relative">
+                <input
+                  defaultValue={slideAttribute.slideSize.width}
+                  onInput={(e) => {
+                    const constrainedInput = Math.max(
+                      800,
+                      Math.min(1920, Number(e.target.value)),
+                    );
+                    handleSlideAttributeChanges("slideSize", {
+                      ...slideAttribute.slideSize,
+                      width: constrainedInput,
+                    });
+                    // setSlideSize((prev) => ({
+                    //   ...prev,
+                    //   width: constrainedInput,
+                    // }));
+                  }}
+                  placeholder="Width"
+                  className="w-20 border-1 p-1 truncate"
+                  type="number"
+                  max={1920}
+                  min={800}
+                />
+                <div className="absolute right-1 top-1 p-0.5 bg-background/10">
+                  pt
+                </div>
+              </div>{" "}
+              <div className="relative">
+                {" "}
+                <input
+                  defaultValue={slideAttribute.slideSize.height}
+                  onInput={(e) => {
+                    const constrainedInput = Math.max(
+                      600,
+                      Math.min(1080, Number(e.target.value)),
+                    );
+                    handleSlideAttributeChanges("slideSize", {
+                      ...slideAttribute.slideSize,
+                      height: constrainedInput,
+                    });
+                  }}
+                  placeholder="Height"
+                  className="w-20 border-1 p-1 truncate"
+                  type="number"
+                  max={1080}
+                  min={600}
+                />{" "}
+                <div className="absolute right-1 top-1 p-0.5 bg-background/10">
+                  pt
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <div
         className="border-1  gap-1 h-fit w-full flex flex-col gap-1 justify-center items-center overflow-hidden"
         style={{ padding: `${paddingSize}px`, scrollBehavior: "smooth" }}

@@ -84,6 +84,7 @@ const DisplayAreaSection: React.FC<DisplayAreaSectionProps> = ({
             slideObject={slideObject}
             textAreaRef={textAreaRef}
             parentSlideSize={parentSlideSize}
+            editable={true}
           />{" "}
         </div>
         {/* <Help /> */}
