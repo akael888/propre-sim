@@ -35,9 +35,10 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
                 <input
                   defaultValue={slideAttribute.slideSize.width}
                   onInput={(e) => {
+                    const targetHTMLInput = e.target as HTMLInputElement;
                     const constrainedInput = Math.max(
                       800,
-                      Math.min(1920, Number(e.target.value)),
+                      Math.min(1920, Number(targetHTMLInput.value)),
                     );
                     handleSlideAttributeChanges("slideSize", {
                       ...slideAttribute.slideSize,
@@ -63,9 +64,10 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
                 <input
                   defaultValue={slideAttribute.slideSize.height}
                   onInput={(e) => {
+                    const targetHTMLInput = e.target as HTMLInputElement;
                     const constrainedInput = Math.max(
                       600,
-                      Math.min(1080, Number(e.target.value)),
+                      Math.min(1080, Number(targetHTMLInput.value)
                     );
                     handleSlideAttributeChanges("slideSize", {
                       ...slideAttribute.slideSize,
