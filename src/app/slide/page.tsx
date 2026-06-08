@@ -8,7 +8,6 @@ import SlideCollectionWrapper from "../ui/slide/slide-collection-wrapper";
 import LoadingSlide from "../ui/fallback/loading-slide";
 
 export default async function SlideManagerPage() {
-
   return (
     <div className="bg-foreground min-h-screen flex flex-col">
       <div className="flex justify-between p-1 border sticky top-0 text-background bg-white z-100">
@@ -33,6 +32,15 @@ export default async function SlideManagerPage() {
         </div>
       </div>
       <div className="bg-foreground gap-5  h-full md:grid-cols-3 md:auto-rows-max md:grid flex flex-col bg-gray-200 p-2">
+        <div className="col-span-full text-background p-2 border-b-2 text-xl font-bold">
+          Recent Slides..
+        </div>
+        <Suspense fallback={<LoadingSlide />}>
+          <SlideCollectionWrapper numberOfData={3} />
+        </Suspense>
+        <div className="col-span-full text-background p-2 border-b-2 text-xl font-bold">
+          All Slides..
+        </div>
         <Suspense fallback={<LoadingSlide />}>
           <SlideCollectionWrapper />
         </Suspense>
