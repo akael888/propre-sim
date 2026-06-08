@@ -17,11 +17,17 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
   const [slideSize, setSlideSize] = useState({ width: 1920, height: 1080 });
   const paddingSize = 10; //in Px
 
+  const clamp = (value: number, min: number, max: number): number => {
+    if (min !== undefined && value < min) return min;
+    if (max !== undefined && value > max) return max;
+    return value;
+  };
+
   return (
     <>
       {" "}
       {editable && (
-        <div className="bg-white h-fit w-fit p-1 gap-2 top-0 z-100 rounded-sm absolute ">
+        <div className="bg-white h-fit w-fit p-1 gap-2 top-0 z-100 rounded-sm absolute opacity-50 hover:opacity-100 ">
           <div className="flex flex-col">
             {" "}
             {/* <div>
@@ -33,21 +39,36 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
             <div className="flex flex-row gap-2 p-2">
               <div className="relative">
                 <input
-                  defaultValue={slideAttribute.slideSize.width}
+                  value={slideAttribute.slideSize.width}
                   onInput={(e) => {
                     const targetHTMLInput = e.target as HTMLInputElement;
-                    const constrainedInput = Math.max(
-                      800,
-                      Math.min(1920, Number(targetHTMLInput.value)),
-                    );
+                    // const clamped = clamp(
+                    //   Number(targetHTMLInput.value),
+                    //   800,
+                    //   1920,
+                    // );
+                    // const constrainedInput = Math.max(
+                    //   800,
+                    //   Math.min(1920, Number(targetHTMLInput.value)),
+                    // );
                     handleSlideAttributeChanges("slideSize", {
                       ...slideAttribute.slideSize,
-                      width: constrainedInput,
+                      width: Number(targetHTMLInput.value),
                     });
                     // setSlideSize((prev) => ({
                     //   ...prev,
                     //   width: constrainedInput,
                     // }));
+                  }}
+                  onBlur={(e) => {
+                    const targetHTMLInput = e.target as HTMLInputElement;
+                    targetHTMLInput.value = String(
+                      clamp(Number(targetHTMLInput.value), 800, 1920),
+                    );
+                    handleSlideAttributeChanges("slideSize", {
+                      ...slideAttribute.slideSize,
+                      width: Number(targetHTMLInput.value),
+                    });
                   }}
                   placeholder="Width"
                   className="w-20 border-1 p-1 truncate"
@@ -55,23 +76,42 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
                   max={1920}
                   min={800}
                 />
-                <div className="absolute right-1 top-1 p-0.5 bg-background/10">
+                <div className="absolute right-5 top-0.5 p-0.5 opacity-20 z-[-1]">
                   pt
                 </div>
               </div>{" "}
               <div className="relative">
                 {" "}
                 <input
-                  defaultValue={slideAttribute.slideSize.height}
+                  value={slideAttribute.slideSize.height}
                   onInput={(e) => {
                     const targetHTMLInput = e.target as HTMLInputElement;
-                    const constrainedInput = Math.max(
-                      600,
-                      Math.min(1080, Number(targetHTMLInput.value)),
+                    // const clamped = clamp(
+                    //   Number(targetHTMLInput.value),
+                    //   600,
+                    //   1080,
+                    // );
+                    // const constrainedInput = Math.max(
+                    //   600,
+                    //   Math.min(1080, Number(targetHTMLInput.value)),
+                    // );
+                    // targetHTMLInput.value = String(clamped);
+                    // alert(clamped);
+                    // alert(Number(targetHTMLInput.value));
+
+                    handleSlideAttributeChanges("slideSize", {
+                      ...slideAttribute.slideSize,
+                      height: Number(targetHTMLInput.value),
+                    });
+                  }}
+                  onBlur={(e) => {
+                    const targetHTMLInput = e.target as HTMLInputElement;
+                    targetHTMLInput.value = String(
+                      clamp(Number(targetHTMLInput.value), 600, 1080),
                     );
                     handleSlideAttributeChanges("slideSize", {
                       ...slideAttribute.slideSize,
-                      height: constrainedInput,
+                      height: Number(targetHTMLInput.value),
                     });
                   }}
                   placeholder="Height"
@@ -80,7 +120,7 @@ const DisplayPanel: React.FC<DisplayPanelProps> = ({
                   max={1080}
                   min={600}
                 />{" "}
-                <div className="absolute right-1 top-1 p-0.5 bg-background/10">
+                <div className="absolute right-5 top-0.5 p-0.5 opacity-20 z-[-1]">
                   pt
                 </div>
               </div>

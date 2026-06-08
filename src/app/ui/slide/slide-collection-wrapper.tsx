@@ -1,10 +1,16 @@
-import { getData, getSession } from "@/app/lib/action";
+import { getData, getSession, getXAmountOfData } from "@/app/lib/action";
 import SlideCard from "./slide-card";
 
-export default async function SlideCollectionWrapper() {
+export default async function SlideCollectionWrapper({
+  numberOfData,
+}: {
+  numberOfData?: number;
+}) {
   const session = await getSession();
   const user = session?.user;
-  const slideData = await getData(user?.id);
+  const slideData = numberOfData
+    ? await getXAmountOfData(user?.id, numberOfData)
+    : await getData(user?.id);
 
   return (
     <>
@@ -16,7 +22,7 @@ export default async function SlideCollectionWrapper() {
         })
       ) : (
         <>
-          <div className="w-full text-center p-2 text-gray-500 col-span-3">
+          <div className="w-full text-center p-2 text-background col-span-3">
             Empty Data
           </div>
         </>
