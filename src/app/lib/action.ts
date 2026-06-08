@@ -17,7 +17,7 @@ export async function getData(userID?: string) {
   try {
     if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
-      const data = await sql`SELECT * FROM slide WHERE user_id=${userID}`;
+      const data = await sql`SELECT * FROM slide WHERE user_id=${userID} ORDER BY created_at DESC`;
       // console.log(data[1].created_at);
       // revalidatePath(`/slide`);
       return data;
