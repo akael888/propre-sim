@@ -17,10 +17,30 @@ export async function getData(userID?: string) {
   try {
     if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
-      const data = await sql`SELECT * FROM slide WHERE user_id=${userID} ORDER BY created_at DESC`;
+      const data =
+        await sql`SELECT * FROM slide WHERE user_id=${userID} ORDER BY created_at DESC`;
       // console.log(data[1].created_at);
       // revalidatePath(`/slide`);
       return data;
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+export async function getXAmountOfData(
+  userID?: string,
+  amountOfData: number = 1,
+) {
+  try {
+    if (process.env.DATABASE_URL && userID) {
+      const sql = neon(process.env.DATABASE_URL);
+      const data =
+        await sql`SELECT * FROM slide WHERE user_id=${userID} ORDER BY created_at DESC`;
+      // console.log(data[1].created_at);
+      // revalidatePath(`/slide`);
+      return data.slice(0, amountOfData);
     }
     return null;
   } catch (error) {
