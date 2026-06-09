@@ -26,6 +26,11 @@ export default function MainPage() {
             </Link>
           </p>
         </div>
+        <div className="bg-red-500 p-1 text-white">
+          The Further Development of this app has been temporary halted or
+          slowed, as the Dev is now focusing on other projects. Please let the
+          Dev know if there is an urgent patch!
+        </div>
       </div>
     </>
   );

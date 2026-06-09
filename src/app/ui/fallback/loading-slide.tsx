@@ -1,6 +1,6 @@
-function LoadingSlide() {
+function LoadingSlide({ maxElement }: { maxElement: number }) {
   const elements = [];
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < maxElement; i++) {
     elements.push(
       <div
         className="bg-background/20 h-full w-full text-background text-center overflow-y-hidden p-2 flex flex-col rounded-xl animate-pulse"
@@ -15,8 +15,7 @@ function LoadingSlide() {
           </div>
 
           <div className="flex p-1 p-2 h-full flex-col">
-            <div className="text-left w-full p-2 h-40 overflow-y-auto whitespace-pre-wrap  inset-shadow-sm bg-gray-300 ">
-            </div>
+            <div className="text-left w-full p-2 h-40 overflow-y-auto whitespace-pre-wrap  inset-shadow-sm bg-gray-300 "></div>
             <div className="flex flex-row justify-between p-1">
               <p className="h-5"></p>
 
