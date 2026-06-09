@@ -35,13 +35,13 @@ export default async function SlideManagerPage() {
         <div className="col-span-full text-background p-2 border-b-2 text-xl font-bold">
           Recent Slides..
         </div>
-        <Suspense fallback={<LoadingSlide />}>
+        <Suspense fallback={<LoadingSlide maxElement={3} />}>
           <SlideCollectionWrapper numberOfData={3} />
         </Suspense>
         <div className="col-span-full text-background p-2 border-b-2 text-xl font-bold">
           All Slides..
         </div>
-        <Suspense fallback={<LoadingSlide />}>
+        <Suspense fallback={<LoadingSlide maxElement={6} />}>
           <SlideCollectionWrapper />
         </Suspense>
       </div>
