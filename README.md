@@ -11,7 +11,7 @@ ProPresenter is the main tool used by my team to perform our Multimedia Church S
 
 ### Problem
 
-Since we only have one device available, we're unable to execute our task in pararel.
+Since we only have one device available, we're unable to execute our task in pararel workflow. This halted progress, especially during busy weeks/months.
 
 ### Solution
 
@@ -21,22 +21,22 @@ Therefore this ProPresenter Sim will offer that Simulation on a web app accessib
 
 ## Features
 
-- Simulate ProPresenter Display from a text editor
-- Authentication
-- Text Data parsing into a ProPresenter Slide
-- ProPresenter Slide and Text Attribute Format Simulation
-- Preview Slide feature
-- To Be Added..
+- Simulating ProPresenter Display using a text-based editor via String parsing to a ProPresenter-stlye Slide
+- ProPresenter Slide Theme, stored in a Local Storage (Will improve this later in development)
+- Users and Authentication
+- Storing Multiple Slide on Users, utilizing Neon Database
 
 ## Tech Stack
 
 - Next JS
-- To Be Added..
+- Neon Database
 
 ## Utils
 
 - Tailwindcss
-- To Be Added..
+- Jest
+- Bruno
+- Bycryptjs
 
 ## Screenshots
 
@@ -48,3 +48,8 @@ Therefore this ProPresenter Sim will offer that Simulation on a web app accessib
 <img width="2506" height="1345" alt="image" src="https://github.com/user-attachments/assets/e2a65b15-416d-4178-9bce-0dbb52287a26" />
 <img width="2504" height="1345" alt="image" src="https://github.com/user-attachments/assets/60a5f709-09a6-4395-8f24-f8f9986de4af" />
 
+### ProPresenter Simulator v1.0.0 (09/06/2026)
+<img width="2502" height="1341" alt="image" src="https://github.com/user-attachments/assets/a4c5d39d-95d1-4d5f-af25-19354867d8b9" />
+<img width="2499" height="1337" alt="image" src="https://github.com/user-attachments/assets/740854e8-be63-4106-9f0b-d5097e7671a8" />
+<img width="2505" height="1342" alt="image" src="https://github.com/user-attachments/assets/270fdc56-e5f2-4990-9ec6-6103eb99fc35" />
+<img width="2505" height="1340" alt="image" src="https://github.com/user-attachments/assets/d63abae8-32d1-47b8-abbf-588fa0c5defa" />
