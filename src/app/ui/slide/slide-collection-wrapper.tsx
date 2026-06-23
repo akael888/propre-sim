@@ -17,7 +17,12 @@ export default async function SlideCollectionWrapper({
       {slideData ? (
         slideData?.map((value, index) => {
           return (
-            <SlideCard index={index} userSlideOBject={value} key={index} />
+            <SlideCard
+              index={index}
+              userSlideOBject={value}
+              key={index}
+              userID={user?.id}
+            />
           );
         })
       ) : (

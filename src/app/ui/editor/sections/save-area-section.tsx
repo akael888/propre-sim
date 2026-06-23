@@ -6,7 +6,11 @@ import { use, useActionState, useEffect, useState } from "react";
 
 function SaveSection({ slideID, user }: { slideID?: string; user?: User }) {
   const submitSlideDatawithID = user?.id && submitSlideData.bind(null, user.id);
-  const [state, formAction, isPending] = useActionState(updateSlideData, null);
+  const updateSlideDatawithID = updateSlideData.bind(null, user?.id ?? "");
+  const [state, formAction, isPending] = useActionState(
+    updateSlideDatawithID,
+    null,
+  );
 
   const staticSlideData = useTextData().staticSlideData;
   const slideData = useTextData().slideData;

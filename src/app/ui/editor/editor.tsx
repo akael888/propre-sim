@@ -7,6 +7,7 @@ import DisplayAreaSection from "./sections/display-area-section";
 import { Session } from "next-auth";
 import { useTextData } from "@/app/context/text-data-context";
 import LoadingScreen from "../fallback/loading-screen";
+import { redirect } from "next/navigation";
 
 type User = Session["user"];
 
@@ -30,7 +31,7 @@ export default function Editor({
     async function fetchData() {
       let stored = null;
       if (slideID) {
-        stored = await getSlideData(slideID);
+        stored = await getSlideData(slideID, user?.id);
 
         if (stored) {
           const data = stored as {
@@ -42,6 +43,8 @@ export default function Editor({
           handleSlideDataObjectChanges(data);
 
           handleTextStringChanges(data.textdata);
+        } else {
+          redirect("/editor");
         }
       } else {
         stored = localStorage.getItem("TEXT_AREA_DATA");

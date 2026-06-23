@@ -1,5 +1,5 @@
 import { AppProvider } from "@/app/context/app-provider";
-import { getSlideData } from "@/app/lib/action";
+import { getSession, getSlideData } from "@/app/lib/action";
 import { defaultTextAttributeData } from "@/app/lib/data";
 import { parseTextDataToObjects } from "@/app/lib/utils";
 import PreviewHeader from "@/app/ui/preview/preview-header";
@@ -11,7 +11,8 @@ export default async function SlidePreview({
   params: { slideID: string };
 }) {
   const { slideID } = await params;
-  const stored = await getSlideData(slideID);
+  const session = await getSession();
+  const stored = await getSlideData(slideID, session?.user.id);
 
   const slideObject = stored
     ? parseTextDataToObjects(stored.textdata.toString())

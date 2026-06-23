@@ -76,12 +76,13 @@ export async function submitSlideData(userID: string, formData: FormData) {
   redirect(`/slide/${data[0].id}/edit`);
 }
 
-export async function getSlideData(slideID: string) {
+export async function getSlideData(slideID: string, userID?: string) {
   console.log(slideID);
   try {
-    if (process.env.DATABASE_URL) {
+    if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
-      const data = await sql`SELECT * FROM slide WHERE id=${slideID}`;
+      const data =
+        await sql`SELECT * FROM slide WHERE id=${slideID} AND user_id=${userID}`;
       if (data) {
         console.log(data[0]);
         return data[0];
@@ -95,7 +96,11 @@ export async function getSlideData(slideID: string) {
   }
 }
 
-export async function updateSlideData(prevState: any, formData: FormData) {
+export async function updateSlideData(
+  userID: string,
+  prevState: any,
+  formData: FormData,
+) {
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const textdata = formData.get("textdata") as string;
@@ -106,10 +111,10 @@ export async function updateSlideData(prevState: any, formData: FormData) {
     .replace(/\f/g, "\n");
 
   try {
-    if (process.env.DATABASE_URL) {
+    if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
       const data =
-        await sql`UPDATE slide SET title = ${title}, description = ${description}, textdata = ${cleanedText} WHERE id=${slideID}`;
+        await sql`UPDATE slide SET title = ${title}, description = ${description}, textdata = ${cleanedText} WHERE id=${slideID} AND user_id=${userID}`;
       console.log(`Data ${data} is Updated! `);
       revalidatePath(`/slide`);
       return { success: true };
@@ -119,11 +124,12 @@ export async function updateSlideData(prevState: any, formData: FormData) {
   }
 }
 
-export async function deleteSlideData(slideID: string) {
+export async function deleteSlideData(slideID: string, userID?: string) {
   try {
-    if (process.env.DATABASE_URL) {
+    if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
-      const data = await sql`DELETE FROM slide WHERE id=${slideID}`;
+      const data =
+        await sql`DELETE FROM slide WHERE id=${slideID} AND user_id=${userID}`;
 
       if (data) {
         console.log(data[0]);

@@ -1,14 +1,14 @@
 "use client";
-import { deleteSlideData } from "@/app/lib/action";
+import { deleteSlideData, getSession } from "@/app/lib/action";
 import { SlideButtonsProp } from "../../lib/type";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-const DeleteSlideButton: React.FC<SlideButtonsProp> = ({ slideID }) => {
+const DeleteSlideButton: React.FC<SlideButtonsProp> = ({ slideID, userID }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
   const deleteSlide = () => {
-    deleteSlideData(slideID);
+    deleteSlideData(slideID, userID);
     setIsOpen(!isOpen);
     router.refresh();
   };
