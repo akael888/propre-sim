@@ -8,12 +8,25 @@ import bcrypt from "bcryptjs";
 import { auth, signIn, signOut } from "../../../auth";
 import { cache } from "react";
 
+export const getSession = cache(async () => {
+  const session = await auth();
+  if (!session?.user) return null;
+  return session;
+});
+
+const getUserId = cache(async () => {
+  const session = await auth();
+  if (!session?.user) return null;
+  return session?.user?.id ?? null;
+});
 // const baseUrl =
 //   process.env.NODE_ENV === "production"
 //     ? process.env.ABSOLUTE_PROD_URL
 //     : process.env.ABSOLUTE_TEST_URL;
 
-export async function getData(userID?: string) {
+export async function getData() {
+  const userID = await getUserId();
+
   try {
     if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
@@ -29,18 +42,16 @@ export async function getData(userID?: string) {
     return null;
   }
 }
-export async function getXAmountOfData(
-  userID?: string,
-  amountOfData: number = 1,
-) {
+export async function getXAmountOfData(amountOfData: number = 1) {
+  const userID = await getUserId();
   try {
     if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
       const data =
-        await sql`SELECT * FROM slide WHERE user_id=${userID} ORDER BY created_at DESC`;
+        await sql`SELECT * FROM slide WHERE user_id=${userID} ORDER BY created_at DESC LIMIT ${amountOfData}`;
       // console.log(data[1].created_at);
       // revalidatePath(`/slide`);
-      return data.slice(0, amountOfData);
+      return data;
     }
     return null;
   } catch (error) {
@@ -49,7 +60,8 @@ export async function getXAmountOfData(
   }
 }
 
-export async function submitSlideData(userID: string, formData: FormData) {
+export async function submitSlideData(formData: FormData) {
+  const userID = await getUserId();
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const textdata = formData.get("textdata") as string;
@@ -59,9 +71,8 @@ export async function submitSlideData(userID: string, formData: FormData) {
     .replace(/\f/g, "\n");
 
   let data = null;
-  data = [{ id: 1 }];
   try {
-    if (process.env.DATABASE_URL) {
+    if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
 
       data = await sql`INSERT INTO slide (title,description,textdata,user_id)
@@ -71,36 +82,38 @@ export async function submitSlideData(userID: string, formData: FormData) {
       revalidatePath(`/slide`);
     }
   } catch (error) {
-    console.log(error);
+    console.log("Database insert failed:", error);
+    return { error: "Failed to save slide Data" };
   }
-  redirect(`/slide/${data[0].id}/edit`);
+  if (data) {
+    redirect(`/slide/${data[0].id}/edit`);
+  }
 }
 
-export async function getSlideData(slideID: string, userID?: string) {
-  console.log(slideID);
+export async function getSlideData(slideID: string) {
+  // console.log(slideID);
+  const userID = await getUserId();
+
   try {
     if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
       const data =
         await sql`SELECT * FROM slide WHERE id=${slideID} AND user_id=${userID}`;
-      if (data) {
-        console.log(data[0]);
+      if (data.length > 0) {
         return data[0];
       }
-      console.log(data);
       return null;
     }
+    console.log("No User Found");
+    return null;
   } catch (error) {
     console.log(error);
     return null;
   }
 }
 
-export async function updateSlideData(
-  userID: string,
-  prevState: any,
-  formData: FormData,
-) {
+export async function updateSlideData(prevState: any, formData: FormData) {
+  const userID = await getUserId();
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
   const textdata = formData.get("textdata") as string;
@@ -114,35 +127,38 @@ export async function updateSlideData(
     if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
       const data =
-        await sql`UPDATE slide SET title = ${title}, description = ${description}, textdata = ${cleanedText} WHERE id=${slideID} AND user_id=${userID}`;
-      console.log(`Data ${data} is Updated! `);
-      revalidatePath(`/slide`);
-      return { success: true };
+        await sql`UPDATE slide SET title = ${title}, description = ${description}, textdata = ${cleanedText} WHERE id=${slideID} AND user_id=${userID} RETURNING id`;
+      if (data.length > 0) {
+        revalidatePath(`/slide`);
+        return { success: true, message: "Updated Slide Data" };
+      }
+      return { success: false, message: "Does not found the correct Slide" };
     }
+    return { success: false, message: "Detected Incorrect User" };
   } catch (error) {
-    console.log(error);
+    console.log("Database update failed:", error);
+    return { success: false, message: "Failed to update slide Data" };
   }
 }
 
-export async function deleteSlideData(slideID: string, userID?: string) {
+export async function deleteSlideData(slideID: string) {
+  const userID = await getUserId();
+
   try {
     if (process.env.DATABASE_URL && userID) {
       const sql = neon(process.env.DATABASE_URL);
       const data =
-        await sql`DELETE FROM slide WHERE id=${slideID} AND user_id=${userID}`;
-
-      if (data) {
-        console.log(data[0]);
+        await sql`DELETE FROM slide WHERE id=${slideID} AND user_id=${userID} RETURNING id`;
+      if (data.length > 0) {
         revalidatePath(`/slide`);
-        return data[0];
+        return { success: true, message: "Deleted a slide Data" };
       }
-      console.log(data);
-
-      return null;
+      return { success: false, message: "Slide not Found" };
     }
+    return { success: false, message: "Detected Incorrect User" };
   } catch (error) {
-    console.log(error);
-    return null;
+    console.log("Database delete failed:", error);
+    return { success: false, message: "Failed to delete slide Data" };
   }
 }
 
@@ -155,10 +171,6 @@ export async function registerUser(formData: FormData) {
   if (!name || !email || !password) {
     return { error: "All Fields are Required" };
   }
-
-  console.log(name);
-  console.log(email);
-  console.log(password);
 
   try {
     if (process.env.DATABASE_URL) {
@@ -181,12 +193,6 @@ export async function registerUser(formData: FormData) {
     return { error: "Something went Wrong" };
   }
 }
-
-export const getSession = cache(async () => {
-  const session = await auth();
-  if (!session?.user) return null;
-  return session;
-});
 
 export async function logoutUser() {
   await signOut({ redirectTo: "/login" });
