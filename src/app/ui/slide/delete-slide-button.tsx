@@ -3,14 +3,23 @@ import { deleteSlideData, getSession } from "@/app/lib/action";
 import { SlideButtonsProp } from "../../lib/type";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-const DeleteSlideButton: React.FC<SlideButtonsProp> = ({ slideID, userID }) => {
+const DeleteSlideButton: React.FC<SlideButtonsProp> = ({ slideID }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
-  const deleteSlide = () => {
-    deleteSlideData(slideID, userID);
-    setIsOpen(!isOpen);
-    router.refresh();
+  const deleteSlide = async () => {
+    try {
+      const deletedSlide = await deleteSlideData(slideID);
+      if (deletedSlide.success) {
+        setIsOpen(!isOpen);
+        router.refresh();
+        return;
+      }
+      alert(`Failed to delete ${deletedSlide.message}`);
+    } catch (error) {
+      alert(`Failed to delete ${error}`);
+      return;
+    }
   };
 
   return (

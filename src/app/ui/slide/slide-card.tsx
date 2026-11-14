@@ -2,11 +2,7 @@ import Link from "next/link";
 import DeleteSlideButton from "./delete-slide-button";
 import { SlideCardProp } from "@/app/lib/type";
 
-const SlideCard: React.FC<SlideCardProp> = ({
-  index,
-  userSlideOBject,
-  userID,
-}) => {
+const SlideCard: React.FC<SlideCardProp> = ({ index, userSlideOBject }) => {
   return (
     <>
       <div className="border-1 border-gray-500 bg-foreground h-full w-full text-background text-center overflow-y-hidden p-2 flex flex-col hover:bg-gray-100 shadow-xl hover:-translate-y-1 hover:border-white rounded-xl">
@@ -61,7 +57,7 @@ const SlideCard: React.FC<SlideCardProp> = ({
               >
                 Preview
               </Link>
-              <DeleteSlideButton slideID={userSlideOBject.id} userID={userID} />
+              <DeleteSlideButton slideID={userSlideOBject.id} />
             </>
           )}
         </div>
