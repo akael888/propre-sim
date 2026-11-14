@@ -5,10 +5,10 @@ import Link from "next/link";
 import { use, useActionState, useEffect, useState } from "react";
 
 function SaveSection({ slideID, user }: { slideID?: string; user?: User }) {
-  const submitSlideDatawithID = user?.id && submitSlideData.bind(null, user.id);
-  const updateSlideDatawithID = updateSlideData.bind(null, user?.id ?? "");
+  // const submitSlideDatawithID = user?.id && submitSlideData.bind(null);
+  // const updateSlideDatawithID = updateSlideData.bind(null);
   const [state, formAction, isPending] = useActionState(
-    updateSlideDatawithID,
+    updateSlideData,
     null,
   );
 
@@ -36,7 +36,7 @@ function SaveSection({ slideID, user }: { slideID?: string; user?: User }) {
       <div className="flex flex-col gap-5 max-w-screen w-full p-1 ">
         {user ? (
           <form
-            action={slideID ? formAction : submitSlideDatawithID}
+            action={slideID ? formAction : submitSlideData}
             className="gap-2 flex flex-row justify-between max-w-screen w-full"
           >
             <div className="flex flex-col w-full h-full">

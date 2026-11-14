@@ -31,7 +31,7 @@ export default function Editor({
     async function fetchData() {
       let stored = null;
       if (slideID) {
-        stored = await getSlideData(slideID, user?.id);
+        stored = await getSlideData(slideID);
 
         if (stored) {
           const data = stored as {
