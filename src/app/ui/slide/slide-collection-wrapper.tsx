@@ -6,11 +6,9 @@ export default async function SlideCollectionWrapper({
 }: {
   numberOfData?: number;
 }) {
-  const session = await getSession();
-  const user = session?.user;
   const slideData = numberOfData
-    ? await getXAmountOfData(user?.id, numberOfData)
-    : await getData(user?.id);
+    ? await getXAmountOfData(numberOfData)
+    : await getData();
 
   return (
     <>
@@ -21,7 +19,6 @@ export default async function SlideCollectionWrapper({
               index={index}
               userSlideOBject={value}
               key={index}
-              userID={user?.id}
             />
           );
         })

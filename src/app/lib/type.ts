@@ -135,7 +135,6 @@ export interface OptionThemeMenuProp {
 
 export interface SlideButtonsProp {
   slideID: string;
-  userID?: string;
 }
 
 export interface SlideCardProp {
@@ -147,5 +146,4 @@ export interface SlideCardProp {
     textdata?: string;
     created_at?: string;
   };
-  userID?: string;
 }

@@ -11,8 +11,7 @@ export default async function SlidePreview({
   params: { slideID: string };
 }) {
   const { slideID } = await params;
-  const session = await getSession();
-  const stored = await getSlideData(slideID, session?.user.id);
+  const stored = await getSlideData(slideID);
 
   const slideObject = stored
     ? parseTextDataToObjects(stored.textdata.toString())
