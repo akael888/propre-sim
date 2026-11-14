@@ -30,8 +30,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         );
 
         if (!isValid) return null;
-        console.log("user");
-        console.log(String(user.id));
+        // console.log("user");
+        // console.log(String(user.id));
         return { id: String(user.id), name: user.name, email: user.email };
       },
     }),
