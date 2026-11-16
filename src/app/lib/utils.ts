@@ -15,6 +15,7 @@ export function parseTextDataToObjects(textData: string) {
     });
     return splittedObject;
   }
+  return [];
 }
 
 export async function copyToClipboard(textToCopy: string) {

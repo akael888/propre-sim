@@ -3,25 +3,27 @@ import { copyToClipboard, parseTextDataToObjects } from "@/app/lib/utils";
 describe("Util: Parse Text Data to Objects", () => {
   it("Test 4 Object", () => {
     const testText = "Text 1\n\nText 2\n\nText 3\n\n";
-    expect(parseTextDataToObjects(testText)?.length).toBe(4);
+    expect(parseTextDataToObjects(testText).length).toBe(4);
   });
 
   it("Empty String", () => {
     const text = "";
-    expect(parseTextDataToObjects(text)?.[0].content).toBe(undefined);
-    expect(parseTextDataToObjects(text)?.length).toBe(undefined);
+    expect(parseTextDataToObjects(text)).toEqual([]);
   });
 
   it("Text without Double Enter", () => {
     const text = "Text123";
-    expect(parseTextDataToObjects(text)?.length).toBe(1);
+    expect(parseTextDataToObjects(text).length).toBe(1);
   });
 
   it("Text with Double Enter and Correct Value", () => {
     const text = "Hi\n\nThere";
-    expect(parseTextDataToObjects(text)?.[0].content).toBe("Hi");
-    expect(parseTextDataToObjects(text)?.[1].content).toBe("There");
-    expect(parseTextDataToObjects(text)?.length).toBe(2);
+    const result = parseTextDataToObjects(text);
+    expect(result[0].content).toBe("Hi");
+    expect(result[0].charIndex).toBe(0);
+    expect(result[1].content).toBe("There");
+    expect(result[1].charIndex).toBe(4);
+    expect(result.length).toBe(2);
   });
 });
 
