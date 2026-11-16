@@ -2,6 +2,7 @@
 import { useState, RefObject } from "react";
 import { TextAreaProps } from "@/app/lib/type";
 import { useTextData } from "@/app/context/text-data-context";
+import CopyTextButton from "./copy-text-button";
 
 const TextArea: React.FC<TextAreaProps> = ({ textAreaRef }) => {
   const textObject = useTextData().textObject;
@@ -67,7 +68,10 @@ const TextArea: React.FC<TextAreaProps> = ({ textAreaRef }) => {
 
   return (
     <>
-      <div className="w-full h-full overflow-hidden ">
+      <div className="w-full h-full overflow-hidden relative">
+        <div className="absolute right-0 t-1 m-1">
+          <CopyTextButton textToCopy={textValue} />
+        </div>
         <textarea
           className="p-2 w-full h-full border-1 bg-gray-300 resize-none shadow-inner shadow-background/50"
           value={textValue}
